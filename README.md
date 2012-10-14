@@ -1,2 +1,2 @@
-babioon-events
+babioon-event
 ==============
