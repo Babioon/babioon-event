@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config addfieldpath="/plugins/system/babioon/patched/fields">
+
+
+	<fieldset name="export" label="COM_BABIOONEVENT_EXPORT"
+		description="COM_BABIOONEVENT_EXPORT_DESC">
+
+		<field name="exportdir" type="text" label="COM_BABIOONEVENT_EXPORTDIR"
+			description="COM_BABIOONEVENT_EXPORTDIR_DESC" default="export" />
+		<field name="exportglue" type="text" label="COM_BABIOONEVENT_EXPORTGLUE"
+			description="COM_BABIOONEVENT_EXPORTGLUE_DESC" default=";" />
+
+		<field name="exportquote" type="radio" default="0"
+			label="COM_BABIOONEVENT_EXPORT" description="COM_BABIOONEVENT_EXPORT_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportorganiser" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTORGANISER" description="COM_BABIOONEVENT_EXPORTORGANISER_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportstart" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTSTART" description="COM_BABIOONEVENT_EXPORTSTART_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportsformat" type="text"
+			label="COM_BABIOONEVENT_EXPORTSFORMAT" description="COM_BABIOONEVENT_EXPORTSFORMAT_DESC"
+			default="d.m.Y H:i" />
+
+		<field name="exportend" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTEND" description="COM_BABIOONEVENT_EXPORTEND_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exporteformat" type="text"
+			label="COM_BABIOONEVENT_EXPORTEFORMAT" description="COM_BABIOONEVENT_EXPORTEFORMAT_DESC"
+			default="d.m.Y H:i" />
+
+		<field name="exportcontact" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTCONTACT" description="COM_BABIOONEVENT_EXPORTCONTACT_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportemail" type="radio" default="1"
+			label="COM_BABIOONEVENTEMAIL_EXPORT" description="COM_BABIOONEVENT_EXPORTEMAIL_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exporttel" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTTEL" description="COM_BABIOONEVENT_EXPORTTEL_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportwebsite" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTWEBSITE" description="COM_BABIOONEVENT_EXPORTWEBSITE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportaddress" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTADDRESS" description="COM_BABIOONEVENT_EXPORTADDRESS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportteaser" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTTEASER" description="COM_BABIOONEVENT_EXPORTTEASER_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exporttext" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTTEXT" description="COM_BABIOONEVENT_EXPORTTEXT_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportisfreeofcharge" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTISFREEOFCHARGE" description="COM_BABIOONEVENT_EXPORTISFREEOFCHARGE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportcharge" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTCHARGE" description="COM_BABIOONEVENT_EXPORTCHARGE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="exportcodepage" type="radio" default="1"
+			label="COM_BABIOONEVENT_EXPORTCODEPAGE" description="COM_BABIOONEVENT_EXPORTCODEPAGE_DESC">
+			<option value="1">Windows 1251 (CP1252)</option>
+			<option value="2">ISO-8851-1</option>
+			<option value="3">UTF-8</option>
+		</field>
+
+		<field name="exportfiles" type="list" default="1"
+			label="COM_BABIOONEVENT_EXPORTFILES" description="COM_BABIOONEVENT_EXPORTFILES_DESC">
+			<option value="0">COM_BABIOONEVENT_EXPORT_NONE</option>
+			<option value="1">COM_BABIOONEVENT_EXPORT_CSV</option>
+			<option value="2">COM_BABIOONEVENT_EXPORT_TXT</option>
+			<option value="3">COM_BABIOONEVENT_EXPORT_BOTH</option>
+		</field>
+
+	</fieldset>
+
+	<fieldset name="form" label="COM_BABIOONEVENT_FORM"
+		description="COM_BABIOONEVENT_FORM_DESC">
+
+		<field name="showorganiser" type="radio" default="2"
+			label="COM_BABIOONEVENT_SHOWORGANISER" description="COM_BABIOONEVENT_SHOWORGANISER_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showdates" type="list" default="4"
+			label="COM_BABIOONEVENT_SHOWDATES" description="COM_BABIOONEVENT_SHOWDATES_DESC">
+			<option value="0">JNO</option>
+			<option value="1">COM_BABIOONEVENT_SHOWSTARTDATE</option>
+			<option value="2">COM_BABIOONEVENT_SHOWSTARTDATEANDSTIME</option>
+			<option value="3">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORY</option>
+			<option value="4">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDSTIME
+			</option>
+			<option value="5">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDSTIMEMANDATORY
+			</option>
+			<option value="6">COM_BABIOONEVENT_SHOWSTARTDATEANDENDDATE
+			</option>
+			<option value="7">COM_BABIOONEVENT_SHOWSTARTDATEANDENDDATEANDSTIME
+			</option>
+			<option value="8">COM_BABIOONEVENT_SHOWSTARTDATEANDENDDATEANDSTIMEANDETIME
+			</option>
+			<option value="9">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATE
+			</option>
+			<option value="10">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEANDSTIME
+			</option>
+			<option value="11">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEANDSTIMEMANDATORY
+			</option>
+			<option value="12">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEANDSTIMEANDETIME
+			</option>
+			<option value="13">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEANDSTIMEMANDATORYANDETIME
+			</option>
+			<option value="14">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEMANDATORY
+			</option>
+			<option value="15">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEMANDATORYANDSTIME
+			</option>
+			<option value="16">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEMANDATORYANDSTIMEMANDATORY
+			</option>
+			<option value="17">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEMANDATORYANDSTIMEANDETIME
+			</option>
+			<option value="18">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEMANDATORYANDSTIMEMANDATORYANDETIME
+			</option>
+			<option value="19">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORYANDENDDATEMANDATORYANDSTIMEMANDATORYANDETIMEMANDATORY
+			</option>
+		</field>
+
+		<field name="showcontact" type="radio" default="1"
+			label="COM_BABIOONEVENT_SHOWCONTACT" description="COM_BABIOONEVENT_SHOWCONTACT_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showphone" type="radio" default="1"
+			label="COM_BABIOONEVENT_SHOWPHONE" description="COM_BABIOONEVENT_SHOWPHONE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showwebsite" type="radio" default="1"
+			label="COM_BABIOONEVENT_SHOWWEBSITE" description="COM_BABIOONEVENT_SHOWWEBSITE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showemail" type="radio" default="1"
+			label="COM_BABIOONEVENT_SHOWEMAIL" description="COM_BABIOONEVENT_SHOWEMAIL_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showlocation" type="list" default="2"
+			label="COM_BABIOONEVENT_SHOWLOCATION" description="COM_BABIOONEVENT_SHOWLOCATION_DESC">
+			<option value="0">JNO</option>
+			<option value="1">COM_BABIOONEVENT_ASONEFIELD</option>
+			<option value="2">COM_BABIOONEVENT_ASONEFIELDMANDATORY</option>
+			<option value="3">COM_BABIOONEVENT_SEPARATED</option>
+			<option value="4">COM_BABIOONEVENT_SEPARATEDMANDATORY</option>
+			<option value="5">COM_BABIOONEVENT_SEPARATEDMANDATORYWITHGOOGLEMAPS
+			</option>
+		</field>
+
+		<field name="showshortdesc" type="radio" default="2"
+			label="COM_BABIOONEVENT_SHOWSHORTDESC" description="COM_BABIOONEVENT_SHOWSHORTDESC_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showlongdesc" type="radio" default="2"
+			label="COM_BABIOONEVENT_SHOWLONGDESC" description="COM_BABIOONEVENT_SHOWLONGDESC_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showcategory" type="radio" default="1"
+			label="COM_BABIOONEVENT_SHOWCATEGORY" description="COM_BABIOONEVENT_SHOWCATEGORY_DESC">
+			<option value="0">COM_BABIOONEVENT_ALWAYSDEFAULTCATEGORY</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field name="defaultcategory" type="category" extension="com_babioonevent"
+			label="COM_BABIOONEVENT_DEFAULTCATEGORY" description="COM_BABIOONEVENT_DEFAULTCATEGORY_DESC" />
+	</fieldset>
+
+	<fieldset name="system" label="COM_BABIOONEVENT_SYSTEM"
+		description="COM_BABIOONEVENT_SYSTEM_DESC">
+
+		<field name="headerlevel" type="list" label="COM_BABIOONEVENT_HEADERLEVEL"
+			description="COM_BABIOONEVENT_HEADERLEVEL_DESC" default="1">
+			<option value="1">h1</option>
+			<option value="2">h2</option>
+			<option value="3">h3</option>
+			<option value="4">h4</option>
+			<option value="5">h5</option>
+		</field>
+
+		<field name="defaultlistlength" type="list" default="25"
+			label="COM_BABIOONEVENT_DEFAULTLISTLENGTH" description="COM_BABIOONEVENT_DEFAULTLISTLENGTH_DESC">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="25">25</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</field>
+		<field name="showfeed" type="radio" default="1"
+			label="COM_BABIOONEVENT_SHOWFEED" description="COM_BABIOONEVENT_SHOWFEED_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="feedlimit" type="list" default="25"
+			label="COM_BABIOONEVENT_FEEDLIMIT" description="COM_BABIOONEVENT_FEEDLIMIT_DESC">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="45">45</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</field>
+
+		<field name="email" size="40" type="text" default="info@mail.org"
+			label="COM_BABIOONEVENT_EMAIL" description="COM_BABIOONEVENT_EMAIL_DESC" />
+		<field name="emailfrom" size="40" type="text" default="Babioon Event"
+			label="COM_BABIOONEVENT_EMAILFROM" description="COM_BABIOONEVENT_EMAILFROM_DESC" />
+		<field name="emailsendto" size="40" type="text" default="info@mail.org"
+			label="COM_BABIOONEVENT_EMAILSENDTO" description="COM_BABIOONEVENT_EMAILSENDTO_DESC" />
+		<field name="gmapappkey" type="text" default=""
+			label="COM_BABIOONEVENT_GMAPAPPKEY" description="COM_BABIOONEVENT_GMAPAPPKEY_DESC" />
+		<field name="gmapdefzoom" type="text" default="14"
+			label="COM_BABIOONEVENT_GMAPDEFZOOM" description="COM_BABIOONEVENT_GMAPDEFZOOM_DESC" />
+
+		<field name="getgeo" type="list" default="0"
+			label="COM_BABIOONEVENT_GETGEO" description="COM_BABIOONEVENT_GETGEO_DESC">
+			<option value="0">JNO</option>
+			<option value="1">COM_BABIOONEVENT_ONSAVE</option>
+			<option value="2">COM_BABIOONEVENT_ONSUBMITANDSAVE</option>
+		</field>
+
+		<field name="showgmap" type="list" default="0"
+			label="COM_BABIOONEVENT_SHOWGMAP" description="COM_BABIOONEVENT_SHOWGMAP_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+	</fieldset>
+
+	<fieldset name="permissions_component" label="COM_BABIOONEVENT_PERMISSIONS_COMPONENT"
+		description="COM_BABIOONEVENT_PERMISSIONS_COMPONENT_DESC">
+
+		<field name="rules" type="rules"
+			label="COM_BABIOONEVENT_PERMISSIONS_COMPONENT_RULESLABEL" class="inputbox"
+			filter="rules" validate="rules" component="com_babioonevent" section="component" />
+	</fieldset>
+
+</config>

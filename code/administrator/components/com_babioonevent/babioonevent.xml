@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+	<name>COM_BABIOONEVENT</name>
+	<creationDate>May 2012</creationDate>
+	<author>Robert Deutz</author>
+	<copyright>Robert Deutz Business Solution</copyright>
+	<license>GNU General Public License version 3</license>
+	<authorEmail>contact@babioon.com</authorEmail>
+	<authorUrl>www.babioon.com</authorUrl>
+	<version>1.1</version>
+	<description>COM_BABIOONEVENT_XML_DESCRIPTION</description>
+	<files folder="site">
+		<filename>babioonevent.php</filename>
+	</files>	
+		
+	<administration>
+    	<menu link="option=com_babioonevent" view="default">COM_BABIOONEVENT</menu>
+    	<menu link="option=com_categories&amp;extension=com_babioonevent" view="categories" alt="Event/Categories">COM_BABIOONEVENT_CATEGORIES</menu>
+		<files folder="admin">
+		  	<filename>babioonevent.php</filename>
+		</files>
+	</administration>		
+
+</extension>
