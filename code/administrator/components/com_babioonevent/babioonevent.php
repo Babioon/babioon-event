@@ -18,7 +18,7 @@ if (!defined('BABIOON'))
 // Include dependancies
 jimport('joomla.application.component.controller');
 
-require JPATH_COMPONENT.'/helpers/helpers.php';
+require JPATH_COMPONENT.'/helpers/babioonevent.php';
 
 // Execute the task.
 $controller	= JController::getInstance('BabioonEvent');

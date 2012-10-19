@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_BABIOONKOORGA_SERVICES_LIST">
+	<layout title="COM_BABIOONEVENT_EVENTS_LIST">
 		<message>
-			<![CDATA[COM_BABIOONKOORGA_SERVICES_LIST_DESC]]>
+			<![CDATA[COM_BABIOONEVENT_EVENTS_LIST_DESC]]>
 		</message>
 	</layout>
 </metadata>

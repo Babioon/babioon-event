@@ -1,9 +1,9 @@
 <?php
 /**
- * babioon koorga
+ * babioon event
  * @author Robert Deutz
  * @copyright Robert Deutz Business Solution
- * @package BABIOON_KOORGA
+ * @package BABIOON_EVENT
  **/
 
 // Check to ensure this file is included in Joomla!
@@ -11,6 +11,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 $pageclass_sfx=$this->params->get('pageclass_sfx','');
 $subheaderlevel= $this->headerlevel;
+
+$data=$this->defaultData;
 ?>
 
 <div id="event<?php echo $pageclass_sfx;?>">
@@ -20,14 +22,64 @@ $subheaderlevel= $this->headerlevel;
 if ($this->title != '')
 {
 	echo "<h$this->headerlevel>".$this->title."</h$this->headerlevel> \n";
-	$subheaderlevel= $this->headerlevel+1;
+	$slevel= $this->headerlevel+1;
 }
+$month	= '';
+$close      = '';
 
-echo "#<div style='text-align:left;font_size:1.2em;'><pre>";
-print_r($this);
-echo "</pre></div>#";
-
-
-
+echo '<div id="liste">';
+if ( !empty($data))
+{
+        foreach ($data as $elm)
+        {
+                $emon = date('m',strtotime($elm->sdate));
+                if ( $emon != $month )
+                {
+                        echo $close;
+                        $month = $emon;
+                        echo '<h'.$slevel.'>'.JText::_(date('F',strtotime($elm->sdate))).' '.date('Y',strtotime($elm->sdate)).'</h'.$slevel.'>';
+                        echo '<ul class="liste">';
+                        $close= '</ul>';
+                }
+                echo '<li>';
+                
+                if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00') 
+                {
+                	//start und ende angegeben
+                	$sd=date('d.m.Y',strtotime($elm->sdate));
+                	$ed=date('d.m.Y',strtotime($elm->edate));
+                	if ($sd == $ed)
+                	{
+                		echo $sd;
+                	}
+                	else 
+                	{
+                		// beide Tage ausgeben
+                		echo $sd,' - ', $ed;
+                	}
+                	echo ': ';
+                }
+                else 
+                {
+					if ($elm->sdate != '0000-00-00')
+					{
+               			echo date('d.m.Y',strtotime($elm->sdate));
+               			echo ': ';
+					}	
+               	
+                }
+                echo '<a href="'.$elm->link.'">'.$elm->name.'</a>','</li>';
+        }
+        echo $close;
+}
+else
+{
+	echo JText::_('COM_BABIOONEVENT_DEFAULTLISTNORESULT');
+}
+echo '</div>';
+if ($this->showpagination)
+{
+	echo $this->dpage->getPagesLinks(  );
+}
 ?>
 </div> <!-- id=event -->

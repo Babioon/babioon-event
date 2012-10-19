@@ -39,7 +39,7 @@ class BabioonEventViewDefault extends JView
         $doc->addStyleDeclaration('.icon-48-babioon {background-image: url(../media/babioon/images/icon-48-babioon.png);}');
 
 		$user = JFactory::getUser();
-		$canDo = BabioonEventHelpers::getActions();
+		$canDo = BabioonEventHelper::getActions();
 		JToolBarHelper::title(JText::_('COM_BABIOONEVENT'), 'babioon.png');
 
 		if ($canDo->get('babioonevent.admin'))

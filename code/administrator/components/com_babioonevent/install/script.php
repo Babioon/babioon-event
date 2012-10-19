@@ -101,7 +101,7 @@ class com_babiooneventInstallerScript
 	function install($parent) 
 	{
 		// $parent is the class calling this method
-		$parent->getParent()->setRedirectURL('index.php?option=com_babioonkoorga');
+		$parent->getParent()->setRedirectURL('index.php?option=com_babioonevent');
         self::databaseMagicOnInstall();
 	}
 

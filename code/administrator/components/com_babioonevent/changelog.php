@@ -1,8 +1,8 @@
 <?php
 /**
  *
- * @version $Id: changelog.php 24 2011-06-27 09:39:49Z deutz $
- * @package RD_KOORGA
+ * @version __*_BABIOONVERSIONTAG_*__
+ * @package BABIOONEVENT
  * @author Robert Deutz
  * @copyright Robert Deutz Business Solution
  **/
@@ -49,10 +49,3 @@ Legend:
 
 
 -- Version 0.9 -- 18 April 2008 -----------------------------------------
-
-
-
-
-
-
-

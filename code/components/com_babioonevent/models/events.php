@@ -97,7 +97,7 @@ class BabioonEventModelEvents extends JModelList
 
 		$orderCol = $app->input->get('filter_order', 'a.name');
 		if (!in_array($orderCol, $this->filter_fields)) {
-			$orderCol = 'a.name';
+			$orderCol = 'a.sdate';
 		}
 		$this->setState('list.ordering', $orderCol);
 
@@ -125,9 +125,13 @@ class BabioonEventModelEvents extends JModelList
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		
+		$today = JFactory::getDate()->format('Y-m-d');
+		
+		
    		$query->select(
        			$this->getState(
        				'list.select',
+       				'a.id,' .
        				'a.name,' .
                     'a.sdate,'.
                     'a.stime,'.
@@ -140,8 +144,9 @@ class BabioonEventModelEvents extends JModelList
        			)
        		)
        		->from('#__babioonevent_events AS a')
-       	    ->where('a.state = 1')
-    		->order($this->getState('list.ordering', 'a.name').' '.$this->getState('list.direction', 'ASC'));
+       	    ->where('a.published = 1')
+       	    ->where('a.sdate >= "'.$today.'"')
+    		->order('a.sdate, a.stime');
     		
     	//echo nl2br(str_replace('#__','j25_',$query));
 		return $query;

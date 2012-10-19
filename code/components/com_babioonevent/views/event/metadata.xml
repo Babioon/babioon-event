@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<view hidden="true">
+	<view title="Event">
+		<message><![CDATA[COM_BABIOONEVENT_EVENTVIEW]]></message>
 	</view>
 </metadata>

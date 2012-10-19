@@ -49,7 +49,7 @@
 		</field>
 
 		<field name="exportemail" type="radio" default="1"
-			label="COM_BABIOONEVENTEMAIL_EXPORT" description="COM_BABIOONEVENT_EXPORTEMAIL_DESC">
+			label="COM_BABIOONEVENT_EXPORTEMAIL" description="COM_BABIOONEVENT_EXPORTEMAIL_DESC">
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
@@ -272,8 +272,6 @@
 			label="COM_BABIOONEVENT_EMAILFROM" description="COM_BABIOONEVENT_EMAILFROM_DESC" />
 		<field name="emailsendto" size="40" type="text" default="info@mail.org"
 			label="COM_BABIOONEVENT_EMAILSENDTO" description="COM_BABIOONEVENT_EMAILSENDTO_DESC" />
-		<field name="gmapappkey" type="text" default=""
-			label="COM_BABIOONEVENT_GMAPAPPKEY" description="COM_BABIOONEVENT_GMAPAPPKEY_DESC" />
 		<field name="gmapdefzoom" type="text" default="14"
 			label="COM_BABIOONEVENT_GMAPDEFZOOM" description="COM_BABIOONEVENT_GMAPDEFZOOM_DESC" />
 

@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once dirname(__FILE__).'/../objects.html.php';
 
 /**
- * BabioonKoorgaViewServices
+ * BabioonEventViewEvents
  */
 class BabioonEventViewEvents extends BabioonEventViewObjects
 {
@@ -21,8 +21,10 @@ class BabioonEventViewEvents extends BabioonEventViewObjects
 	 * 
 	 * @param string $tpl
 	 */
-    function display($tpl = null)
+   function display($tpl = null)
 	{
-		parent::display($tpl);
+        // default is to show the events
+        $this->assignRef('element', $this->get('Item')) ;	    
+	    parent::display($tpl);
 	}
 }

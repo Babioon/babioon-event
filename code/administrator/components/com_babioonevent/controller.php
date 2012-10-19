@@ -29,7 +29,7 @@ class BabioonEventController extends JController
         // pretty simple
         $app=JFactory::getApplication();
         $view = $app->input->get('view','default');
-	    BabioonEventHelpers::addSubmenu(JRequest::getCmd('view', 'default') );
+	    BabioonEventHelper::addSubmenu(JRequest::getCmd('view', 'default') );
 	    $app->input->set('view',$view);
 		parent::display();
 		return $this;

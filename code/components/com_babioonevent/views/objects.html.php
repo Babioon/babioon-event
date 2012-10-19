@@ -14,7 +14,7 @@ jimport('joomla.application.component.view');
 /**
  * BabioonEventViewObjects
  */
-class BabioonEventViewObjects extends JView
+class BabioonEventViewObjects extends BabioonView
 {
 	/**
 	 * Default view, list of items

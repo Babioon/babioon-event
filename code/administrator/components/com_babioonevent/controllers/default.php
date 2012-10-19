@@ -11,12 +11,10 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controlleradmin');
 
-require_once JPATH_COMPONENT.'/helpers/helpers.php';
-
 /**
  * Babioon Event Default controller class.
  *
- * @package BABIOON_KOORGA
+ * @package BABIOON_EVENT
  */
 class BabioonEventControllerDefault extends JControllerAdmin
 {
@@ -27,10 +25,9 @@ class BabioonEventControllerDefault extends JControllerAdmin
 
 	public function display($cachable = false, $urlparams = false)
 	{
-		require_once JPATH_COMPONENT.'/helpers/helpers.php';
-		
-		// Load the submenu.
-		BabioonKoorgaHelpers::addSubmenu( 'default' );
+        require_once JPATH_COMPONENT.'/helpers/babioonevent.php';
+	    // Load the submenu.
+		BabioonEventHelper::addSubmenu( 'default' );
 		
 		parent::display();
 

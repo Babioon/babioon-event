@@ -14,7 +14,7 @@ jimport('joomla.application.component.view');
 /**
  * View to edit a address.
  */
-class BabioonEventViewObject extends JView
+class BabioonEventViewObject extends BabioonView
 {
 	protected $state;
 	protected $element;
@@ -34,7 +34,6 @@ class BabioonEventViewObject extends JView
 		$name       = $this->getName();
 		
 		$state 		= $this->get('State');
-		$this->assignRef('element', $this->get('Item')) ;
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -64,7 +63,7 @@ class BabioonEventViewObject extends JView
 		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
 			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
-		if (is_null($this->titleposfix)) 
+		if (is_null($this->titleposfix) && !empty($this->element->name)) 
 		{
 		    $this->titleposfix = $this->element->name;
 		}

@@ -11,11 +11,11 @@ defined('_JEXEC') or die;
 
 
 /**
- * BabioonEventHelpers
+ * BabioonEventHelper
  *
  * @package		BABIOON_EVENT
  */
-class BabioonEventHelpers
+class BabioonEventHelper
 {
 
 	/**
@@ -31,7 +31,7 @@ class BabioonEventHelpers
 	 */
 	public static function addSubmenu($vName)
 	{
-		$submenu = array('default');
+		$submenu = array('default','events');
 	    foreach($submenu AS $item)
 	    {
     	    JSubMenuHelper::addEntry(
@@ -54,7 +54,6 @@ class BabioonEventHelpers
 	    
 	}
     
-    
 	/**
 	 * Gets a list of the actions that can be performed.
 	 *
@@ -66,6 +65,7 @@ class BabioonEventHelpers
 	{
 		$user	= JFactory::getUser();
 		$result	= new JObject;
+		$assetName = 'com_babioonevent';
 		
 		$actions = array(
 			'babioonevent.admin', 'babioonevent.manage', 'babioonevent.create', 'babioonevent.edit', 'babioonevent.edit.state', 'babioonevent.delete'
@@ -84,9 +84,12 @@ class BabioonEventHelpers
 	    $sigular='';
 	    switch($plural)
 	    {
-	        case 'data'        : $sigular='datum';         break;
+	        case 'events'        : $sigular='event';         break;
 	    }
 	    return $sigular;
 	} 
+	
+		
+	
 	
 }
