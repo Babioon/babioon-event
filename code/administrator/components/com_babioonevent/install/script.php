@@ -3,7 +3,7 @@
 defined('_JEXEC') or die('Restricted access');
  
 /**
- * Script file of com_rde_admin component
+ * Script file of com_babioonevent component
  */
 class com_babiooneventInstallerScript
 {
