@@ -25,7 +25,7 @@ class BabioonEventRouteHelper
             
         }
         */
-        $result = is_object($result) ? $result->id : JRequest::getInt('Itemid',0);      
+        $result = is_object($result) ? $result->id : $app->input->get('Itemid', 0, 'uint');      
         return $result;
     }  
 }

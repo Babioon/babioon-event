@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @version __*_BABIOONVERSIONTAG_*__
+ * @version 2.0
  * @package BABIOONEVENT
  * @author Robert Deutz
  * @copyright Robert Deutz Business Solution
@@ -28,6 +28,10 @@ Legend:
 ^ -> Change
 - -> Removed
 ! -> Note
+
+-- Version 2.0.0 -- 25 October 2012 -----------------------------------------
+! changed the version naming scheme, see http://babioon.com
+
 
 -- Version 1.2 -- 5 May 2012 -----------------------------------------
 ! renamed to babioon event to avoid migration conflicts

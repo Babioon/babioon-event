@@ -25,69 +25,7 @@ class com_babiooneventInstallerScript
 				return false;
 			}
 		}
-        
-		
-		try {
-    		// update check
-    		$query=$db->getQuery(true);
-    		/**
-    		 * update will only work when old db prefix is jos
-    		 */
-    		$query->select('*')
-    		    ->from('jos_categories')
-    		    ->where('section  = "com_rd_event_data"')
-    		    ->orderby('ordering');
-    		    
-    	    $db->setQuery($query);
-    	    $oldcat=$db->loadObjectList();
-
-			$root	= JTable::getInstance('category');
-			$root->load(1);
-
-			$comp	= JTable::getInstance('asset');
-			$comp->loadByName('com_babioonevent');
-			foreach($oldcat AS $c)
-            {
-                $id=$c->id;
-                
-                $newcat	= JTable::getInstance('category');
-                $newcat->title     = $c->title;
-                $newcat->alias     = $c->alias;
-                $newcat->path      = $c->alias;
-                $newcat->published = 1;
-                $newcat->params    = "{}";
-                $newcat->language  = "*";
-                $newcat->set('_trackAssets', false);
-                $newcat->extension = 'com_babioonevent';
-    			$newcat->setLocation($root->id, 'last-child');
-    			if (!$newcat->check() || !$newcat->store()) {
-    				//$this->setError($newcat->getError());
-    				return false;
-    			}
-    			$asset	= JTable::getInstance('asset');
-			    $asset->name = 'com_babioonevent.category.'.$id;
-		    	$asset->title = $c->title;
-    			$asset->setLocation($comp->id, 'last-child');
-    			if (!$asset->check() || !$asset->store()) {
-    				//$this->setError($asset->getError());
-    				return false;
-    			}
-    			
-                $query->clear();
-                $query->update('#__categories')
-                    ->set('id='.$id)
-                    ->set('asset_id='.$asset->id)
-                    ->where('id='.$newcat->id);    
-    			$db->setQuery($query);
-    			$db->query();
-    			
-    			
-            }    	    
-		} catch (Exception $e) {
-		    // whatever happen ignore it
-		}
 		return true;
-	    
     }
 	
 	
