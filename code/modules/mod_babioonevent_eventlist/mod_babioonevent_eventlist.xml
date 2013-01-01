@@ -76,8 +76,8 @@
 					default="1" 
 					label="MOD_BABIOONEVENT_EVENTLIST_ORDER" 
 					description="MOD_BABIOONEVENT_EVENTLIST_ORDER_DESC">
-					<option value="1">MOD_BABIOONEVENT_EVENTLIST_DATEDate</option>
-					<option value="2">MOD_BABIOONEVENT_EVENTLIST_CATEGORIESANDDATECategories and Date</option>
+					<option value="1">MOD_BABIOONEVENT_EVENTLIST_DATE</option>
+					<option value="2">MOD_BABIOONEVENT_EVENTLIST_CATEGORIESANDDATE</option>
 				</field>
 
 			</fieldset>	
