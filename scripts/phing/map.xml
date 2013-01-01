@@ -6,15 +6,26 @@
 	<import file="${project.basedir}/../_4all/tasks.xml"/>
 
 	<target name="do">
-	
+
 		<echo msg="**************************" />
 		<echo msg="* MAP: babioonevent *" />
 		<echo msg="**************************" />
-	
+
 		<phingcall target="linkcomponent_new_repository_layout">
 			<property name="projectname" value="babioon-event" />
 			<property name="filebase" value="${packagedir}/${projectname}" />
-			<property name="pname" value="com_babioonevent" />	
+			<property name="pname" value="com_babioonevent" />
 		</phingcall>
+
+		<phingcall target="symboliclink">
+			<property name="source" value="${packagedir}/${projectname}/code/modules/mod_babioonevent_eventlist" />
+			<property name="target" value="${targetdir}/modules/mod_babioonevent_eventlist" />
+		</phingcall>
+		<phingcall target="maplanguage">
+			<property name="basesource" value="${packagedir}/${projectname}/code/modules/mod_babioonevent_eventlist/language" />
+			<property name="basetarget" value="${targetdir}/language" />
+		</phingcall>
+
+
 	</target>
 </project>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+	<name>BabioonEvent Eventlist</name>
+	<author>Robert Deutz</author>
+	<creationDate>01/2013</creationDate>
+	<copyright>Robert Deutz Business Solution (www.rdbs.de)</copyright>
+	<license>GNU General Public License version 3</license>
+	<authorEmail>contact@babioon.com</authorEmail>
+	<authorUrl>www.babioon.com</authorUrl>
+	<version>2.0 </version>
+	<description>MOD_BABIOONEVENT_EVENTLIST_XML_DESCRIPTION</description>
+	<files>
+		<filename module="mod_babioonevent_eventlist">mod_babioonevent_eventlist.php</filename>
+		<filename>mod_babioonevent_eventlist.class.php</filename>
+		<filename>tmpl/default.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">lang/language/en-GB/en-GB.mod_babioonevent_eventlist.ini</language>
+		<language tag="de-DE">lang/language/de-DE/de-DE.mod_babioonevent_eventlist.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+
+
+				<field name="eventcats" 
+					type="category" 
+					extension="com_babioonevent" 
+					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCATS" 
+					description="MOD_BABIOONEVENT_EVENTLIST_EVENTCATS_DESC" 					
+					multiple="true"
+					default=""
+					size="10"
+					>
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+					</field>
+
+				<field name="headerlevel" 
+					type="list" 
+					default="1" 
+					label="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVELHeaderlevel" 
+					description="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_DESCheaderlevel for the first header">
+					<option value="1">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H1</option>
+					<option value="2">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H2</option>
+					<option value="3">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H3</option>
+					<option value="4">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H4</option>
+					<option value="5">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H5</option>
+				</field>
+
+				<field name="eventcount" 
+					type="text" default="5" 
+					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNTNumber Event" 
+					description="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNT_DESCThe quantity of events we show" />
+
+				<field name="showmonths" 
+					type="radio" 
+					default="0" 
+					label="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHSShow Months" 
+					description="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHS_DESCShow Months as header">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field name="showcats" 
+					type="radio" 
+					default="1" 
+					label="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS_Show Categories" 
+					description="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS_DESCShow categories as header">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field name="order" 
+					type="list" 
+					default="1" 
+					label="MOD_BABIOONEVENT_EVENTLIST_ORDEROrdering" 
+					description="MOD_BABIOONEVENT_EVENTLIST_ORDER_DESCOrdering for the event items">
+					<option value="1">MOD_BABIOONEVENT_EVENTLIST_DATEDate</option>
+					<option value="2">MOD_BABIOONEVENT_EVENTLIST_CATEGORIESANDDATECategories and Date</option>
+				</field>
+
+			</fieldset>	
+
+
+			<fieldset name="advanced">
+				<field name="layout" type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+				<field name="moduleclass_sfx" type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field name="owncache" type="list" default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC" >
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING
+					</option>
+				</field>
+
+				<field name="cache_time" type="text" default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+			</fieldset>
+		</fields>
+	</config>		
+
+
+</extension>
