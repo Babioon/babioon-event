@@ -39,8 +39,8 @@
 				<field name="headerlevel" 
 					type="list" 
 					default="1" 
-					label="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVELHeaderlevel" 
-					description="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_DESCheaderlevel for the first header">
+					label="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL" 
+					description="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_DESC">
 					<option value="1">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H1</option>
 					<option value="2">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H2</option>
 					<option value="3">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H3</option>
@@ -50,14 +50,14 @@
 
 				<field name="eventcount" 
 					type="text" default="5" 
-					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNTNumber Event" 
-					description="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNT_DESCThe quantity of events we show" />
+					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNT" 
+					description="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNT_DESC" />
 
 				<field name="showmonths" 
 					type="radio" 
 					default="0" 
-					label="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHSShow Months" 
-					description="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHS_DESCShow Months as header">
+					label="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHS" 
+					description="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHS_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -65,8 +65,8 @@
 				<field name="showcats" 
 					type="radio" 
 					default="1" 
-					label="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS_Show Categories" 
-					description="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS_DESCShow categories as header">
+					label="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS" 
+					description="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -74,8 +74,8 @@
 				<field name="order" 
 					type="list" 
 					default="1" 
-					label="MOD_BABIOONEVENT_EVENTLIST_ORDEROrdering" 
-					description="MOD_BABIOONEVENT_EVENTLIST_ORDER_DESCOrdering for the event items">
+					label="MOD_BABIOONEVENT_EVENTLIST_ORDER" 
+					description="MOD_BABIOONEVENT_EVENTLIST_ORDER_DESC">
 					<option value="1">MOD_BABIOONEVENT_EVENTLIST_DATEDate</option>
 					<option value="2">MOD_BABIOONEVENT_EVENTLIST_CATEGORIESANDDATECategories and Date</option>
 				</field>
@@ -103,6 +103,5 @@
 			</fieldset>
 		</fields>
 	</config>		
-
 
 </extension>
