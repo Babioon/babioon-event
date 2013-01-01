@@ -12,15 +12,15 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 // Try to load router helper
 if(!class_exists('BabioonEventRouteHelper'))
 {
-	if(file_exists(JPATH_SITE.'/components/babioon-event/helpers/route.php'))
+	if(file_exists(JPATH_SITE.'/components/com_babioonevent/helpers/route.php'))
 	{
-		require_once JPATH_SITE.'/components/babioon-event/helpers/route.php';	
+		require_once JPATH_SITE.'/components/com_babioonevent/helpers/route.php';	
 	}	
 }	
 if(!class_exists('BabioonEventRouteHelper', false))
 {
 	// We gave our best 
-	JText::_('MOD_BABIONEVENT_ROUTEHELPER_NOT_AVAILABLE');
+	echo JText::_('MOD_BABIONEVENT_ROUTEHELPER_NOT_AVAILABLE');
 	return false;
 }	
 else
