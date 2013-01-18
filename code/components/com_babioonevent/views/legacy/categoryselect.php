@@ -1,6 +1,6 @@
 <?php
 /**
- * RDBS 
+ * RDBS
  * @author Robert Deutz (email contact@rdbs.net / site www.rdbs.de)
  * @version $Id: categoryselect.php 635 2009-08-23 12:57:09Z deutz $
  **/
@@ -21,11 +21,13 @@ if (array_key_exists('labletag',$this->elm))
 	$namedesc = strtoupper ( $this->elm ['name'] ) . 'DESC';
 }
 
-echo JText::_ ( $namedesc );
-echo $this->elm ['mandatory'] ? ' *' : '';
 if ($this->elm ['value'] == 0) {
 	$this->elm ['value'] = $this->elm['defaultvalue'];
 }
+
+echo '<label for="', $this->elm ['name'], '" class="lcb" >', JText::_ ( $namedesc );
+echo $this->elm ['mandatory'] ? ' *' : '';
+echo '</label>';
 
 echo '<select name="'.$this->elm['name'].'" class="inputbox">';
 echo JHtml::_('select.options', JHtml::_('category.options', 'com_babioonevent'), 'value', 'text', $this->elm ['value']);
