@@ -11,14 +11,14 @@
 	<description>COM_BABIOONEVENT_XML_DESCRIPTION</description>
 	<files folder="site">
 		<filename>babioonevent.php</filename>
-	</files>	
-		
+	</files>
+
 	<administration>
-    	<menu link="option=com_babioonevent" view="default">COM_BABIOONEVENT</menu>
+    	<menu img="../media/babioon/images/babioon.png">COM_BABIOONEVENT</menu>
     	<menu link="option=com_categories&amp;extension=com_babioonevent" view="categories" alt="Event/Categories">COM_BABIOONEVENT_CATEGORIES</menu>
 		<files folder="admin">
 		  	<filename>babioonevent.php</filename>
 		</files>
-	</administration>		
+	</administration>
 
 </extension>

@@ -22,8 +22,8 @@ class BabioonEventHelper
 	 * @var    string  The prefix to use with controller messages.
 	 */
 	protected static $text_prefix = 'COM_BABIOONEVENT_';
-    
-    
+
+
 	/**
 	 * Configure the Linkbar.
 	 *
@@ -45,19 +45,19 @@ class BabioonEventHelper
 			'index.php?option=com_categories&extension=com_babioonevent',
 			$vName == 'categories'
 		);
-		
+
 		if ($vName=='categories') {
 			JToolBarHelper::title(
 				JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE', JText::_('com_babioonevent')),
 				'babioonevent-categories');
 		}
-	    
+
 	}
-    
+
 	/**
 	 * Gets a list of the actions that can be performed.
 	 *
-	 * @param	
+	 * @param
 	 *
 	 * @return	JObject
 	 */
@@ -66,7 +66,7 @@ class BabioonEventHelper
 		$user	= JFactory::getUser();
 		$result	= new JObject;
 		$assetName = 'com_babioonevent';
-		
+
 		$actions = array(
 			'babioonevent.admin', 'babioonevent.manage', 'babioonevent.create', 'babioonevent.edit', 'babioonevent.edit.state', 'babioonevent.delete'
 		);
@@ -77,8 +77,8 @@ class BabioonEventHelper
 
 		return $result;
 	}
-	
-	
+
+
 	public static function toSigular($plural)
 	{
 	    $sigular='';
@@ -87,9 +87,9 @@ class BabioonEventHelper
 	        case 'events'        : $sigular='event';         break;
 	    }
 	    return $sigular;
-	} 
-	
-		
-	
-	
+	}
+
+
+
+
 }

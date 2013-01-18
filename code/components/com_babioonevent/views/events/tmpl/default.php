@@ -17,7 +17,7 @@ $data=$this->defaultData;
 
 <div id="event<?php echo $pageclass_sfx;?>">
 
-<?php 
+<?php
 
 if ($this->title != '')
 {
@@ -42,8 +42,8 @@ if ( !empty($data))
                         $close= '</ul>';
                 }
                 echo '<li>';
-                
-                if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00') 
+
+                if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00')
                 {
                 	//start und ende angegeben
                 	$sd=date('d.m.Y',strtotime($elm->sdate));
@@ -52,21 +52,21 @@ if ( !empty($data))
                 	{
                 		echo $sd;
                 	}
-                	else 
+                	else
                 	{
                 		// beide Tage ausgeben
                 		echo $sd,' - ', $ed;
                 	}
                 	echo ': ';
                 }
-                else 
+                else
                 {
 					if ($elm->sdate != '0000-00-00')
 					{
                			echo date('d.m.Y',strtotime($elm->sdate));
                			echo ': ';
-					}	
-               	
+					}
+
                 }
                 echo '<a href="'.$elm->link.'">'.$elm->name.'</a>','</li>';
         }
@@ -79,7 +79,9 @@ else
 echo '</div>';
 if ($this->showpagination)
 {
-	echo $this->dpage->getPagesLinks(  );
+	echo '<div class="pagination">';
+    echo $this->dpage->getPagesLinks(  );
+    echo '</div>';
 }
 ?>
 </div> <!-- id=event -->
