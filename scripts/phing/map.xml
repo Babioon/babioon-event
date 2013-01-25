@@ -26,6 +26,14 @@
 			<property name="basetarget" value="${targetdir}/language" />
 		</phingcall>
 
+		<phingcall target="symboliclink">
+			<property name="source" value="${packagedir}/${projectname}/code/plugins/search/babioonevent_events" />
+			<property name="target" value="${targetdir}/plugins/search/babioonevent_events" />
+		</phingcall>
+		<phingcall target="maplanguage">
+			<property name="basesource" value="${packagedir}/${projectname}/code/plugins/search/babioonevent_events/language" />
+			<property name="basetarget" value="${targetdir}/administrator/language" />
+		</phingcall>
 
 	</target>
 </project>
