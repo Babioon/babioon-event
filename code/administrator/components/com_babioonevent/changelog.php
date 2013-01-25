@@ -34,6 +34,10 @@ Legend:
 ! changed the version naming scheme, see http://babioon.com
 ! new repository layout
 ! code cleanup
++ module next events
++ search plugin
+- front end editing of events
+
 
 -- Version 1.2 -- 5 May 2012 -----------------------------------------
 ! renamed to babioon event to avoid migration conflicts
