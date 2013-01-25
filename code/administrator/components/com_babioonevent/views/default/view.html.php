@@ -48,7 +48,7 @@ class BabioonEventViewDefault extends JView
 		$canDo = BabioonEventHelper::getActions();
 		JToolBarHelper::title(JText::_('COM_BABIOONEVENT'), 'babioon.png');
 
-		if ($canDo->get('babioonevent.admin'))
+		if ($canDo->get('core.admin'))
 		{
 			JToolBarHelper::preferences('com_babioonevent');
 		}
