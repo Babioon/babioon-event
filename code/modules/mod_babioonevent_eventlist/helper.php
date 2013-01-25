@@ -1,88 +1,120 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
-// no direct access
-defined ( '_JEXEC' ) or die ( 'Restricted access' );
+// No direct access
+defined('_JEXEC') or die('Restricted access');
 
-class modBabiooneventEventlistHelper {
-
-	public function getItems($params) 
+/**
+ * modBabiooneventEventlistHelper
+ *
+ * @package  BABIOON_EVENT
+ * @since    2.0
+ */
+class ModBabiooneventEventlistHelper
+{
+	/**
+	 * get the event items
+	 *
+	 * @param   JRegistry  $params  parameter object
+	 *
+	 * @return  array
+	 */
+	public function getItems($params)
 	{
-		$eventcats = $params->get('eventcats', array());
-		$eventcount = $params->get ( 'eventcount', 5 );
-		$order = $params->get ( 'order', 1 );
+		$eventcats  = $params->get('eventcats', array());
+		$eventcount = $params->get('eventcount', 5);
+		$order      = $params->get('order', 1);
+		$Itemid     = BabioonEventRouteHelper::getItemid('events');
+		$db         = JFactory::getDBO();
+		$now        = gmdate("Y-m-d");
 
-		$Itemid = BabioonEventRouteHelper::getItemid ( 'events' );
-		$db = JFactory::getDBO ();
-		$now = gmdate ( "Y-m-d" ) ;
+		$query = $db->getQuery(true);
+		$query->select('MONTHNAME(e.sdate) AS mon')
+				->select('YEAR(e.sdate) AS year')
+				->select('e.*')
+				->select('cc.title AS cctitle')
+				->from('#__babioonevent_events AS e')
+				->from('#__categories AS cc')
+				->where('(e.sdate >= "' . $now . '" OR e.edate >= "' . $now . '")')
+				->where('e.catid = cc.id')
+				->where('e.published = 1')
+				->where('cc.published = 1')
+				->order('e.sdate, cc.title');
 
-		$catfilter = '';
-		if (!empty($eventcats) && trim($eventcats[0]) != "") 
+		if (!empty($eventcats) && trim($eventcats[0]) != "")
 		{
-			$catfilter = ' AND catid in (' . implode ( ',', $eventcats  ) . ') ';
+			$catfilter = 'catid in (' . implode(',', $eventcats) . ') ';
+			$query->where($catfilter);
 		}
 
-		$query = "SELECT MONTHNAME(e.sdate) as mon,YEAR(e.sdate) as year," .
-				"\n e.*, cc.title as cctitle" .
-				"\n FROM " .
-				"\n  #__babioonevent_events as e, #__categories as cc" .
-				"\n WHERE " .
-				"\n (e.sdate >= '$now' OR e.edate >= '$now')" .
-				"\n AND e.catid = cc.id" .
-				"\n AND e.published = 1" .
-				"\n AND cc.published = 1" .
-				$catfilter .
-				"\n ORDER BY e.sdate, cc.title ";
+		$db->setQuery($query, 0, $eventcount);
 
-		$db->setQuery ( $query, 0, $eventcount );
+		$c      = $db->loadObjectList();
+		$ccount = count($c);
+		$link   = 'index.php?option=com_babioonevent&view=event' . '&Itemid=' . $Itemid . '&id=';
 
-		$c = $db->loadObjectList ();
-		$ccount = count ( $c );
+		$categorylist = array();
+		$nr           = array();
 
-		$link = 'index.php?option=com_babioonevent&view=event' . '&Itemid=' . $Itemid . '&id=';
-		$categorylist = array ( );
-		$nr = array ( );
-		for($i = 0; $i < $ccount; $i ++) 
+		for ($i = 0; $i < $ccount; $i ++)
 		{
-			$obj = new stdClass ( );
-			$crow = $c [$i];
-			$obj = $crow;
+			$obj       = new stdClass;
+			$crow      = $c [$i];
+			$obj       = $crow;
 			$obj->link = $link . $crow->id;
-			$nr [] = $obj;
+			$nr []     = $obj;
 			$categorylist [$obj->catid] = $obj->cctitle;
 		}
 
-		if ($order == 2) {
-			$result = array ( );
-			if (trim ( $eventcats ) != '') {
-				foreach ( explode ( ',', $eventcats ) as $elm ) {
-					foreach ( $nr as $r ) {
-						if ($elm == $r->catid) {
+		if ($order == 2)
+		{
+			$result = array();
+
+			if (!empty($eventcats))
+			{
+				foreach (explode(',', $eventcats) as $elm)
+				{
+					foreach ($nr as $r)
+					{
+						if ($elm == $r->catid)
+						{
 							$result [] = $r;
 						}
 					}
 				}
-			} else {
-				if (asort ( $categorylist, SORT_LOCALE_STRING ) === true) {
-					foreach ( $categorylist as $key => $value ) {
-						foreach ( $nr as $r ) {
-							if ($key == $r->catid) {
+			}
+			else
+			{
+				if (asort($categorylist, SORT_LOCALE_STRING) === true)
+				{
+					foreach ($categorylist as $key => $value)
+					{
+						foreach ($nr as $r)
+						{
+							if ($key == $r->catid)
+							{
 								$result [] = $r;
 							}
 						}
 					}
-				} else {
+				}
+				else
+				{
 					$result = $nr;
 				}
 			}
-		} else {
+		}
+		else
+		{
 			$result = $nr;
 		}
+
 		return $result;
 	}
 }

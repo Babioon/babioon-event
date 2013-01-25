@@ -1,30 +1,32 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // No direct access
-defined ( '_JEXEC' ) or die ( 'Restricted access' );
+defined('_JEXEC') or die('Restricted access');
 
-$showmonths 	= $params->get ( 'showmonths', 0 );
-$showcats 		= $params->get ( 'showcats', 1 );
-$order 			= $params->get ( 'order', 1 );
-$headerlevel	= $params->get ( 'headerlevel', 1 );
+$showmonths 	= $params->get('showmonths', 0);
+$showcats 		= $params->get('showcats', 1);
+$order 			= $params->get('order', 1);
+$headerlevel	= $params->get('headerlevel', 1);
 
-if ($showmonths == 1) 
+if ($showmonths == 1)
 {
 	$mlevel = $headerlevel;
-	if ($showcats) 
+
+	if ($showcats)
 	{
 		$clevel = $mlevel + 1;
 	}
-} 
-else 
+}
+else
 {
-	if ($showcats) 
+	if ($showcats)
 	{
 		$clevel = $headerlevel;
 	}
@@ -34,35 +36,38 @@ $month = '';
 $scattext = '';
 $close = '';
 
-$rcount = count ( $items );
-if (is_array ( $items ) && $rcount != 0) 
+$rcount = count($items);
+
+if (is_array($items) && $rcount != 0)
 {
-	if ($showmonths == 0 && $showcats == 0) 
+	if ($showmonths == 0 && $showcats == 0)
 	{
 		echo '<ul class="liste">';
 		$close = '</ul>';
 
 	}
-	for($i = 0; $i < $rcount; $i ++) 
+
+	for ($i = 0; $i < $rcount; $i ++)
 	{
 		$elm = $items [$i];
-		if ($elm->mon != $month && $showmonths) 
+
+		if ($elm->mon != $month && $showmonths)
 		{
 			echo $close;
 			$month = $elm->mon;
 			$scattext = $elm->cctitle;
-			echo '<h' . $mlevel . '>' . JText::_ ( $month ) . '</h' . $mlevel . '>';
-			
-			if ($showcats) 
+			echo '<h' . $mlevel . '>' . JText::_($month) . '</h' . $mlevel . '>';
+
+			if ($showcats)
 			{
 				echo '<h' . $clevel . '>' . $scattext . '</h' . $clevel . '>';
 			}
 			echo '<ul class="liste">';
 			$close = '</ul>';
-		} 
-		else 
+		}
+		else
 		{
-			if ($scattext != $elm->cctitle && $showcats) 
+			if ($scattext != $elm->cctitle && $showcats)
 			{
 				echo $close;
 				$scattext = $elm->cctitle;
@@ -73,36 +78,37 @@ if (is_array ( $items ) && $rcount != 0)
 		}
 		echo '<li>';
 
-		if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00') 
-        {
-        	//start und ende angegeben
-           	$sd=date('d.m.Y',strtotime($elm->sdate));
-           	$ed=date('d.m.Y',strtotime($elm->edate));
-           	if ($sd == $ed)
-           	{
-           		echo $sd;
-           	}
-           	else 
-           	{
-           		// beide Tage ausgeben
-           		echo $sd,' - ', $ed;
-           	}
-           	echo ': ';
-        }
-        else 
-        {
+		if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00')
+		{
+			// Start und ende angegeben
+			$sd = date('d.m.Y', strtotime($elm->sdate));
+			$ed = date('d.m.Y', strtotime($elm->edate));
+
+			if ($sd == $ed)
+			{
+				echo $sd;
+			}
+			else
+			{
+				// Beide Tage ausgeben
+				echo $sd,' - ', $ed;
+			}
+			echo ': ';
+		}
+		else
+		{
 			if ($elm->sdate != '0000-00-00')
 			{
-          			echo date('d.m.Y',strtotime($elm->sdate));
-          			echo ': ';
-			}	
-          	
-        }
+					echo date('d.m.Y', strtotime($elm->sdate));
+					echo ': ';
+			}
+
+		}
 		echo '<a href="' . $elm->link . '">' . $elm->name . '</a>', '</li>';
 	}
 	echo $close;
-} 
-else 
+}
+else
 {
-	echo JText::_ ( 'MOD_BABIONEVENT_NOEVENTS' );
+	echo JText::_('MOD_BABIONEVENT_NOEVENTS');
 }
