@@ -1,18 +1,19 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // Check to ensure this file is included in Joomla!
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die ('Restricted access');
 
-$pageclass_sfx=$this->params->get('pageclass_sfx','');
-$subheaderlevel= $this->headerlevel;
+$pageclass_sfx  = $this->params->get('pageclass_sfx', '');
+$subheaderlevel = $this->headerlevel;
 
-$data=$this->defaultData;
+$data = $this->defaultData;
 ?>
 
 <div id="event<?php echo $pageclass_sfx;?>">
@@ -21,13 +22,14 @@ $data=$this->defaultData;
 
 if ($this->title != '')
 {
-	echo "<h$this->headerlevel>".$this->title."</h$this->headerlevel> \n";
-	$slevel= $this->headerlevel+1;
+	echo "<h$this->headerlevel>" . $this->title . "</h$this->headerlevel> \n";
+	$slevel = $this->headerlevel + 1;
 }
 $month	= '';
 $close      = '';
 
 echo '<div id="liste">';
+
 if ( !empty($data))
 {
         foreach ($data as $elm)

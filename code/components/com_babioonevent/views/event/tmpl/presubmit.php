@@ -1,18 +1,19 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // Check to ensure this file is included in Joomla!
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
 $pageclass_sfx   = $this->params->get('pageclass_sfx','');
 $subheaderlevel  = $this->headerlevel+1;
-$subheaderlevel2 = $this->headerlevel+2; 
-$subheaderlevel3 = $this->headerlevel+3; 
+$subheaderlevel2 = $this->headerlevel+2;
+$subheaderlevel3 = $this->headerlevel+3;
 
 echo "<h$this->headerlevel>".JText::_('COM_BABIOONEVENT_CHECKDATA')."</h$this->headerlevel>";
 $this->setPageTitle(JText::_('COM_BABIOONEVENT_CHECKDATA_PT'));
@@ -31,7 +32,7 @@ $i++;
 // organiser
 if ($this->params->get('showorganiser',2) != 0)
 {
-	$elm = $this->form[$i];	
+	$elm = $this->form[$i];
 	echo '<h'.$subheaderlevel2.'>',JText::_($elm['labletag']),'</h'.$subheaderlevel2.'>';
 	echo '<p class="box">';
 	echo trim($elm['value']) != '' ? $elm['value'] : JText::_('COM_BABIOONEVENT_NODATASET');
@@ -41,7 +42,7 @@ if ($this->params->get('showorganiser',2) != 0)
 $confvar = $this->params->get('showdates',4);
 if ($confvar != 0)
 {
-	echo '<h'.$subheaderlevel.'>'.JText::_('COM_BABIOONEVENT_START').'</h'.$subheaderlevel.'>';	
+	echo '<h'.$subheaderlevel.'>'.JText::_('COM_BABIOONEVENT_START').'</h'.$subheaderlevel.'>';
 
 	// startdate
 	$elm=$this->form[$i];
@@ -62,7 +63,7 @@ if ($confvar != 0)
 	}
 	if ( $confvar >= 6 )
 	{
-		echo '<h'.$subheaderlevel.'>'.JText::_('COM_BABIOONEVENT_END').'</h'.$subheaderlevel.'>';	
+		echo '<h'.$subheaderlevel.'>'.JText::_('COM_BABIOONEVENT_END').'</h'.$subheaderlevel.'>';
 		$elm=$this->form[$i];
 		echo '<h'.$subheaderlevel2.'>',JText::_($elm['labletag']),'</h'.$subheaderlevel2.'>';
 		echo '<p class="box">';
@@ -85,8 +86,8 @@ $cinfo = (int) $this->params->get('showcontact',1) + (int) $this->params->get('s
 if ($cinfo != 0)
 {
 
-	echo '<h'.$subheaderlevel.'>'.JText::_('COM_BABIOONEVENT_CONTACTPERSON').'</h'.$subheaderlevel.'>';	
-	
+	echo '<h'.$subheaderlevel.'>'.JText::_('COM_BABIOONEVENT_CONTACTPERSON').'</h'.$subheaderlevel.'>';
+
 	if ($this->params->get('showcontact',1) != 0)
 	{
 		$elm=$this->form[$i];
@@ -129,14 +130,14 @@ if ($cinfo != 0)
 		{
 			if ($elm['value'] == 1)
 			{
-				echo JText::_('COM_BABIOONEVENT_WESHOWTHEEMAIL');				
+				echo JText::_('COM_BABIOONEVENT_WESHOWTHEEMAIL');
 			}
-			else 
+			else
 			{
 				echo JText::_('COM_BABIOONEVENT_WEDONTSHOWTHEEMAIL');
 			}
-		}	
-		
+		}
+
 	}
 }
 
@@ -144,7 +145,7 @@ $locationconfvar=$this->params->get('showlocation',1);
 if ($locationconfvar > 2)
 {
 	echo '<h'.$subheaderlevel.'>'.JText::_('COM_BABIOONEVENT_LOCATION').'</h'.$subheaderlevel.'>';
-	if ($locationconfvar == 5) 
+	if ($locationconfvar == 5)
 	{
 		// Geocoordintes notice
 		if ($this->geomsg != '')
@@ -213,7 +214,7 @@ if ($this->params->get('showlongdesc',2) != 0)
 $elm=$this->form[$i];
 echo '<h'.$subheaderlevel2.'>',JText::_($elm['labletag']),'</h'.$subheaderlevel2.'>';
 echo '<p class="box">';
-echo $elm['value'] == 0 ? JText::_ ( 'NOFREEOFCHARGE' ) :  JText::_ ( 'YESFREEOFCHARGE' ); 
+echo $elm['value'] == 0 ? JText::_ ( 'NOFREEOFCHARGE' ) :  JText::_ ( 'YESFREEOFCHARGE' );
 echo '</p>';
 $i++;
 

@@ -1,15 +1,17 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // Check to ensure this file is included in Joomla!
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined('_JEXEC') or die ('Restricted access');
 
-$pageclass_sfx   = $this->params->get('pageclass_sfx','');
+$pageclass_sfx = $this->params->get('pageclass_sfx', '');
+
 if ($this->result)
 {
 	$msg = JText::_('COM_BABIOONEVENT_THANKYOUMSG');

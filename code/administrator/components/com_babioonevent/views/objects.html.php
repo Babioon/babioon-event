@@ -1,9 +1,10 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // No direct access
@@ -14,12 +15,15 @@ jimport('joomla.application.component.view');
 /**
  * View class for a list of Objects.
  *
- * @package     BABIOON_EVENT
+ * @package  BABIOON_EVENT
+ * @since    2.0
  */
 class BabioonEventViewObjects extends JView
 {
 	protected $items;
+
 	protected $pagination;
+
 	protected $state;
 
 	/**
@@ -40,6 +44,7 @@ class BabioonEventViewObjects extends JView
 		if (count($errors = $this->get('Errors')))
 		{
 			JError::raiseError(500, implode("\n", $errors));
+
 			return false;
 		}
 
@@ -49,71 +54,76 @@ class BabioonEventViewObjects extends JView
 
 	/**
 	 * Add the page title and toolbar.
+	 *
+	 * @return void
 	 */
 	protected function addToolbar()
 	{
 		$name       = $this->getName();
 		$tag        = strtoupper($name);
-		$sigular    = BabioonEventHelper::toSigular($name);
+		$singular    = BabioonEventHelper::toSingular($name);
 		$doc = JFactory::getDocument();
-		if(file_exists(JPATH_BASE.'/media/babioon/images/icon-48-babioon-'.$name.'.png'))
-		{
-		    $doc->addStyleDeclaration('.icon-48-babioon-'.$name.' {background-image: url(../media/babioon/images/icon-48-babioon-'.$name.'.png);}');
-		    $image='babioon-'.$name.'.png';
-		}
-		else 
-		{
-		    $doc->addStyleDeclaration('.icon-48-babioon {background-image: url(../media/babioon/images/icon-48-babioon.png);}');
-		    $image='babioon.png';    
-		}
-	    	    
-		$user = JFactory::getUser();
-		$canDo = BabioonEventHelper::getActions($sigular);
-		JToolBarHelper::title(JText::_('COM_BABIOONEVENT_'.$tag), $image);
-		// use sigular
-		JToolBarHelper::addNew($sigular.'.add');
-		JToolBarHelper::editList($sigular.'.edit');
 
-		if ($canDo->get('babioonevent.edit.state'))
+		if (file_exists(JPATH_BASE . '/media/babioon/images/icon-48-babioon-' . $name . '.png'))
+		{
+			$doc->addStyleDeclaration('.icon-48-babioon-' . $name . ' {background-image: url(../media/babioon/images/icon-48-babioon-' . $name . '.png);}');
+			$image = 'babioon-' . $name . '.png';
+		}
+		else
+		{
+			$doc->addStyleDeclaration('.icon-48-babioon {background-image: url(../media/babioon/images/icon-48-babioon.png);}');
+			$image = 'babioon.png';
+		}
+
+		$user = JFactory::getUser();
+		$canDo = BabioonEventHelper::getActions($singular);
+		JToolBarHelper::title(JText::_('COM_BABIOONEVENT_' . $tag), $image);
+
+		// Use singular
+		JToolBarHelper::addNew($singular . '.add');
+		JToolBarHelper::editList($singular . '.edit');
+
+		if ($canDo->get('core.edit.state'))
 		{
 			if ($this->state->get('filter.state') != 2)
 			{
 				JToolBarHelper::divider();
-				JToolBarHelper::publish($sigular.'.publish', 'JTOOLBAR_PUBLISH', true);
-				JToolBarHelper::unpublish($sigular.'.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+				JToolBarHelper::publish($singular . '.publish', 'JTOOLBAR_PUBLISH', true);
+				JToolBarHelper::unpublish($singular . '.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 			}
 
 			if ($this->state->get('filter.state') != -1)
 			{
 				JToolBarHelper::divider();
+
 				if ($this->state->get('filter.state') != 2)
 				{
-					JToolBarHelper::archiveList($sigular.'.archive');
+					JToolBarHelper::archiveList($singular . '.archive');
 				}
 				elseif ($this->state->get('filter.state') == 2)
 				{
-					JToolBarHelper::unarchiveList($sigular.'.publish');
+					JToolBarHelper::unarchiveList($singular . '.publish');
 				}
 			}
 		}
 
-		if ($canDo->get('babioonevent.edit.state'))
+		if ($canDo->get('core.edit.state'))
 		{
-			JToolBarHelper::checkin($sigular.'.checkin');
+			JToolBarHelper::checkin($singular . '.checkin');
 		}
 
-		if ($this->state->get('filter.state') == -2 && $canDo->get('babioonevent.delete'))
+		if ($this->state->get('filter.state') == -2 && $canDo->get('core.delete'))
 		{
-			JToolBarHelper::deleteList('', $sigular.'.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::deleteList('', $singular . '.delete', 'JTOOLBAR_EMPTY_TRASH');
 			JToolBarHelper::divider();
 		}
-		elseif ($canDo->get('babioonevent.edit.state'))
+		elseif ($canDo->get('core.edit.state'))
 		{
-			JToolBarHelper::trash($sigular.'.trash');
+			JToolBarHelper::trash($singular . '.trash');
 			JToolBarHelper::divider();
 		}
 
-		if ($canDo->get('babioonevent.admin'))
+		if ($canDo->get('core.admin'))
 		{
 			JToolBarHelper::preferences('com_babioonevent');
 		}

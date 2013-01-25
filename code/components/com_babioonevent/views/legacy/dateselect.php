@@ -1,10 +1,10 @@
 <?php
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
-if(!class_exists('BabioonLegacyDatePicker',false)) 
+if(!class_exists('BabioonLegacyDatePicker',false))
 {
     require_once dirname(__FILE__).'/datepicker/datepicker.php';
-    BabioonLegacyDatePicker::loadScript();    
+    BabioonLegacyDatePicker::loadScript();
 }
 
 if ($this->elm ['error'] == 1) {

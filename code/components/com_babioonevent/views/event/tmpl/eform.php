@@ -1,18 +1,19 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // Check to ensure this file is included in Joomla!
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
 $pageclass_sfx   = $this->params->get('pageclass_sfx','');
 $subheaderlevel  = $this->headerlevel+1;
-$subheaderlevel2 = $this->headerlevel+2; 
-$subheaderlevel3 = $this->headerlevel+3; 
+$subheaderlevel2 = $this->headerlevel+2;
+$subheaderlevel3 = $this->headerlevel+3;
 ?>
 
 <div id="event<?php echo $pageclass_sfx;?>">
@@ -25,10 +26,10 @@ if ($this->showerror)
 	$this->preerrortext = JText::_ ( 'COM_BABIOONEVENT_ERROREXPORT' );
 	echo $this->loadTemplate('error',false);
 }
-else 
+else
 {
 	echo "<h$this->headerlevel>".$this->title."</h$this->headerlevel>";
-	echo JText::_('COM_BABIOONEVENT_HEADTEXTEXPORTEVENT');	
+	echo JText::_('COM_BABIOONEVENT_HEADTEXTEXPORTEVENT');
 }
 
 $action = JRoute::_ ( 'index.php' );
@@ -45,13 +46,13 @@ $i=0;
 // start is always in the form
 $elm=$this->form[$i];
 $this->assign('elm',$elm);
-echo $this->loadTemplate($elm['type'],false);	
+echo $this->loadTemplate($elm['type'],false);
 $i++;
 
 // end is always in the form
 $elm=$this->form[$i];
 $this->assign('elm',$elm);
-echo $this->loadTemplate($elm['type'],false);	
+echo $this->loadTemplate($elm['type'],false);
 $i++;
 echo '</fieldset>';
 
@@ -61,7 +62,7 @@ echo '<fieldset><legend>'.JText::_ ( 'COM_BABIOONEVENT_CATEGORIES' ).'</legend>'
 $elm=$this->form[$i];
 $elm['list'] = $this->categorylist;
 $this->assign('elm',$elm);
-echo $this->loadTemplate($elm['type'],false);	
+echo $this->loadTemplate($elm['type'],false);
  */
 
 echo $this->categorylist;

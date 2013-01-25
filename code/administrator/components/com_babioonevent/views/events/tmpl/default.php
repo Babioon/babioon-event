@@ -1,12 +1,13 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
 JHtml::_('behavior.tooltip');
@@ -16,7 +17,7 @@ $user		= JFactory::getUser();
 $userId		= $user->get('id');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
-$params		= (isset($this->state->params)) ? $this->state->params : new JObject();
+$params		= (isset($this->state->params)) ? $this->state->params : new JObject;
 
 
 $canCreate	= $user->authorise('core.create',		'com_babioonevent.event');

@@ -1,10 +1,10 @@
 <?php
 /**
- * RDBS 
+ * RDBS
  * @author Robert Deutz (email contact@rdbs.net / site www.rdbs.de)
  * @version $Id: wysiwyg.php 635 2009-08-23 12:57:09Z deutz $
  **/
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
 $class='inputbox';
 $lclass='lib';
@@ -12,12 +12,12 @@ $rows=5;
 $cols=30;
 $buttons=false;
 
-if (array_key_exists('class', $this->elm)) $class = $this->elm ['class']; 
-if (array_key_exists('rows', $this->elm)) $rows = $this->elm ['rows']; 
+if (array_key_exists('class', $this->elm)) $class = $this->elm ['class'];
+if (array_key_exists('rows', $this->elm)) $rows = $this->elm ['rows'];
 if (array_key_exists('cols', $this->elm)) $cols = $this->elm ['cols'];
-if (array_key_exists('lclass', $this->elm)) $lclass = $this->elm ['lclass']; 
-if (array_key_exists('button', $this->elm)) $buttons = $this->elm ['buttons']; 
- 
+if (array_key_exists('lclass', $this->elm)) $lclass = $this->elm ['lclass'];
+if (array_key_exists('button', $this->elm)) $buttons = $this->elm ['buttons'];
+
 if ($this->elm ['error'] == 1) {
 	echo '<div class="formelm fail">';
 	echo '<p class="unsichtbar">' . JText::_ ( 'COM_BABIOONEVENT_FORMELMERROR' ) . '</p>';

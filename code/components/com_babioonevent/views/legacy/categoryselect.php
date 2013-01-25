@@ -4,7 +4,7 @@
  * @author Robert Deutz (email contact@rdbs.net / site www.rdbs.de)
  * @version $Id: categoryselect.php 635 2009-08-23 12:57:09Z deutz $
  **/
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
 if ($this->elm ['error'] == 1) {
 	echo '<div class="formelm fail">';

@@ -1,10 +1,10 @@
 <?php
 /**
- * RDBS 
+ * RDBS
  * @author Robert Deutz (email contact@rdbs.net / site www.rdbs.de)
  * @version $Id: radio0.php 679 2009-08-30 08:50:23Z deutz $
  **/
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
 if ($this->elm ['error'] == 1) {
 	echo '<div class="formelm fail">';

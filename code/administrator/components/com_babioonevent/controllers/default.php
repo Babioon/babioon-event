@@ -1,9 +1,10 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // No direct access
@@ -14,7 +15,8 @@ jimport('joomla.application.component.controlleradmin');
 /**
  * Babioon Event Default controller class.
  *
- * @package BABIOON_EVENT
+ * @package  BABIOON_EVENT
+ * @since    2.0
  */
 class BabioonEventControllerDefault extends JControllerAdmin
 {
@@ -22,17 +24,4 @@ class BabioonEventControllerDefault extends JControllerAdmin
 	 * @var    string  The prefix to use with controller messages.
 	 */
 	protected $text_prefix = 'COM_BABIOONEVENT_';
-
-	public function display($cachable = false, $urlparams = false)
-	{
-        require_once JPATH_COMPONENT.'/helpers/babioonevent.php';
-	    // Load the submenu.
-		BabioonEventHelper::addSubmenu( 'default' );
-		
-		parent::display();
-
-		return $this;
-	}
-	
-	
-}	
+}

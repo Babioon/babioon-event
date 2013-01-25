@@ -1,9 +1,10 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // No direct access
@@ -14,7 +15,8 @@ jimport('joomla.application.component.controlleradmin');
 /**
  * BabioonEvent Event controller class.
  *
- * @package BABIOON_EVENT
+ * @package  BABIOON_EVENT
+ * @since    2.0
  */
 class BabioonEventControllerEvents extends JControllerAdmin
 {
@@ -23,28 +25,20 @@ class BabioonEventControllerEvents extends JControllerAdmin
 	 */
 	protected $text_prefix = 'COM_BABIOONEVENT_';
 
-	public function display($cachable = false, $urlparams = false)
-	{
-		require_once JPATH_COMPONENT.'/helpers/babioonevent.php';
-		
-		// Load the submenu.
-		// Note: use plural
-		BabioonEventHelper::addSubmenu( 'events' );
-		
-		parent::display();
-
-		return $this;
-	}
-	
 	/**
 	 * Proxy for getModel.
+	 *
+	 * @param   string  $name    Model name
+	 * @param   string  $prefix  Prefix
+	 * @param   array   $config  configuration array
+	 *
+	 * @return  the model
 	 */
 	public function getModel($name = 'Event', $prefix = 'BabioonEventModel', $config = array('ignore_request' => true))
 	{
 		// Note: Name in singular
-	    $model = parent::getModel($name, $prefix, $config);
+		$model = parent::getModel($name, $prefix, $config);
+
 		return $model;
 	}
-	
-	
-}	
+}

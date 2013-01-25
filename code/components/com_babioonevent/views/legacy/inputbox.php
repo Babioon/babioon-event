@@ -1,10 +1,10 @@
 <?php
 /**
- * RDBS 
+ * RDBS
  * @author Robert Deutz (email contact@rdbs.net / site www.rdbs.de)
  * @version $Id: inputbox.php 669 2009-08-24 13:46:49Z deutz $
  **/
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
 if ($this->elm ['error'] == 1) {
 	echo '<div class="formelm fail">';

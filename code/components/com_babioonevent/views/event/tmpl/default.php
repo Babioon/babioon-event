@@ -1,18 +1,19 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // Check to ensure this file is included in Joomla!
-defined( '_JEXEC' ) or die( 'Restricted access' );
+defined ('_JEXEC') or die ('Restricted access');
 
 $pageclass_sfx   = $this->params->get('pageclass_sfx','');
 $subheaderlevel  = $this->headerlevel+1;
-$subheaderlevel2 = $this->headerlevel+2; 
-$subheaderlevel3 = $this->headerlevel+3; 
+$subheaderlevel2 = $this->headerlevel+2;
+$subheaderlevel3 = $this->headerlevel+3;
 $slevel=$this->headerlevel+1;
 $s2level=$this->headerlevel+2;
 $this->gmaphlevel=$s2level;
@@ -28,7 +29,7 @@ $link2start='index.php?option=com_babioonevent&view=events&Itemid='.BabioonEvent
 
 
 
-<?php 
+<?php
 echo "<h$this->headerlevel>".JText::_('COM_BABIOONEVENT_EVENTDETAIL')."</h$this->headerlevel>";
 
 $data=$this->element;
@@ -42,9 +43,9 @@ if ($data->name != "")
 	{
 		echo '<dt>'.JText::_('COM_BABIOONEVENT_ORGANISER').'</dt>';
 		echo '<dd>'.$data->organiser.'</dd>';
-	}	
+	}
 	$confvar = $data->params->get('showdates',4);
-	if ($confvar != 0)	
+	if ($confvar != 0)
 	{
 		if ($data->sdate != '0000-00-00')
 		{
@@ -88,7 +89,7 @@ if ($data->name != "")
 		echo '<dt>'.JText::_('COM_BABIOONEVENT_EMAIL').'</dt>';
 		echo '<dd>'.$data->email.'</dd>';
 	}
-	
+
 	if($data->isfreeofcharge == 1 )
 	{
 		echo '<dt>'.JText::_('COM_BABIOONEVENT_CHARGE').'</dt>';
@@ -113,7 +114,7 @@ if ($data->name != "")
 			echo trim($data->city) 		!= '' ? $data->city   . '' 			: '' ;
 			echo '</address></dd>';
 		}
-		else 
+		else
 		{
 			if ($data->address != '')
 			{
@@ -122,7 +123,7 @@ if ($data->name != "")
 				echo $data->address;
 				echo '</address></dd>';
 			}
-		}	
+		}
 	}
 	echo '</dl>';
 	if (trim ($data->teaser .$data->text) != '')
@@ -132,7 +133,7 @@ if ($data->name != "")
 		echo $data->teaser .' '.$data->text;
 		echo '</div>';
 	}
-	
+
 	if ($data->params->get('showgmap',1) != 0)
 	{
 		if ($data->geo_b != '' && $data->geo_l != '')
@@ -141,9 +142,9 @@ if ($data->name != "")
 			$randid=rand(1000,9999);
 			$doc = JFactory::getDocument();
 			$name=str_replace(array('"',"'"), '', $data->name);
-			
+
 			$script='
-				  	function initialize'.$randid.'() 
+				  	function initialize'.$randid.'()
 				  	{
 						var myLatlng = new google.maps.LatLng('.$data->geo_b.', '.$data->geo_l.');
 						var myOptions = {
@@ -152,22 +153,22 @@ if ($data->name != "")
   										mapTypeId: google.maps.MapTypeId.ROADMAP
 										};
 				  		var mapobj'.$randid.' = new google.maps.Map($("map'.$randid.'"), myOptions);
-				  		
+
 						var marker = new google.maps.Marker({
 						      position: myLatlng,
 						      title:"'.$name.'"
 						  });
-						  
+
 						  // To add the marker to the map, call setMap();
-						  marker.setMap(mapobj'.$randid.');  				  		
+						  marker.setMap(mapobj'.$randid.');
 				  	}
   					window.addEvent("domready",initialize'.$randid.');
 				';
     		$doc->addScriptDeclaration($script);
-		    
+
 		    echo "<h$s2level>".JText::_('COM_BABIOONEVENT_GMAPTITLE')."</h$s2level>";
 		    echo '<div id="map'.$randid.'" style="width: 100%; height: 300px"></div>';
-		}	
+		}
 	}
 }
 else

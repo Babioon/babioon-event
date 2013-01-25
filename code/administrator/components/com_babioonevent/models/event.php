@@ -1,9 +1,10 @@
 <?php
 /**
  * babioon event
- * @author Robert Deutz
- * @copyright Robert Deutz Business Solution
- * @package BABIOON_EVENT
+ * @package    BABIOON_EVENT
+ * @author     Robert Deutz <rdeutz@gmail.com>
+ * @copyright  2012 Robert Deutz Business Solution
+ * @license    GNU General Public License version 2 or later
  **/
 
 // No direct access
@@ -14,7 +15,8 @@ jimport('joomla.application.component.modeladmin');
 /**
  * model address.
  *
- * @package     BABIOON_EVENT
+ * @package  BABIOON_EVENT
+ * @since    2.0
  */
 class BabioonEventModelEvent extends JModelAdmin
 {
@@ -22,7 +24,7 @@ class BabioonEventModelEvent extends JModelAdmin
 	 * @var    string  The prefix to use with controller messages.
 	 */
 	protected $text_prefix = 'COM_BABIOONEVENT_';
-	
+
 	protected $index = array();
 
 	/**
@@ -33,14 +35,12 @@ class BabioonEventModelEvent extends JModelAdmin
 	 * @param   array   $config  Configuration array for model. [optional]
 	 *
 	 * @return  JTable  A database object
-	 *
 	 */
 	public function getTable($type = 'Event', $prefix = 'BabioonEventTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
-	
-	
+
 	/**
 	 * Method to get the record form.
 	 *
@@ -51,19 +51,21 @@ class BabioonEventModelEvent extends JModelAdmin
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
-	    // Get the form.
+		// Get the form.
 		$form = $this->loadForm('com_babioonevent.event', 'event', array('control' => 'jform', 'load_data' => $loadData));
+
 		if (empty($form))
 		{
 			return false;
 		}
-		
-        /*
-         * modify fields on the fly
-         */
-		//$form->setFieldAttribute('name','required', false);
-		//$form->setFieldAttribute('name','class','inputbox');
-		
+
+		/*
+		 * modify fields on the fly
+		 */
+		/*
+		$form->setFieldAttribute('name', 'required', false);
+		$form->setFieldAttribute('name', 'class', 'inputbox');
+		*/
 		return $form;
 	}
 
@@ -81,12 +83,12 @@ class BabioonEventModelEvent extends JModelAdmin
 		{
 			$data = $this->getItem();
 		}
-		// split the start and time field 	
-		$data->stimehh = substr($data->stime, 0,2);
-		$data->stimemm = substr($data->stime, 3,2);
+		// Split the start and time field
+		$data->stimehh = substr($data->stime, 0, 2);
+		$data->stimemm = substr($data->stime, 3, 2);
 
-		$data->etimehh = substr($data->etime, 0,2);
-		$data->etimemm = substr($data->etime, 3,2);
+		$data->etimehh = substr($data->etime, 0, 2);
+		$data->etimemm = substr($data->etime, 3, 2);
 
 		return $data;
 	}
@@ -94,35 +96,35 @@ class BabioonEventModelEvent extends JModelAdmin
 	/**
 	 * Prepare and sanitise the table data prior to saving.
 	 *
-	 * @param	JTable	A JTable object.
+	 * @param   JTable  &$table  A JTable object.
 	 *
 	 * @return	void
 	 */
 	protected function prepareTable(&$table)
 	{
-		// merge start and end time
+		// Merge start and end time
 		if ($table->stimmhh != '')
 		{
 			if ($table->stimemm == '')
 			{
 				$table->stimemm = '00';
-			}	
-			$table->stime = $table->stimmhh.':'.$table->stimemm.':00';
+			}
+			$table->stime = $table->stimmhh . ':' . $table->stimemm . ':00';
 			$table->stimeset = 1;
 			unset ($table->stimmhh);
-			unset ($table->stimmmm);	
-		}	
+			unset ($table->stimmmm);
+		}
 
 		if ($table->etimmhh != '')
 		{
 			if ($table->etimemm == '')
 			{
 				$table->etimemm = '00';
-			}	
-			$table->etime = $table->etimmhh.':'.$table->etimemm.':00';
+			}
+			$table->etime = $table->etimmhh . ':' . $table->etimemm . ':00';
 			$table->etimeset = 1;
 			unset ($table->etimmhh);
-			unset ($table->etimmmm);	
-		}	
+			unset ($table->etimmmm);
+		}
 	}
 }
