@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="search">
+	<name>plg_search_babioonevent</name>
+	<creationDate>Januar 2013</creationDate>
+	<author>Robert Deutz</author>
+	<copyright>Robert Deutz Business Solution</copyright>
+	<license>GNU General Public License version 3</license>
+	<authorEmail>contact@babioon.com</authorEmail>
+	<authorUrl>www.babioon.com</authorUrl>
+	<version>2.0</version>
+	<description>BABIOONEVENT_PLG_SEARCH_EVENTS_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="content">babioonevent_events.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages folder="language">
+		<language tag="en-GB">en-GB.plg_search_babioonevent_events.ini</language>
+		<language tag="en-GB">en-GB.plg_search_babioonevent_events.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+
+			<fieldset name="basic">
+				<field name="search_limit" type="text"
+					default="50"
+					description="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHLIMIT_DESC"
+					label="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHLIMIT_LABEL"
+					size="5"
+				/>
+
+				<field name="searchinname" type="radio" default="1" label="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINNAME" description="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINNAME_DESC">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+
+				<field name="searchinorganiser" type="radio" default="1" label="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINORGANISER" description="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINORGANISER_DESC">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+
+				<field name="searchinteaser" type="radio" default="1" label="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINTEASER" description="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINTEASER_DESC">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+
+				<field name="searchintext" type="radio" default="1" label="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINTEXT" description="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINTEXT_DESC">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+
+				<field name="searchincontact" type="radio" default="1" label="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINCONTACT" description="BABIOONEVENT_PLG_SEARCH_EVENTS_SEARCHINCONTACT_DESC">
+					<option value="0">JOFF</option>
+					<option value="1">JON</option>
+				</field>
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>
