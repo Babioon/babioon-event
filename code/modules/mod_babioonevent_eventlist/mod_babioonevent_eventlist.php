@@ -18,6 +18,7 @@ if (!class_exists('BabioonEventRouteHelper'))
 		require_once JPATH_SITE . '/components/com_babioonevent/helpers/route.php';
 	}
 }
+
 if (!class_exists('BabioonEventRouteHelper', false))
 {
 	// We gave our best
