@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
  * @package  BABIOON_EVENT
  * @since    2.0
  */
-class PlgSearchBabioonevent_Events extends JPlugin
+class PlgSearchBabioonevent extends JPlugin
 {
 	/**
 	 * eventRouterLoaded  is the route class loaded
