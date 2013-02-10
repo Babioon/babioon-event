@@ -152,7 +152,7 @@ if ($data->name != "")
   										center: myLatlng,
   										mapTypeId: google.maps.MapTypeId.ROADMAP
 										};
-				  		var mapobj'.$randid.' = new google.maps.Map($("map'.$randid.'"), myOptions);
+				  		var mapobj'.$randid.' = new google.maps.Map(document.getElementById("map'.$randid.'"), myOptions);
 
 						var marker = new google.maps.Marker({
 						      position: myLatlng,
@@ -162,7 +162,7 @@ if ($data->name != "")
 						  // To add the marker to the map, call setMap();
 						  marker.setMap(mapobj'.$randid.');
 				  	}
-  					window.addEvent("domready",initialize'.$randid.');
+  					window.onload = initialize'.$randid.';
 				';
     		$doc->addScriptDeclaration($script);
 
