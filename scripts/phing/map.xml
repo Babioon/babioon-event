@@ -27,11 +27,11 @@
 		</phingcall>
 
 		<phingcall target="symboliclink">
-			<property name="source" value="${packagedir}/${projectname}/code/plugins/search/babioonevent_events" />
-			<property name="target" value="${targetdir}/plugins/search/babioonevent_events" />
+			<property name="source" value="${packagedir}/${projectname}/code/plugins/search/babioonevent" />
+			<property name="target" value="${targetdir}/plugins/search/babioonevent" />
 		</phingcall>
 		<phingcall target="maplanguage">
-			<property name="basesource" value="${packagedir}/${projectname}/code/plugins/search/babioonevent_events/language" />
+			<property name="basesource" value="${packagedir}/${projectname}/code/plugins/search/babioonevent/language" />
 			<property name="basetarget" value="${targetdir}/administrator/language" />
 		</phingcall>
 
