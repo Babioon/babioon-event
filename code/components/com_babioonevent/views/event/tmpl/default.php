@@ -138,9 +138,10 @@ if ($data->name != "")
 	{
 		if ($data->geo_b != '' && $data->geo_l != '')
 		{
-			$maps=BabioonGooglemaps::getInstance();
+			$doc=JFactory::getDocument();
+			$doc->addScript("http://maps.google.com/maps/api/js?sensor=false");
+
 			$randid=rand(1000,9999);
-			$doc = JFactory::getDocument();
 			$name=str_replace(array('"',"'"), '', $data->name);
 
 			$script='
