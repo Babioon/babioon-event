@@ -14,7 +14,11 @@ $pageclass_sfx   = $this->params->get('pageclass_sfx','');
 $subheaderlevel  = $this->headerlevel+1;
 $subheaderlevel2 = $this->headerlevel+2;
 $subheaderlevel3 = $this->headerlevel+3;
+?>
 
+<div id="event<?php echo $pageclass_sfx;?>">
+
+<?php
 echo "<h$this->headerlevel>".JText::_('COM_BABIOONEVENT_CHECKDATA')."</h$this->headerlevel>";
 $this->setPageTitle(JText::_('COM_BABIOONEVENT_CHECKDATA_PT'));
 
@@ -253,6 +257,4 @@ if ($this->params->get('showcategory',2) != 0)
 	<input type="hidden" name="hereweare" value="<?php echo $this->hereweare; ?>" />
 </form>
 
-<?php
-
-echo '</div> <!-- id=event -->';
+</div> <!-- id=event -->
