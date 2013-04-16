@@ -1,5 +1,24 @@
+<?php
 
-<p style="float:right;margin-top:-80px"><img src="../media/babioon/images/confhere.png" /></p>
-<h2>Babioon-Event Component - Eventcalendar</h2>
-<p>Copyright by <a href="http://www.rdbs.de" target="_blank">Robert Deutz Business Solution</a></p>
-<p>Released under the <a href="http://www.gnu.org/licenses/gpl" target="_blank">GNU General Public License</a></p>
+if (JFactory::getUser()->authorise('core.admin', 'com_babioonevent'))
+{
+	echo JText::_('COM_BABIOONEVENT_CONFHERE_IMG');
+}
+echo JText::_('COM_BABIOONEVENT_COMP');
+echo JText::_('COM_BABIOONEVENT_COMP_DESC');
+
+echo '<div class="cpanel" style="padding:20px">';
+echo JText::_('COM_BABIOONEVENT_COMP_SUPPORT');
+echo JText::_('COM_BABIOONEVENT_COMP_DOCS');
+echo JText::_('COM_BABIOONEVENT_COMP_FORUM');
+if (JFactory::getUser()->authorise('core.admin', 'com_babioonevent'))
+{
+	echo LiveUpdate::getIcon();
+}
+
+
+echo '</div>';
+echo '<div class="clr"></div>';
+
+echo '<p>' . JText::_('COM_BABIOONEVENT_COPYRIGHT') . ' | ';
+echo JText::_('COM_BABIOONEVENT_LICENSE') . '</p>';

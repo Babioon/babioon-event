@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS `#__babioonevent_events` ; 
-
-CREATE TABLE `#__babioonevent_events` (
+CREATE TABLE IF NOT EXISTS `#__babioonevent_events` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `organiser` varchar(255) NOT NULL,

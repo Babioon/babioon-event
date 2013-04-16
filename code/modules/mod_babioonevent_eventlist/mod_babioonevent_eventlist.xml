@@ -7,16 +7,16 @@
 	<license>GNU General Public License version 3</license>
 	<authorEmail>contact@babioon.com</authorEmail>
 	<authorUrl>www.babioon.com</authorUrl>
-	<version>2.0 </version>
+	<version>2.0.0</version>
 	<description>MOD_BABIOONEVENT_EVENTLIST_XML_DESCRIPTION</description>
 	<files>
 		<filename module="mod_babioonevent_eventlist">mod_babioonevent_eventlist.php</filename>
-		<filename>mod_babioonevent_eventlist.class.php</filename>
+		<filename>helper.php</filename>
 		<filename>tmpl/default.php</filename>
 	</files>
-	<languages>
-		<language tag="en-GB">lang/language/en-GB/en-GB.mod_babioonevent_eventlist.ini</language>
-		<language tag="de-DE">lang/language/de-DE/de-DE.mod_babioonevent_eventlist.ini</language>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.mod_babioonevent_eventlist.ini</language>
+		<language tag="de-DE">de-DE/de-DE.mod_babioonevent_eventlist.ini</language>
 	</languages>
 
 	<config>
@@ -24,11 +24,11 @@
 			<fieldset name="basic">
 
 
-				<field name="eventcats" 
-					type="category" 
-					extension="com_babioonevent" 
-					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCATS" 
-					description="MOD_BABIOONEVENT_EVENTLIST_EVENTCATS_DESC" 					
+				<field name="eventcats"
+					type="category"
+					extension="com_babioonevent"
+					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCATS"
+					description="MOD_BABIOONEVENT_EVENTLIST_EVENTCATS_DESC"
 					multiple="true"
 					default=""
 					size="10"
@@ -36,10 +36,10 @@
 					<option value="">JOPTION_ALL_CATEGORIES</option>
 					</field>
 
-				<field name="headerlevel" 
-					type="list" 
-					default="1" 
-					label="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL" 
+				<field name="headerlevel"
+					type="list"
+					default="1"
+					label="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL"
 					description="MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_DESC">
 					<option value="1">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H1</option>
 					<option value="2">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H2</option>
@@ -48,39 +48,39 @@
 					<option value="5">MOD_BABIOONEVENT_EVENTLIST_HEADERLEVEL_H5</option>
 				</field>
 
-				<field name="eventcount" 
-					type="text" default="5" 
-					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNT" 
+				<field name="eventcount"
+					type="text" default="5"
+					label="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNT"
 					description="MOD_BABIOONEVENT_EVENTLIST_EVENTCOUNT_DESC" />
 
-				<field name="showmonths" 
-					type="radio" 
-					default="0" 
-					label="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHS" 
+				<field name="showmonths"
+					type="radio"
+					default="0"
+					label="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHS"
 					description="MOD_BABIOONEVENT_EVENTLIST_SHOWMONTHS_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 
-				<field name="showcats" 
-					type="radio" 
-					default="1" 
-					label="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS" 
+				<field name="showcats"
+					type="radio"
+					default="1"
+					label="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS"
 					description="MOD_BABIOONEVENT_EVENTLIST_SHOWCATS_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 
-				<field name="order" 
-					type="list" 
-					default="1" 
-					label="MOD_BABIOONEVENT_EVENTLIST_ORDER" 
+				<field name="order"
+					type="list"
+					default="1"
+					label="MOD_BABIOONEVENT_EVENTLIST_ORDER"
 					description="MOD_BABIOONEVENT_EVENTLIST_ORDER_DESC">
 					<option value="1">MOD_BABIOONEVENT_EVENTLIST_DATE</option>
 					<option value="2">MOD_BABIOONEVENT_EVENTLIST_CATEGORIESANDDATE</option>
 				</field>
 
-			</fieldset>	
+			</fieldset>
 
 
 			<fieldset name="advanced">
@@ -102,6 +102,6 @@
 					label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
 			</fieldset>
 		</fields>
-	</config>		
+	</config>
 
 </extension>

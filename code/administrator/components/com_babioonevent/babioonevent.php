@@ -12,8 +12,9 @@ defined('_JEXEC') or die;
 
 // Access check.
 $user = JFactory::getUser();
+$comp = 'com_babioonevent';
 
-if (!$user->authorise('core.manage', 'com_babioonevent') && !$user->authorise('core.admin', 'com_babioonevent'))
+if (!$user->authorise('core.manage', $comp) && !$user->authorise('core.admin', $comp))
 {
 	$app = JFactory::getApplication();
 	$app->redirect('index.php', JText::_('JERROR_ALERTNOAUTHOR'), 'error');
@@ -29,6 +30,37 @@ if (!defined('BABIOON'))
 jimport('joomla.application.component.controller');
 
 require JPATH_COMPONENT . '/helpers/babioonevent.php';
+
+// START: Akeeba Live Update
+$view = JFactory::getApplication()->input->get('view', 'default');
+
+// Load files if needed
+if ($view == 'liveupdate' || $view == 'default')
+{
+	if (file_exists(JPATH_COMPONENT . '/liveupdate/liveupdate.php'))
+	{
+		require_once JPATH_COMPONENT . '/liveupdate/liveupdate.php';
+	}
+	else
+	{
+		return JError::raiseWarning(404, JText::_(strtoupper($comp) . '_COULD_NOT_LOAD_LIVEUPDATE_FILES'));
+	}
+}
+
+if ($view == 'liveupdate')
+{
+	if (JFactory::getUser()->authorise('core.admin', $comp))
+	{
+		LiveUpdate::handleRequest();
+
+		return;
+	}
+	else
+	{
+		return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+	}
+}
+// END: Akeeba Live Update
 
 // Execute the task.
 $controller	= JController::getInstance('BabioonEvent');

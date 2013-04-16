@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="buildpackage" default="do">
+
+	<target name="do">
+		<!-- import task -->
+		<import file="${project.basedir}/../../../_4all/tasks.xml"/>
+
+		<property name="filebase" value="${project.basedir}/../../.." override="false"/>
+		<property name="pname"    value="babioon-event" override="true"/>
+		<property name="codebase" value="${filebase}/${pname}/code" override="true"/>
+
+		<getversion propertyname="vn" filename="${codebase}/administrator/components/com_babioonevent/babioonevent.xml" />
+
+		<echo>Versionnumber: ${vn}</echo>
+
+		<echo msg="*********************************" />
+		<echo msg="* Build-Package: babioon-event *" />
+		<echo msg="*********************************" />
+
+		<property name="bp_targetdir" value="babioonevent" />
+
+        <property name="builddir" value="${filebase}/build" />
+        <mkdir dir="${builddir}" />
+
+		<property name="targetdir" value="${filebase}/build/${bp_targetdir}" />
+
+		<!-- remove the dir first -->
+		<delete  dir="${targetdir}" failonerror="false" quiet="true"/>
+		<mkdir dir="${targetdir}" />
+
+		<mkdir dir="${targetdir}/backend" />
+		<mkdir dir="${targetdir}/backend/language" />
+		<mkdir dir="${targetdir}/frontend" />
+		<mkdir dir="${targetdir}/frontend/language" />
+		<mkdir dir="${targetdir}/modules" />
+		<mkdir dir="${targetdir}/plugins" />
+		<mkdir dir="${targetdir}/install" />
+
+		<!-- copy the plugins -->
+		<copy todir="${targetdir}/plugins" overwrite="true">
+			<fileset dir="${codebase}/plugins" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy the modules -->
+		<copy todir="${targetdir}/modules" overwrite="true">
+			<fileset dir="${codebase}/modules" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy the component backend -->
+		<copy todir="${targetdir}/backend" overwrite="true">
+			<fileset dir="${codebase}/administrator/components" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy the language backend -->
+		<copy todir="${targetdir}/backend/language" overwrite="true">
+			<fileset dir="${codebase}/administrator/language" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy the component frontend -->
+		<copy todir="${targetdir}/frontend" overwrite="true">
+			<fileset dir="${codebase}/components" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy the language frontend -->
+		<copy todir="${targetdir}/frontend/language" overwrite="true">
+			<fileset dir="${codebase}/language" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<copy file="${codebase}/administrator/components/com_babioonevent/babioonevent.xml" tofile="${targetdir}/babioonevent.xml" overwrite="true"/>
+
+		<copy file="${codebase}/administrator/components/com_babioonevent/install/script.babioonevent.php" tofile="${targetdir}/install/script.babioonevent.php" overwrite="true"/>
+		<copy file="${codebase}/administrator/components/com_babioonevent/install/helper.php" tofile="${targetdir}/install/helper.php" overwrite="true"/>
+
+		<if>
+			<isset property="vn" />
+			<then>
+				<property name="zipfile" value="${builddir}/${pname}-${vn}.zip"/>
+			</then>
+			<else>
+				<property name="zipfile" value="${builddir}/${pname}.zip"/>
+			</else>
+		</if>
+
+		<delete file="${zipfile}" failonerror="false" quiet="true"/>
+		<!-- zipfilename must match to projectname -->
+		<zip destfile="${zipfile}" basedir="${targetdir}" />
+	</target>
+</project>

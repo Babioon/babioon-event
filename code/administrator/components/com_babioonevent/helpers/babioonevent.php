@@ -49,6 +49,15 @@ class BabioonEventHelper
 			$vName == 'categories'
 		);
 
+		if (JFactory::getUser()->authorise('core.admin', 'com_babioonevent'))
+		{
+			JSubMenuHelper::addEntry(
+				JText::_(self::$text_prefix . strtoupper('liveupdate')),
+				'index.php?option=com_babioonevent&view=liveupdate',
+				$vName == 'liveupdate'
+			);
+		}
+
 		if ($vName == 'categories')
 		{
 			JToolBarHelper::title(
@@ -95,7 +104,7 @@ class BabioonEventHelper
 		switch ($plural)
 		{
 			case 'events' :
-				$sigular = 'event';
+				$singular = 'event';
 				break;
 		}
 		return $singular;

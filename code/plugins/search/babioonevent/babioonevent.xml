@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="plugin" group="search">
+<extension version="2.5" type="plugin" group="search" method="upgrade">
 	<name>plg_search_babioonevent</name>
 	<creationDate>Januar 2013</creationDate>
 	<author>Robert Deutz</author>
@@ -7,15 +7,14 @@
 	<license>GNU General Public License version 3</license>
 	<authorEmail>contact@babioon.com</authorEmail>
 	<authorUrl>www.babioon.com</authorUrl>
-	<version>2.0</version>
+	<version>2.0.0</version>
 	<description>BABIOONEVENT_PLG_SEARCH_XML_DESCRIPTION</description>
 	<files>
-		<filename plugin="content">babioonevent_events.php</filename>
-		<filename>index.html</filename>
+		<filename plugin="babioonevent">babioonevent.php</filename>
 	</files>
 	<languages folder="language">
-		<language tag="en-GB">en-GB.plg_search_babioonevent.ini</language>
-		<language tag="en-GB">en-GB.plg_search_babioonevent.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_search_babioonevent.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_search_babioonevent.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
