@@ -140,6 +140,15 @@ class BabioonEventModelEvents extends JModelList
 					'list.select',
 					'a.id,' .
 					'a.name,' .
+					'a.organiser,' .
+					'a.teaser,' .
+					'a.address,' .
+					'a.ainfo,' .
+					'a.street,' .
+					'a.pcode,' .
+					'a.city,' .
+					'a.state,' .
+					'a.country,' .
 					'a.sdate,' .
 					'a.stime,' .
 					'a.stimeset,' .
@@ -147,12 +156,16 @@ class BabioonEventModelEvents extends JModelList
 					'a.etime,' .
 					'a.etimeset,' .
 					'a.checked_out, a.checked_out_time, ' .
-					'a.params, a.control, a.state '
+					'a.params, a.control, a.state, ' .
+					'c.title as cctitle'
 				)
 			)
 			->from('#__babioonevent_events AS a')
+			->from('#__categories AS c')
 			->where('a.published = 1')
 			->where('a.sdate >= "' . $today . '"')
+			->where('a.catid = c.id')
+			->where('c.published = 1')
 			->order('a.sdate, a.stime');
 
 		return $query;

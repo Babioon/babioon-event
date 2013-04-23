@@ -30,7 +30,22 @@ class BabioonEventViewEvents extends BabioonEventViewObjects
 	function display($tpl = null)
 	{
 		// Default is to show the events
-		$this->assignRef('element', $this->get('Item'));
+
+		// Feed link
+		$parmas = $this->get('State')->params;
+
+		if ($parmas->get('showfeed') != 0)
+		{
+			$doc      = JFactory::getDocument();
+			$Itemid   = BabioonEventRouteHelper::getItemid();
+			$feedlink = '<link href="index.php?option=com_babioonevent&amp;view=events&amp;layout=default&amp;Itemid=' . $Itemid . '&amp;format=feed&amp;type=rss" rel="alternate" type="application/rss+xml" title="Veranstaltungen Feed RSS 2.0" />';
+			$doc->addCustomTag($feedlink);
+			$feedlink = '<link href="index.php?option=com_babioonevent&amp;view=events&amp;layout=default&amp;Itemid=' . $Itemid . '&amp;format=feed&amp;type=atom" rel="alternate" type="application/atom+xml" title="Veranstaltungen Feed Atom 1.0" />';
+			$doc->addCustomTag($feedlink);
+		}
+
+		$this->assignRef('element', $this->get('Items'));
+
 		parent::display($tpl);
 	}
 }
