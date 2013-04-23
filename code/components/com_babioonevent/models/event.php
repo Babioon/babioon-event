@@ -708,7 +708,7 @@ class BabioonEventModelEvent extends JModelItem
 					}
 					if (in_array('isfreeofcharge', $head_fields))
 					{
-						$r['isfreeofcharge'] = $r['isfreeofcharge'] ? JText::_('YES') : JText::_('NO');
+						$r['isfreeofcharge'] = $r['isfreeofcharge'] ? JText::_('JYES') : JText::_('JNO');
 					}
 					if (in_array('address', $head_fields))
 					{
@@ -722,6 +722,8 @@ class BabioonEventModelEvent extends JModelItem
 					{
 						$r['text'] = BabioonUtilities::html2txt($r['text']);
 					}
+					unset($r['stimeset']);
+					unset($r['etimeset']);
 					unset($r['showemail']);
 
 					foreach (array_keys($r) as $e)
