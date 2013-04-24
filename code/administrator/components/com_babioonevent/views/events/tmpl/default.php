@@ -55,7 +55,7 @@ $canEdit	= $user->authorise('core.edit',			'com_babioonevent.event');
 					<?php echo JHtml::_('grid.sort',  'COM_BABIOONEVENT_ORGANISER', 'a.organiser', $listDirn, $listOrder); ?>
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'COM_BABIOONEVENT_CITY', 'a.city', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_BABIOONEVENT_SDATE', 'a.sdate', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
@@ -95,7 +95,7 @@ $canEdit	= $user->authorise('core.edit',			'com_babioonevent.event');
 				    <?php echo $this->escape($item->organiser); ?>
 				</td>
 				<td>
-				    <?php echo $this->escape($item->city); ?>
+				    <?php echo $this->escape(substr($item->sdate, 8,2) . '.' . substr($item->sdate, 5,2) . '.' . substr($item->sdate, 0,4)); ?>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'event.', $canEdit); ?>
