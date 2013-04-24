@@ -558,7 +558,7 @@ class BabioonEventModelEvent extends JModelItem
 		}
 
 		$where 		= count($where) ? "\n" . implode(' AND ', $where) : '';
-		$orderby 	= ' ORDER BY  e.sdate,e.stime,e.edate,e.etime';
+		$orderby 	= 'e.sdate,e.stime,e.edate,e.etime';
 		$farray		= array();
 		$fields  = array('organiser','start','end','contact','email','tel','website','address','teaser','text','isfreeofcharge','charge');
 
@@ -576,7 +576,7 @@ class BabioonEventModelEvent extends JModelItem
 						break;
 					case 'address':
 						// Separate field, if empty is in old entry
-						$farray[] = 'IF(street <> "",CONCAT(IF(ainfo<>"",CONCAT(ainfo," "),""),street,IF(pcode<>"",CONCAT(pcode," "),""),IF(city<>"",CONCAT(city," "),"") ),address) AS address';
+						$farray[] = 'IF(street <> "",CONCAT(IF(ainfo<>"",CONCAT(ainfo,", "),""),street,IF(pcode<>"",CONCAT(", ",pcode),""),IF(city<>"",CONCAT(" ",city),"") ),address) AS address';
 						break;
 					default:
 						$farray[] = 'e.' . $elm;
@@ -591,8 +591,9 @@ class BabioonEventModelEvent extends JModelItem
 				->from("#__babioonevent_events as e")
 				->from("#__categories as cc")
 				->where($where)
-				->orderby($orderby);
+				->order('e.sdate,e.stime,e.edate,e.etime');
 		$db->setQuery($query);
+
 		$this->data = $db->loadAssocList();
 
 		return $this->data;
