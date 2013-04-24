@@ -137,7 +137,7 @@ class BabioonEventModelEvents extends JModelList
 
 		if (is_numeric($published))
 		{
-			$query->where('state = ' . (int) $published);
+			$query->where('published = ' . (int) $published);
 		}
 		elseif ($published === '')
 		{
