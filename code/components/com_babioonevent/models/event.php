@@ -558,7 +558,6 @@ class BabioonEventModelEvent extends JModelItem
 		}
 
 		$where 		= count($where) ? "\n" . implode(' AND ', $where) : '';
-		$orderby 	= 'e.sdate,e.stime,e.edate,e.etime';
 		$farray		= array();
 		$fields  = array('organiser','start','end','contact','email','tel','website','address','teaser','text','isfreeofcharge','charge');
 
