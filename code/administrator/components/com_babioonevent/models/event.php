@@ -83,12 +83,30 @@ class BabioonEventModelEvent extends JModelAdmin
 		{
 			$data = $this->getItem();
 		}
-		// Split the start and time field
-		$data->stimehh = substr($data->stime, 0, 2);
-		$data->stimemm = substr($data->stime, 3, 2);
 
-		$data->etimehh = substr($data->etime, 0, 2);
-		$data->etimemm = substr($data->etime, 3, 2);
+		if ($data->stimeset == 1)
+		{
+			// Split the start and time field
+			$data->stimehh = substr($data->stime, 0, 2);
+			$data->stimemm = substr($data->stime, 3, 2);
+		}
+		else
+		{
+			$data->stimehh = '';
+			$data->stimemm = '';
+		}
+
+		if ($data->etimeset == 1)
+		{
+			// Split the start and time field
+			$data->etimehh = substr($data->etime, 0, 2);
+			$data->etimemm = substr($data->etime, 3, 2);
+		}
+		else
+		{
+			$data->etimehh = '';
+			$data->etimemm = '';
+		}
 
 		return $data;
 	}
@@ -102,29 +120,44 @@ class BabioonEventModelEvent extends JModelAdmin
 	 */
 	protected function prepareTable(&$table)
 	{
+		// We need the input
+		$data = JFactory::getApplication()->input->get('jform', array(), 'post', 'array');
+
+		$stimehh = $data['stimehh'];
+		$stimemm = $data['stimemm'];
+
 		// Merge start and end time
-		if ($table->stimmhh != '')
+		if ($stimehh != '')
 		{
-			if ($table->stimemm == '')
+			if ($stimemm == '')
 			{
-				$table->stimemm = '00';
+				$stimemm = '00';
 			}
-			$table->stime = $table->stimmhh . ':' . $table->stimemm . ':00';
+			$table->stime = $stimehh . ':' . $stimemm . ':00';
 			$table->stimeset = 1;
-			unset ($table->stimmhh);
-			unset ($table->stimmmm);
+		}
+		else
+		{
+			$table->stime = '00:00:00';
+			$table->stimeset = 0;
 		}
 
-		if ($table->etimmhh != '')
+		$etimehh = $data['etimehh'];
+		$etimemm = $data['etimemm'];
+
+		if ($etimehh != '')
 		{
-			if ($table->etimemm == '')
+			if ($etimemm == '')
 			{
-				$table->etimemm = '00';
+				$etimemm = '00';
 			}
-			$table->etime = $table->etimmhh . ':' . $table->etimemm . ':00';
+			$table->etime = $etimehh . ':' . $etimemm . ':00';
 			$table->etimeset = 1;
-			unset ($table->etimmhh);
-			unset ($table->etimmmm);
+		}
+		else
+		{
+			$table->etime = '00:00:00';
+			$table->etimeset = 0;
 		}
 	}
 }
