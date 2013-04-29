@@ -21,11 +21,6 @@ jimport('joomla.application.component.controlleradmin');
 class BabioonEventControllerEvents extends JControllerAdmin
 {
 	/**
-	 * @var    string  The prefix to use with controller messages.
-	 */
-	protected $text_prefix = 'COM_BABIOONEVENT_';
-
-	/**
 	 * Proxy for getModel.
 	 *
 	 * @param   string  $name    Model name
