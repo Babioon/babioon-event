@@ -98,7 +98,7 @@ $canEdit	= $user->authorise('core.edit',			'com_babioonevent.event');
 				    <?php echo $this->escape(substr($item->sdate, 8,2) . '.' . substr($item->sdate, 5,2) . '.' . substr($item->sdate, 0,4)); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'event.', $canEdit); ?>
+					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'events.', $canEdit); ?>
 				</td>
 				<td class="center">
 					<?php echo $item->id; ?>

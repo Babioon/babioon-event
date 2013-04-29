@@ -88,8 +88,8 @@ class BabioonEventViewObjects extends JView
 			if ($this->state->get('filter.state') != 2)
 			{
 				JToolBarHelper::divider();
-				JToolBarHelper::publish($singular . '.publish', 'JTOOLBAR_PUBLISH', true);
-				JToolBarHelper::unpublish($singular . '.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+				JToolBarHelper::publish($name . '.publish', 'JTOOLBAR_PUBLISH', true);
+				JToolBarHelper::unpublish($name . '.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 			}
 
 			if ($this->state->get('filter.state') != -1)
@@ -98,28 +98,28 @@ class BabioonEventViewObjects extends JView
 
 				if ($this->state->get('filter.state') != 2)
 				{
-					JToolBarHelper::archiveList($singular . '.archive');
+					JToolBarHelper::archiveList($name . '.archive');
 				}
 				elseif ($this->state->get('filter.state') == 2)
 				{
-					JToolBarHelper::unarchiveList($singular . '.publish');
+					JToolBarHelper::unarchiveList($name . '.publish');
 				}
 			}
 		}
 
 		if ($canDo->get('core.edit.state'))
 		{
-			JToolBarHelper::checkin($singular . '.checkin');
+			JToolBarHelper::checkin($name . '.checkin');
 		}
 
 		if ($this->state->get('filter.state') == -2 && $canDo->get('core.delete'))
 		{
-			JToolBarHelper::deleteList('', $singular . '.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::deleteList('', $name . '.delete', 'JTOOLBAR_EMPTY_TRASH');
 			JToolBarHelper::divider();
 		}
 		elseif ($canDo->get('core.edit.state'))
 		{
-			JToolBarHelper::trash($singular . '.trash');
+			JToolBarHelper::trash($name . '.trash');
 			JToolBarHelper::divider();
 		}
 
