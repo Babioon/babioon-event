@@ -18,7 +18,7 @@ jimport('joomla.application.component.view');
  * @package  BABIOON_EVENT
  * @since    2.0
  */
-class BabioonEventViewObject extends JView
+class BabioonEventViewObject extends JViewLegacy
 {
 	protected $form;
 
@@ -46,6 +46,12 @@ class BabioonEventViewObject extends JView
 			JError::raiseError(500, implode("\n", $errors));
 
 			return false;
+		}
+
+		if (BabioonEventHelper::isVersion3())
+		{
+			$name     = $this->getName();
+			$this->addTemplatePath(dirname(__FILE__) . '/' . $name . '/tmpl3');
 		}
 
 		$this->addToolbar();
@@ -80,6 +86,7 @@ class BabioonEventViewObject extends JView
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
 		$canDo		= BabioonEventHelper::getActions($name);
+		$this->canDo = $canDo;
 
 		$tag        = 'COM_BABIOONEVENT_' . strtoupper($name);
 		JToolBarHelper::title($isNew ? JText::_($tag . '_NEW') : JText::_($tag . '_EDIT'), $image);

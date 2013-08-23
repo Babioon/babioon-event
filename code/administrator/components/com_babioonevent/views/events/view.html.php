@@ -20,4 +20,37 @@ require_once dirname(__FILE__) . '/../objects.html.php';
  */
 class BabioonEventViewEvents extends BabioonEventViewObjects
 {
+	/**
+	 * Returns an array of fields the table can be sorted by
+	 *
+	 * @return  array  Array containing the field name to sort by as the key and display text as value
+	 *
+	 * @since   3.0
+	 */
+	protected function getSortFields()
+	{
+		return array(
+			'a.state' => JText::_('JSTATUS'),
+			'a.name' => JText::_('COM_BABIOONEVENT_NAME'),
+			'a.organiser' => JText::_('COM_BABIOONEVENT_ORGANISER'),
+			'a.sdate' => JText::_('COM_BABIOONEVENT_SDATE'),
+			'a.id' => JText::_('JGRID_HEADING_ID')
+		);
+	}
+
+	/**
+	 * Add the sidebar.
+	 *
+	 * @return void
+	 *
+	 * @since   3.0
+	 */
+	protected function addSidebar()
+	{
+		JHtmlSidebar::addFilter(
+			JText::_('JOPTION_SELECT_PUBLISHED'),
+			'filter_state',
+			JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true)
+		);
+	}
 }

@@ -5,4 +5,16 @@
 			<![CDATA[COM_BABIOONEVENT_EVENTS_LIST_DESC]]>
 		</message>
 	</layout>
+
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request">
+
+		<field name="id" type="category" extension="com_babioonevent" required="true"
+			label="COM_BABIOONEVENT_CATID" description="COM_BABIOONEVENT_CATID_DESC" />
+
+
+		</fieldset>
+	</fields>
+
 </metadata>

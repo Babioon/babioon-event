@@ -10,7 +10,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die ('Restricted access');
 
-jimport('joomla.application.component.view');
+require_once dirname(__FILE__) . '/babiooneventview.php';
 
 /**
  * BabioonEventViewObjects
@@ -18,7 +18,7 @@ jimport('joomla.application.component.view');
  * @package  BABIOON_EVENT
  * @since    2.0
  */
-class BabioonEventViewObjects extends BabioonView
+class BabioonEventViewObjects extends BabioonEventView
 {
 	/**
 	 * Default view, list of items
@@ -45,6 +45,7 @@ class BabioonEventViewObjects extends BabioonView
 
 			return false;
 		}
+
 		$this->assignRef('state', $state);
 		$this->assignRef('params', $state->params);
 
@@ -85,6 +86,7 @@ class BabioonEventViewObjects extends BabioonView
 		{
 			$title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
 		}
+
 		$this->document->setTitle($title);
 		$this->assign('title', $title);
 

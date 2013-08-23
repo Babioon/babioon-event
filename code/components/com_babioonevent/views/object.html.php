@@ -10,7 +10,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
+require_once dirname(__FILE__) . '/babiooneventview.php';
 
 /**
  * View to edit a address.
@@ -18,7 +18,7 @@ jimport('joomla.application.component.view');
  * @package  BABIOON_EVENT
  * @since    2.0
  */
-class BabioonEventViewObject extends BabioonView
+class BabioonEventViewObject extends BabioonEventView
 {
 	protected $state;
 
@@ -51,6 +51,7 @@ class BabioonEventViewObject extends BabioonView
 
 			return false;
 		}
+
 		$this->assignRef('state', $state);
 		$this->assignRef('params', $state->params);
 
@@ -86,6 +87,7 @@ class BabioonEventViewObject extends BabioonView
 		{
 			$this->titleposfix = $this->element->name;
 		}
+
 		$this->document->setTitle($title . ': ' . $this->titleposfix);
 		$this->assign('title', $title);
 

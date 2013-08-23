@@ -18,7 +18,7 @@ jimport('joomla.application.component.controller');
  * @package  BABIOON_EVENT
  * @since    2.0
  */
-class BabioonEventController extends JController
+class BabioonEventController extends JControllerLegacy
 {
 
 	/**

@@ -18,9 +18,8 @@ jimport('joomla.application.component.view');
  * @package  BABIOON_EVENT
  * @since    2.0
  */
-class BabioonEventViewDefault extends JView
+class BabioonEventViewDefault extends JViewLegacy
 {
-
 	/**
 	 * Display the view
 	 *
@@ -30,6 +29,18 @@ class BabioonEventViewDefault extends JView
 	 */
 	public function display($tpl = null)
 	{
+		if (BabioonEventHelper::isVersion3())
+		{
+			$name     = $this->getName();
+			$this->addTemplatePath(dirname(__FILE__) . '/tmpl3');
+			$this->sidebar = JHtmlSidebar::render();
+
+			// Add css
+			$doc = JFactory::getDocument();
+			$doc->addStyleDeclaration('.icon-48-babioon {background-image: url(../media/babioon/images/icon-48-babioon.png);}');
+			$doc->addStyleSheet(JURI::base(true) . '/../media/babioon/css/3x.css');
+		}
+
 		$this->addToolbar();
 		parent::display();
 	}

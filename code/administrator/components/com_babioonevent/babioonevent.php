@@ -26,9 +26,6 @@ if (!defined('BABIOON'))
 	jexit('we need the BABIOON System Plugin');
 }
 
-// Include dependancies
-jimport('joomla.application.component.controller');
-
 require JPATH_COMPONENT . '/helpers/babioonevent.php';
 
 // START: Akeeba Live Update
@@ -60,10 +57,11 @@ if ($view == 'liveupdate')
 		return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 	}
 }
+
 // END: Akeeba Live Update
 
 // Execute the task.
-$controller	= JController::getInstance('BabioonEvent');
+$controller	= JControllerLegacy::getInstance('BabioonEvent');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();
 

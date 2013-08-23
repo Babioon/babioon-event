@@ -18,7 +18,6 @@ defined('_JEXEC') or die;
  */
 class BabioonEventHelper
 {
-
 	/**
 	 * @var    string  The prefix to use with controller messages.
 	 */
@@ -34,16 +33,23 @@ class BabioonEventHelper
 	public static function addSubmenu($vName)
 	{
 		$submenu = array('default','events');
+		$classSidebar = 'JSubMenuHelper';
+
+		if (self::isVersion3())
+		{
+			$classSidebar = 'JHtmlSidebar';
+		}
 
 		foreach ($submenu AS $item)
 		{
-			JSubMenuHelper::addEntry(
+			$classSidebar::addEntry(
 				JText::_(self::$text_prefix . strtoupper($item)),
 				'index.php?option=com_babioonevent&view=' . $item,
 				$vName == $item
 			);
 		}
-		JSubMenuHelper::addEntry(
+
+		$classSidebar::addEntry(
 			JText::_('COM_BABIOONEVENT_SUBMENU_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_babioonevent',
 			$vName == 'categories'
@@ -51,7 +57,7 @@ class BabioonEventHelper
 
 		if (JFactory::getUser()->authorise('core.admin', 'com_babioonevent'))
 		{
-			JSubMenuHelper::addEntry(
+			$classSidebar::addEntry(
 				JText::_(self::$text_prefix . strtoupper('liveupdate')),
 				'index.php?option=com_babioonevent&view=liveupdate',
 				$vName == 'liveupdate'
@@ -64,7 +70,6 @@ class BabioonEventHelper
 				JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE', JText::_('com_babioonevent')),
 				'babioonevent-categories');
 		}
-
 	}
 
 	/**
@@ -107,6 +112,17 @@ class BabioonEventHelper
 				$singular = 'event';
 				break;
 		}
+
 		return $singular;
+	}
+
+	/**
+	 * Checks if we are running a Joomla-Version greater or equal 3.0
+	 *
+	 * @return  boolean
+	 */
+	public static function isVersion3()
+	{
+		return version_compare(JVERSION, '3.0', 'ge');
 	}
 }

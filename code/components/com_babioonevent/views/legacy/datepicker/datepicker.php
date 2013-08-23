@@ -1,7 +1,7 @@
 <?php
 
 /** ensure this file is being included by a parent file */
-defined('BABIOON') or die('Restricted access');
+defined ('_JEXEC') or die ('Restricted access');
 
 /**
  * class BabioonLegacyDatePicker
@@ -24,7 +24,7 @@ class BabioonLegacyDatePicker
 		{
 			self::$instance = new BabioonLegacyDatePicker();
 		}
-        
+
 	}
 
 	function getHtml(	$id,$datedefault='',$type='split-date',$rangeLow='',$rangeHigh='',

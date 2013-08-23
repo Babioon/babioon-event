@@ -18,7 +18,7 @@ jimport('joomla.application.component.controller');
  * @package  BABIOON_UPCC
  * @since    2.0
  */
-class BabioonEventController extends JController
+class BabioonEventController extends JControllerLegacy
 {
 	/**
 	 * Method to display a view.

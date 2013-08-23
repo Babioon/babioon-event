@@ -18,7 +18,7 @@ jimport('joomla.application.component.view');
  * @package  BABIOON_EVENT
  * @since    2.0
  */
-class BabioonEventViewObjects extends JView
+class BabioonEventViewObjects extends JViewLegacy
 {
 	protected $items;
 
@@ -46,6 +46,14 @@ class BabioonEventViewObjects extends JView
 			JError::raiseError(500, implode("\n", $errors));
 
 			return false;
+		}
+
+		if (BabioonEventHelper::isVersion3())
+		{
+			$name     = $this->getName();
+			$this->addTemplatePath(dirname(__FILE__) . '/' . $name . '/tmpl3');
+			$this->addSidebar();
+			$this->sidebar = JHtmlSidebar::render();
 		}
 
 		$this->addToolbar();
@@ -77,11 +85,20 @@ class BabioonEventViewObjects extends JView
 
 		$user = JFactory::getUser();
 		$canDo = BabioonEventHelper::getActions($singular);
+		$this->canDo = $canDo;
+
 		JToolBarHelper::title(JText::_('COM_BABIOONEVENT_' . $tag), $image);
 
-		// Use singular
-		JToolBarHelper::addNew($singular . '.add');
-		JToolBarHelper::editList($singular . '.edit');
+		// Use sigular
+		if ($canDo->get('core.create'))
+		{
+			JToolBarHelper::addNew($singular . '.add');
+		}
+
+		if ($canDo->get('core.edit'))
+		{
+			JToolBarHelper::editList($singular . '.edit');
+		}
 
 		if ($canDo->get('core.edit.state'))
 		{
@@ -127,5 +144,15 @@ class BabioonEventViewObjects extends JView
 		{
 			JToolBarHelper::preferences('com_babioonevent');
 		}
+	}
+
+	/**
+	 * Add the sidebar. Should be overwriten in child classes
+	 *
+	 * @return void
+	 */
+	protected function addSidebar()
+	{
+		JHtmlSidebar::setAction('index.php?option=com_babioonevent&view=' . $this->getName());
 	}
 }

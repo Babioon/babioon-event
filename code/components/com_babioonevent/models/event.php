@@ -1420,7 +1420,7 @@ class BabioonEventModelEvent extends JModelItem
 	 */
 	public function getCategoryName()
 	{
-		$db    = JFactory::getDbo();
+		$db    = $this->getDbo();
 		$catid = $this->getUserState('catid');
 		$query = "SELECT title FROM #__categories WHERE id = '$catid' ";
 		$db->setQuery($query);
