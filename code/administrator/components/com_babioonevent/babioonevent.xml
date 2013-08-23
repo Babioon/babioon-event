@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5" method="upgrade">
 	<name>COM_BABIOONEVENT</name>
-	<creationDate>April 2013</creationDate>
+	<creationDate>August 2013</creationDate>
 	<author>Robert Deutz</author>
 	<copyright>Robert Deutz Business Solution</copyright>
 	<license>GNU General Public License version 3</license>
 	<authorEmail>contact@babioon.com</authorEmail>
 	<authorUrl>www.babioon.com</authorUrl>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 	<description>Babioon Event - Event Component</description>
 
 	<!-- Frontend component files -->
 	<files folder="frontend/com_babioonevent">
+		<folder>controllers</folder>
 		<folder>helpers</folder>
-		<folder>models</folder>
 		<folder>views</folder>
 		<filename>babioonevent.php</filename>
-		<filename>controller.php</filename>
 	</files>
 
 	<!-- Frontend translation files -->
@@ -31,19 +30,18 @@
 
 		<!-- backend component files -->
 		<files folder="backend/com_babioonevent">
-			<folder>controllers</folder>
 			<folder>helpers</folder>
 			<folder>install</folder>
 			<folder>liveupdate</folder>
 			<folder>models</folder>
-			<folder>tables</folder>
 			<folder>views</folder>
 			<filename>access.xml</filename>
 			<filename>babioonevent.php</filename>
 			<filename>babioonevent.xml</filename>
 			<filename>changelog.php</filename>
 			<filename>config.xml</filename>
-			<filename>controller.php</filename>
+			<filename>fof.xml</filename>
+			<filename>toolbar.php</filename>
 		</files>
 
 		<!-- backend translation files -->

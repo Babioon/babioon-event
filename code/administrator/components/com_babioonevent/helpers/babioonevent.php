@@ -18,7 +18,6 @@ defined('_JEXEC') or die;
  */
 class BabioonEventHelper
 {
-
 	/**
 	 * @var    string  The prefix to use with controller messages.
 	 */
@@ -33,80 +32,168 @@ class BabioonEventHelper
 	 */
 	public static function addSubmenu($vName)
 	{
-		$submenu = array('default','events');
+		// Load FOF
+		include_once JPATH_LIBRARIES . '/fof/include.php';
 
-		foreach ($submenu AS $item)
+		if (!defined('FOF_INCLUDED'))
 		{
-			JSubMenuHelper::addEntry(
-				JText::_(self::$text_prefix . strtoupper($item)),
-				'index.php?option=com_babioonevent&view=' . $item,
-				$vName == $item
-			);
-		}
-		JSubMenuHelper::addEntry(
-			JText::_('COM_BABIOONEVENT_SUBMENU_CATEGORIES'),
-			'index.php?option=com_categories&extension=com_babioonevent',
-			$vName == 'categories'
-		);
-
-		if (JFactory::getUser()->authorise('core.admin', 'com_babioonevent'))
-		{
-			JSubMenuHelper::addEntry(
-				JText::_(self::$text_prefix . strtoupper('liveupdate')),
-				'index.php?option=com_babioonevent&view=liveupdate',
-				$vName == 'liveupdate'
-			);
+			JError::raiseError('500', 'FOF is not installed');
 		}
 
-		if ($vName == 'categories')
-		{
-			JToolBarHelper::title(
-				JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE', JText::_('com_babioonevent')),
-				'babioonevent-categories');
-		}
-
+		$strapper = new FOFRenderStrapper;
+		$strapper->renderCategoryLinkbar('com_babioonevent');
 	}
 
 	/**
-	 * Gets a list of the actions that can be performed.
+	 * Checks if we are running a Joomla-Version greater or equal 3.0
 	 *
-	 * @return	JObject
+	 * @return  boolean
 	 */
-	public static function getActions()
+	public static function isVersion3()
 	{
-		$user	= JFactory::getUser();
-		$result	= new JObject;
-		$assetName = 'com_babioonevent';
-
-		$actions = array(
-			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.state', 'core.delete'
-		);
-
-		foreach ($actions as $action)
-		{
-			$result->set($action,	$user->authorise($action, $assetName));
-		}
-
-		return $result;
+		return version_compare(JVERSION, '3.0', 'ge');
 	}
 
 	/**
-	 * return the singular to a in plural given object name
+	 * Create a uniq filename, returns false if not found
 	 *
-	 * @param   string  $plural  the plural
+	 * @param   string   $adir      directroy where we are going to save the file
+	 * @param   string   $prefix    a prefix for the filename
+	 * @param   string   $suffix    a suffix for the filename
+	 * @param   boolean  $year      include year in filename
+	 * @param   boolean  $month     include month in filename
+	 * @param   boolean  $day       include day in filename
+	 * @param   boolean  $hour      include hour in filename
+	 * @param   boolean  $minutes   include minutes in filename
+	 * @param   boolean  $seconds   include seconds in filename
+	 * @param   int      $maxloops  how many attemts we do
 	 *
-	 * @return  string the singular
+	 * @return unknown
 	 */
-	public static function toSingular($plural)
+	public static function getFilename($adir, $prefix, $suffix, $year = false,$month=false,$day=true,$hour=true,$minutes=true,$seconds=true,$maxloops=10)
 	{
-		$singular = '';
+		$filename = '';
+		$format = '';
 
-		switch ($plural)
+		if ($year)
 		{
-			case 'events' :
-				$singular = 'event';
-				break;
+			$format .= 'Y';
 		}
-		return $singular;
+
+		if ($month)
+		{
+			$format .= 'm';
+		}
+
+		if ($day)
+		{
+			$format .= 'd';
+		}
+
+		if ($hour)
+		{
+			$format .= 'H';
+		}
+
+		if ($minutes)
+		{
+			$format .= 'i';
+		}
+
+		if ($seconds)
+		{
+			$format .= 's';
+		}
+
+		$loop = 0;
+		$found = false;
+
+		while (!$found  && ($loop < $maxloops))
+		{
+			$part = date($format);
+			$filename = $prefix . '-' . $part . '.' . $suffix;
+			$found = file_exists($adir . '/' . $filename) === false;
+			$loop++;
+		}
+
+		if ($found)
+		{
+			return $filename;
+		}
+
+		return false;
+	}
+
+	/**
+	 * converts html to text
+	 *
+	 * plain copy from php.net
+	 *
+	 * @param   string   $html       the html
+	 * @param   boolean  $keeplinks  keep links within the text
+	 *
+	 * @return  string               the text
+	 */
+	public static function html2txt($html, $keeplinks=false)
+	{
+		$suche1 = array (
+							'@<script[^>]*?>.*?</script>@si',   // JavaScript entfernen
+							'@([\r\n])[\s]+@',                   // Leerraeume entfernen
+							'@<br />@i',							// Zeilunbrueche
+							'@</p>@i',							// Absaetze
+							'@</tr>@i',							// Tabellenzeilen
+							'@</td>@i'							// Tabellenspalten
+						);
+
+		$suche2 = array('');
+
+		$suche3 = array (	'@<[\/\!]*?[^<>]*?>@si',             // HTML-Tags entfernen
+							'@&(quot|#34);@i',                   // HTML-Entitaeten ersetzen
+							'@&(amp|#38);@i',
+							'@&(lt|#60);@i',
+							'@&(gt|#62);@i',
+							'@&(nbsp|#160);@i',
+							'@&(iexcl|#161);@i',
+							'@&(cent|#162);@i',
+							'@&(pound|#163);@i',
+							'@&(copy|#169);@i',
+							'@&#(\d+);@e'                      // Als PHP auswerten
+							);
+
+		$ersetze1 = array (	'',
+							'\1',
+							chr(13),
+							chr(13),
+							chr(13),
+							' | ');
+
+		$ersetze3 = array('');
+
+		$ersetze3 = array (	'',
+							'"',
+							'&',
+							'<',
+							'>',
+							' ',
+							chr(161),
+							chr(162),
+							chr(163),
+							chr(169),
+							'chr(\1)');
+
+		if ($keeplinks)
+		{
+			$suche   = array_merge($suche1, $suche2, $suche3);
+			$ersetze = array_merge($ersetze1, $ersetze2, $ersetze3);
+		}
+		else
+		{
+			$suche   = array_merge($suche1, $suche3);
+			$ersetze = array_merge($ersetze1, $ersetze3);
+		}
+
+		$text = preg_replace($suche, $ersetze, $html);
+
+		return $text;
 	}
 }

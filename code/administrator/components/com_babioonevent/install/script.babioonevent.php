@@ -56,38 +56,6 @@ class Com_BabiooneventInstallerScript
 	);
 
 	/**
-	 * createAssets description, ACL
-	 *
-	 * @return  boolean  true on success
-	 */
-	public function createAssets()
-	{
-		$db = JFactory::getDBO();
-
-		// We need to add some asset rows on install, this is a tree
-
-		$asset	= JTable::getInstance('asset');
-
-		if (!$asset->loadByName($this->babioon_extension))
-		{
-			$root	= JTable::getInstance('asset');
-			$root->loadByName('root.1');
-			$asset->name = $this->babioon_extension;
-			$asset->title = $this->babioon_extension;
-			$asset->setLocation($root->id, 'last-child');
-
-			if (!$asset->check() || !$asset->store())
-			{
-				$this->setError($asset->getError());
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * method to install the component
 	 *
 	 * @param   JInstaller  $parent  Parent object
@@ -170,7 +138,7 @@ class Com_BabiooneventInstallerScript
 		}
 		else
 		{
-			// Pfff, ok then we take the risk but we'll send a message about not geeting the info
+			// Pfff, ok then we take the risk but we'll send a message about not getting the info
 			$message[] = "<p>We couldn't get information about the PHP Version we assume that you have $this->minPhpVersion or later</p>";
 			$version   = $this->minPhpVersion;
 		}
@@ -242,8 +210,6 @@ class Com_BabiooneventInstallerScript
 	{
 		// $parent is the class calling this method
 		// $type is the type of change (install, update or discover_install)
-
-		self::createAssets();
 
 		// Install subextensions
 		$status = BabioonInstallHelper::installSubextensions($parent, $this->installation_queue);

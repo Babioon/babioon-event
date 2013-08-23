@@ -10,47 +10,34 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-jimport('joomla.application.component.view');
-
 /**
  * class BabioonEventViewDefault
  *
  * @package  BABIOON_EVENT
- * @since    2.0
+ * @since    3.0
  */
-class BabioonEventViewDefault extends JView
+class BabioonEventViewDefault extends FOFViewHtml
 {
-
 	/**
-	 * Display the view
+	 * default class construtor
 	 *
-	 * @param   string  $tpl  A template file to load. [optional]
-	 *
-	 * @return	void
+	 * @param   array  $config  Configuration array
 	 */
-	public function display($tpl = null)
+	public function __construct($config = array())
 	{
-		$this->addToolbar();
-		parent::display();
-	}
+		parent::__construct($config);
 
-	/**
-	 * Add the page title and toolbar.
-	 *
-	 * @return	void
-	 */
-	protected function addToolbar()
-	{
-		$doc = JFactory::getDocument();
-		$doc->addStyleDeclaration('.icon-48-babioon {background-image: url(../media/babioon/images/icon-48-babioon.png);}');
-
-		$user = JFactory::getUser();
-		$canDo = BabioonEventHelper::getActions();
-		JToolBarHelper::title(JText::_('COM_BABIOONEVENT'), 'babioon.png');
-
-		if ($canDo->get('core.admin'))
+		if (BabioonEventHelper::isVersion3())
 		{
-			JToolBarHelper::preferences('com_babioonevent');
+			// Joomla! 3.x
+			$renderer = new FOFRenderJoomla3;
 		}
+		else
+		{
+			// Joomla! 2.5
+			$renderer = new FOFRenderJoomla;
+		}
+
+		$this->setRenderer($renderer);
 	}
 }

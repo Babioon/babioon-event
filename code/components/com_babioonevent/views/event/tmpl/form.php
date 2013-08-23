@@ -7,249 +7,296 @@
  * @license    GNU General Public License version 2 or later
  **/
 
-// Check to ensure this file is included in Joomla!
-defined ('_JEXEC') or die ('Restricted access');
+// No direct access
+defined('_JEXEC') or die;
 
-$pageclass_sfx   = $this->params->get('pageclass_sfx','');
-$subheaderlevel  = $this->headerlevel+1;
-$subheaderlevel2 = $this->headerlevel+2;
-$subheaderlevel3 = $this->headerlevel+3;
+JHtml::_('behavior.framework');
 
-$this->params = $this->params;
-?>
+$displayData 	= new stdClass;
+$form 			= $this->form;
+$errors 		= $form->getErrors();
+$params 		= JComponentHelper::getParams('com_babioonevent');
+$keys 			= array_keys($form->getFieldset());
+$showlocation   = $params->get('showlocation', 2);
+$headerlevel    = $params->get('headerlevel', 1);
+$Itemid 		= BabioonEventRouteHelper::getItemid('event');
 
-<div id="event<?php echo $pageclass_sfx;?>">
-
-<?php if ($this->showerror)
+if ($form->getValue('sdate') == '0000-00-00')
 {
-	$title=JText::_ ( 'COM_BABIOONEVENT_ERROR' );
-	$this->document->setTitle ( JText::_ ( 'COM_BABIOONEVENT_ERROR_PT' ) );
-	$this->preerrortext = JText::_ ( 'COM_BABIOONEVENT_ERRORSUBMITEVENT' );
-	echo $this->loadTemplate('error',false);
+	$form->setValue('sdate', '');
+}
+
+if ($form->getValue('edate') == '0000-00-00')
+{
+	$form->setValue('edate', '');
+}
+
+if ($showlocation == 5)
+{
+	$locatioinfo = JText::_('COM_BABIOONEVENT_LOCATIONINFOGOOGLE');
 }
 else
 {
-	echo "<h$this->headerlevel>".$this->title."</h$this->headerlevel>";
+	$locatioinfo = JText::_('COM_BABIOONEVENT_LOCATIONINFO');
+}
+
+$title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+?>
+<!-- ************************** START: babioonevent ************************** -->
+<div class="babioonevent">
+
+<?php if (count($errors) != 0)
+{
+	echo "<h$headerlevel>" . JText::_('COM_BABIOONEVENT_ERROR') . "</h$headerlevel>";
+
+
+	$displayData->pretext = JText::_('COM_BABIOONEVENT_ERRORSUBMITEVENT');
+	$displayData->errors = $errors;
+	echo FOFLayoutHelper::render('form.error', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+}
+else
+{
+	echo "<h$headerlevel>" . $title . "</h$headerlevel>";
 	echo JText::_('COM_BABIOONEVENT_HEADTEXTSUBMITEVENT');
 }
 
-$action = JRoute::_ ( 'index.php' );
-echo '<form action="' . $action . '#content" method="post" name="rdeventaddform" class="event_form">';
-// standard fields
-echo '<input type="hidden" name="option" value="com_babioonevent" />';
-echo '<input type="hidden" name="view" value="event" />';
-echo '<input type="hidden" name="task" value="" />';
-echo '<input type="hidden" name="layout" value="presubmit" />';
-echo '<fieldset><legend>'.JText::_ ( 'COM_BABIOONEVENT_ADDDATA' ).'</legend>';
-
-echo JText::_ ( 'COM_BABIOONEVENT_ADDDATAINFO' );
-
-
-$i=0;
-// name is always in the form
-$elm=$this->form[$i];
-$this->assign('elm',$elm);
-echo $this->loadTemplate($elm['type'],false);
-
-$i++;
-if ($this->params->get('showorganiser',2) != 0)
-{
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-}
-echo '</fieldset>';
-$confvar = $this->params->get('showdates',4);
-if ($confvar != 0)
-{
-	echo '<fieldset>';
-	echo '<legend>'.JText::_('COM_BABIOONEVENT_START').'</legend>';
-
-	echo JText::_ ( 'COM_BABIOONEVENT_STARTINFO' );
-
-	// startdate
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-	// starttime
-	if ($confvar == 2 OR $confvar == 4 OR $confvar == 5 OR $confvar == 7 OR $confvar == 8 OR ($confvar >= 10 AND $confvar != 14) )
-	{
-		$elm=$this->form[$i];
-
-		$elm['timeset'] = ($elm['value'] != '--' || $elm['value'] == '');
-		$this->assign('elm',$elm);
-		echo $this->loadTemplate($elm['type'],false);
-		$i++;
-	}
-	echo '</fieldset>';
-	if ( $confvar >= 6 )
-	{
-		echo '<fieldset>';
-		echo '<legend>'.JText::_('COM_BABIOONEVENT_END').'</legend>';
-
-		echo JText::_ ( 'COM_BABIOONEVENT_ENDINFO' );
-
-		$elm=$this->form[$i];
-		$this->assign('elm',$elm);
-		echo $this->loadTemplate($elm['type'],false);
-		$i++;
-		if ($confvar == 8 OR $confvar == 12 OR $confvar == 13 OR $confvar >= 17 )
-		{
-			$elm=$this->form[$i];
-			$this->assign('elm',$elm);
-			echo $this->loadTemplate($elm['type'],false);
-			$i++;
-		}
-		echo '</fieldset>';
-	}
-}
-
-$cinfo = (int) $this->params->get('showcontact',1) + (int) $this->params->get('showphone',1) + (int) $this->params->get('showwebsite',1)+ (int) $this->params->get('showemail',1);
-if ($cinfo != 0)
-{
-	echo '<fieldset>';
-	echo '<legend>'.JText::_('COM_BABIOONEVENT_CONTACTPERSON').'</legend>';
-
-	echo JText::_ ( 'COM_BABIOONEVENT_CONTACTPERSONINFO' );
-
-	if ($this->params->get('showcontact',1) != 0)
-	{
-		$elm=$this->form[$i];
-		$this->assign('elm',$elm);
-		echo $this->loadTemplate($elm['type'],false);
-		$i++;
-	}
-	if ($this->params->get('showphone',1) != 0)
-	{
-		$elm=$this->form[$i];
-		$this->assign('elm',$elm);
-		echo $this->loadTemplate($elm['type'],false);
-		$i++;
-	}
-	if ($this->params->get('showwebsite',1) != 0)
-	{
-		$elm=$this->form[$i];
-		$this->assign('elm',$elm);
-		echo $this->loadTemplate($elm['type'],false);
-		$i++;
-	}
-	if ($this->params->get('showemail',1) != 0)
-	{
-		$elm=$this->form[$i];
-		$this->assign('elm',$elm);
-		echo $this->loadTemplate($elm['type'],false);
-		$i++;
-		$elm=$this->form[$i];
-		$this->assign('elm',$elm);
-		echo $this->loadTemplate($elm['type'],false);
-		$i++;
-	}
-	echo '</fieldset>';
-}
-$locationconfvar=$this->params->get('showlocation',1);
-if ($locationconfvar > 2)
-{
-	echo '<fieldset>';
-	echo '<legend>'.JText::_('COM_BABIOONEVENT_LOCATION').'</legend>';
-
-	if ($locationconfvar == 5)
-	{
-		echo JText::_('COM_BABIOONEVENT_LOCATIONINFOGOOGLE');
-	}
-	else
-	{
-		echo JText::_('COM_BABIOONEVENT_LOCATIONINFO');
-	}
-
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-	echo '</fieldset>';
-}
-
-echo '<fieldset>';
-echo '<legend>' . JText::_ ( 'COM_BABIOONEVENT_EVENTDESCRIPTION' ) . '</legend>';
-
-echo JText::_ ( 'COM_BABIOONEVENT_EVENTDESCRIPTIONINFO' );
-
-if ($locationconfvar != 0 AND $locationconfvar < 3)
-{
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-}
-
-if ($this->params->get('showshortdesc',2) != 0)
-{
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-}
-if ($this->params->get('showlongdesc',2) != 0)
-{
-	$elm=$this->form[$i];
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-}
-$list=array();
-// is free of charge
-$obj= new stdClass();
-$obj->value = 0;
-$obj->text = JText::_ ( 'NOFREEOFCHARGE' );
-$list[]=$obj;
-unset($obj);
-$obj= new stdClass();
-$obj->value = 1;
-$obj->text = JText::_ ( 'YESFREEOFCHARGE' );
-$list[]=$obj;
-unset($obj);
-
-$elm=$this->form[$i];
-$elm['list'] = $list;
-$elm['defaultvalue'] = 1;
-
-$this->assign('elm',$elm);
-echo $this->loadTemplate($elm['type'],false);
-$i++;
-
-$elm=$this->form[$i];
-$this->assign('elm',$elm);
-echo $this->loadTemplate($elm['type'],false);
-$i++;
-
-if ($this->params->get('showcategory',2) != 0)
-{
-	$elm=$this->form[$i];
-	$elm['defaultvalue']=$this->params->get('defaultcategory',0);
-	$this->assign('elm',$elm);
-	echo $this->loadTemplate($elm['type'],false);
-	$i++;
-}
-echo '</fieldset>';
-
-echo '<div class="note">'.JText::_('COM_BABIOONEVENT_NOTESUBMITEVENT').'</div>';
-echo '<div class="formelm"><input type="submit" value="'. JText::_('COM_BABIOONEVENT_SEND').'" class="button" /> </div>';
-
-echo "\n".'</form>';
-
-
 ?>
-</div> <!-- id=event -->
+
+	<?php echo JText::_('COM_BABIOONEVENT_ADDDATAINFO');?>
+
+
+	<form action="index.php?option=com_babioonevent&view=event&Itemid=<?php echo $Itemid;?>" method="post" name="adminForm" class="form-horizontal">
+		<fieldset>
+			<legend><?php echo JText::_('COM_BABIOONEVENT_ADDDATA');?></legend>
+
+
+			<?php $displayData->label = $form->getLabel('name'); ?>
+			<?php $displayData->input = $form->getInput('name'); ?>
+			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+
+			<?php $f = 'organiser'; ?>
+			<?php if (in_array($f, $keys)) : ?>
+
+				<?php $displayData->label = $form->getLabel($f); ?>
+				<?php $displayData->input = $form->getInput($f); ?>
+				<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php endif; ?>
+
+		</fieldset>
+
+		<fieldset>
+			<legend><?php echo JText::_('COM_BABIOONEVENT_START');?></legend>
+			<?php echo JText::_('COM_BABIOONEVENT_STARTINFO'); ?>
+
+			<?php $f = 'sdate'; ?>
+			<?php $displayData->label = $form->getLabel($f); ?>
+			<?php $displayData->input = $form->getInput($f); ?>
+			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+
+			<?php $f = 'stimehh'; ?>
+			<?php if (in_array($f, $keys)) : ?>
+
+				<div class="formelement">
+					<span class="control-label"><?php echo $form->getLabel($f); ?> / <?php echo $form->getLabel('stimemm'); ?></span>
+					<div class="controls">
+						<?php echo $form->getInput($f); ?><?php echo $form->getInput('stimemm'); ?>
+					</div>
+				</div>
+
+			<?php endif; ?>
+		</fieldset>
+
+
+		<?php $f = 'edate'; ?>
+		<?php if (in_array($f, $keys)) : ?>
+			<fieldset>
+				<legend><?php echo JText::_('COM_BABIOONEVENT_END');?></legend>
+				<?php echo JText::_('COM_BABIOONEVENT_ENDINFO'); ?>
+
+				<?php $f = 'edate'; ?>
+				<?php $displayData->label = $form->getLabel($f); ?>
+				<?php $displayData->input = $form->getInput($f); ?>
+				<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+
+				<?php $f = 'etimehh'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<div class="formelement">
+						<span class="control-label"><?php echo $form->getLabel($f); ?> / <?php echo $form->getLabel('etimemm'); ?></span>
+						<div class="controls">
+							<?php echo $form->getInput($f); ?><?php echo $form->getInput('etimemm'); ?>
+						</div>
+					</div>
+				<?php endif; ?>
+
+			</fieldset>
+		<?php endif; ?>
+
+		<?php $f = array('contact','email','tel','website'); ?>
+		<?php if (count(array_intersect($f, $keys)) != 0) : ?>
+			<fieldset>
+				<legend><?php echo JText::_('COM_BABIOONEVENT_CONTACTPERSON');?></legend>
+				<?php echo JText::_('COM_BABIOONEVENT_CONTACTPERSONINFO'); ?>
+
+				<?php $f = 'contact'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'tel'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'website'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'email'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'showemail'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+			</fieldset>
+		<?php endif; ?>
+
+		<?php $f = array('ainfo','street','pcode','city','state','country'); ?>
+		<?php if (count(array_intersect($f, $keys)) != 0) : ?>
+			<fieldset>
+				<legend><?php echo JText::_('COM_BABIOONEVENT_LOCATION');?></legend>
+				<?php echo $locatioinfo; ?>
+
+				<?php $f = 'address'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'ainfo'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'street'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'pcode'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'city'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'state'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'country'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+			</fieldset>
+		<?php endif; ?>
+
+
+		<?php $f = array('address','teaser','text','isfreeofcharge','charge','catid'); ?>
+		<?php if (count(array_intersect($f, $keys)) != 0) : ?>
+			<fieldset>
+				<legend><?php echo JText::_('COM_BABIOONEVENT_EVENTDESCRIPTION');?></legend>
+				<?php echo JText::_('COM_BABIOONEVENT_EVENTDESCRIPTIONINFO'); ?>
+
+				<?php $f = 'address'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'teaser'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'text'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'isfreeofcharge'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'charge'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+
+				<?php $f = 'catid'; ?>
+				<?php if (in_array($f, $keys)) : ?>
+					<?php $displayData->label = $form->getLabel($f); ?>
+					<?php $displayData->input = $form->getInput($f); ?>
+					<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+				<?php endif; ?>
+			</fieldset>
+
+		<?php endif; ?>
+
+
+
+		<div class="note"><?php echo JText::_('COM_BABIOONEVENT_NOTESUBMITEVENT'); ?></div>
+
+		<div class="form-actions">
+			<input type="submit" value="<?php echo JText::_('COM_BABIOONEVENT_SEND');?>" class="btn btn-primary" />
+		</div>
+
+		<input type="hidden" name="option" value="com_babioonevent" />
+		<input type="hidden" name="view" value="event" />
+		<input type="hidden" name="task" value="preview" />
+		<input type="hidden" name="layout" value="preview" />
+		<input type="hidden" name="<?php echo JFactory::getSession()->getFormToken();?>" value="1" />
+	</form>
+</div>
+<!-- *************************** END: babioonevent *************************** -->

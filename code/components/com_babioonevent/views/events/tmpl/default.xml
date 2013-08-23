@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_BABIOONEVENT_EVENTS_LIST">
+	<layout title="COM_BABIOONEVENT_VIEW_EVENTS_DEFAULT_TITLE">
 		<message>
-			<![CDATA[COM_BABIOONEVENT_EVENTS_LIST_DESC]]>
+				<![CDATA[COM_BABIOONEVENT_VIEW_EVENTS_DEFAULT_DESC]]>
 		</message>
 	</layout>
+	<state>
+		<name>COM_BABIOONEVENT_VIEW_EVENTS_DEFAULT_TITLE</name>
+		<description>COM_BABIOONEVENT_VIEW_EVENTS_DEFAULT_DESC</description>
+	</state>
 </metadata>
