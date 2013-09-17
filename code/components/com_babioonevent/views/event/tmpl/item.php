@@ -65,7 +65,7 @@ $fields 		 = array('tel','website','ainfo','street','pcode','city','state','coun
 	<?php endif; ?>
 
 	<?php $f = 'stime'; ?>
-	<?php if (in_array($f, $keys)) : ?>
+	<?php if (in_array($f . 'hh', $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
 		<?php echo FOFLayoutHelper::render('form.showsettime', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
@@ -77,7 +77,7 @@ $fields 		 = array('tel','website','ainfo','street','pcode','city','state','coun
 	<?php endif; ?>
 
 	<?php $f = 'etime'; ?>
-	<?php if (in_array($f, $keys)) : ?>
+	<?php if (in_array($f . 'hh', $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
 		<?php echo FOFLayoutHelper::render('form.showsettime', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
