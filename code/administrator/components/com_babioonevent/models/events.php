@@ -55,6 +55,30 @@ class BabiooneventModelEvents extends FOFModel
 
 				return false;
 			}
+
+			$dtFields = array('s','e');
+
+			foreach ($dtFields as $dtf)
+			{
+				// Preset default values
+				$data[$dtf . 'time'] = '00:00:00';
+				$data[$dtf . 'timeset'] = '0';
+
+				// Check time and date
+				$result = $this->checkDate($dtf . 'date');
+
+				if ($result !== false)
+				{
+					$data[$dtf . 'date'] = $result;
+					$result = $this->checkTime($dtf . 'time');
+
+					if ($result !== false)
+					{
+						$data[$dtf . 'time'] = $result;
+						$data[$dtf . 'timeset'] = 1;
+					}
+				}
+			}
 		}
 
 		if ($this->_isNewRecord)
@@ -99,18 +123,20 @@ class BabiooneventModelEvents extends FOFModel
 		}
 
 		// Make sure the dates have the correct format
-		$data['sdate'] = $this->formatDate($data['sdate']);
 
-		if ($data['sdate'] === false)
+		foreach (array ('sdate', 'edate') as $d)
 		{
-			return false;
-		}
+			if ($data[$d] != '')
+			{
+				$data[$d] = $this->formatDate($data[$d]);
 
-		$data['edate'] = $this->formatDate($data['edate']);
+				if ($data[$d] === false)
+				{
+					$this->setError('Date format not valid: ' . $d);
 
-		if ($data['edate'] === false)
-		{
-			return false;
+					return false;
+				}
+			}
 		}
 
 		return true;
@@ -128,6 +154,28 @@ class BabiooneventModelEvents extends FOFModel
 	protected function onAfterGetItem(&$record)
 	{
 		parent::onAfterGetItem($record);
+
+		if ($record->sdate == '0000-00-00')
+		{
+			$record->sdate = '';
+		}
+
+		if ($record->edate == '0000-00-00')
+		{
+			$record->edate = '';
+		}
+
+		if (strpos($record->sdate, '-') !== false)
+		{
+			list($y, $m, $d) = explode('-', $record->sdate);
+			$record->sdate = $d . '.' . $m . '.' . $y;
+		}
+
+		if (strpos($record->edate, '-') !== false)
+		{
+			list($y, $m, $d) = explode('-', $record->edate);
+			$record->edate = $d . '.' . $m . '.' . $y;
+		}
 
 		if ($record->stimeset == 1)
 		{
