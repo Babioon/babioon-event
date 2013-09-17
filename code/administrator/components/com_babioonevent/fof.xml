@@ -8,9 +8,6 @@
             <field name="locked_on">checked_out_time</field>
         </table>
         <!-- Table options for a specific table -->
-        <table name="events">
-            <field name="enabled">published</field>
-        </table>
     </common>
 
     <!-- Component back-end options -->
