@@ -3,12 +3,12 @@
 <project name="map" default="do">
 
 	<!-- import task -->
-	<import file="${project.basedir}/../_4all/tasks.xml"/>
+	<import file="${tasksdir}/_4all/tasks.xml"/>
 
 	<target name="do">
 
 		<echo msg="**************************" />
-		<echo msg="* MAP: babioonevent *" />
+		<echo msg="* MAP: babioonevent      *" />
 		<echo msg="**************************" />
 
 		<phingcall target="linkcomponent_new_repository_layout">
@@ -30,10 +30,26 @@
 			<property name="source" value="${packagedir}/${projectname}/code/plugins/search/babioonevent" />
 			<property name="target" value="${targetdir}/plugins/search/babioonevent" />
 		</phingcall>
+
 		<phingcall target="maplanguage">
 			<property name="basesource" value="${packagedir}/${projectname}/code/plugins/search/babioonevent/language" />
 			<property name="basetarget" value="${targetdir}/administrator/language" />
 		</phingcall>
 
+		<available file="${targetdir}/media/babioon" type="dir" property="babioonexists" value="true" />
+		<if>
+			<equals arg1="${babioonexists}" arg2="true" />
+			<then>
+				<echo msg="Media-Dir exists" />
+			</then>
+			<else>
+				<mkdir dir="${targetdir}/media/babioon" />
+			</else>
+		</if>
+
+		<phingcall target="symboliclink">
+			<property name="source" value="${packagedir}/${projectname}/code/media/babioon/event" />
+			<property name="target" value="${targetdir}/media/babioon/event" />
+		</phingcall>
 	</target>
 </project>
