@@ -64,9 +64,6 @@ class Com_BabiooneventInstallerScript
 	 */
 	function install($parent)
 	{
-		// $parent is the class calling this method
-		// $parent->getParent()->setRedirectURL('index.php?option=' . $this->babioon_extension);
-		// self::createAssets();
 	}
 
 	/**
@@ -78,7 +75,6 @@ class Com_BabiooneventInstallerScript
 	 */
 	function discover_install($parent)
 	{
-		self::install($parent);
 	}
 
 	/**
@@ -184,7 +180,7 @@ class Com_BabiooneventInstallerScript
 		}
 
 		// Bugfix for certain installer features
-		if (in_array($type, array('install','discover_install')))
+		if (in_array($type, array('install')))
 		{
 			BabioonInstallHelper::bugfixDBFunctionReturnedNoError($this->babioon_extension);
 		}
@@ -211,8 +207,11 @@ class Com_BabiooneventInstallerScript
 		// $parent is the class calling this method
 		// $type is the type of change (install, update or discover_install)
 
-		// Install subextensions
-		$status = BabioonInstallHelper::installSubextensions($parent, $this->installation_queue);
+		if ($type != 'discover_install')
+		{
+			// Install subextensions
+			$status = BabioonInstallHelper::installSubextensions($parent, $this->installation_queue);
+		}
 
 		$this->_renderPostInstallation($status, $parent);
 	}

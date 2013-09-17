@@ -107,11 +107,11 @@ $fields 		 = array('tel','website','ainfo','street','pcode','city','state','coun
 		<?php $f = 'charge'; ?>
 		<?php if (in_array($f, $keys)) : ?>
 			<?php $displayData->fieldname = $f; ?>
-			<?php echo FOFLayoutHelper::render('form.showcharge', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo FOFLayoutHelper::render('html.showcharge', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 		<?php endif; ?>
 
 	<?php else : ?>
-			kostenlos
+			<?php echo FOFLayoutHelper::render('html.showfreeofcharge', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 

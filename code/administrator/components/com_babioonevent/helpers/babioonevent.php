@@ -40,8 +40,39 @@ class BabioonEventHelper
 			JError::raiseError('500', 'FOF is not installed');
 		}
 
-		$strapper = new FOFRenderStrapper;
+		if (self::isVersion3())
+		{
+			$strapper = new FOFRenderJoomla3;
+		}
+		else
+		{
+			$strapper = new FOFRenderJoomla;
+		}
+
 		$strapper->renderCategoryLinkbar('com_babioonevent');
+	}
+
+	/**
+	 * Gets a list of the actions that can be performed.
+	 *
+	 * @return	JObject
+	 */
+	public static function getActions()
+	{
+		$user	= JFactory::getUser();
+		$result	= new JObject;
+		$assetName = 'com_babioonevent';
+
+		$actions = array(
+			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.state', 'core.delete'
+		);
+
+		foreach ($actions as $action)
+		{
+			$result->set($action,	$user->authorise($action, $assetName));
+		}
+
+		return $result;
 	}
 
 	/**

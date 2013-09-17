@@ -15,7 +15,7 @@ JHtml::_('behavior.framework');
 $displayData 	= new stdClass;
 $params 		= JComponentHelper::getParams('com_babioonevent');
 $headerlevel    = $params->get('headerlevel', 1);
-$slevel			= $headerlevel;
+$slevel			= $headerlevel+1;
 $Itemid 		= BabioonEventRouteHelper::getItemid('events');
 
 $title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
@@ -25,7 +25,7 @@ $close  = '';
 
 ?>
 <!-- ************************** START: babioonevent ************************** -->
-<div id="babioonevent">
+<div class="babioonevent">
 
 	<h<?php echo $headerlevel;?>>
 		<?php echo $title;?>
@@ -54,10 +54,10 @@ $close  = '';
 								<?php if ($elm->sdate != '0000-00-00') : ?>
 									<?php echo date('d.m.Y', strtotime($elm->sdate));?>:&nbsp;
 								<?php endif;?>
-								<a href="<?php echo $elm->link; ?>">
-									<?php echo $elm->name;?>
-								</a>
 							<?php endif;?>
+							<a href="<?php echo $elm->link; ?>">
+								<?php echo $elm->name;?>
+							</a>
 						</li>
 			<?php endforeach; ?>
 			<?php echo $close;?><!-- CLOSE ul -->

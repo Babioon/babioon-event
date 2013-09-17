@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Load FOF
-require_once JPATH_LIBRARIES . '/fof/include.php';
+include_once JPATH_LIBRARIES . '/fof/include.php';
 
 if (!defined('FOF_INCLUDED'))
 {

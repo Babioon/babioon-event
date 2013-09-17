@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `#__babioonevent_events` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `babioon_event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `organiser` varchar(255) NOT NULL,
   `start` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -42,6 +42,6 @@ CREATE TABLE IF NOT EXISTS `#__babioonevent_events` (
   `control` text NOT NULL,
   `catid` int(11) unsigned NOT NULL DEFAULT '0',
   `hash` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`babioon_event_id`),
   KEY `published` (`published`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
