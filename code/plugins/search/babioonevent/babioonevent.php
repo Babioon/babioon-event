@@ -168,7 +168,7 @@ class PlgSearchBabioonevent extends JPlugin
 		}
 
 		$query = $db->getQuery(true);
-		$query->select('a.id')
+		$query->select('a.babioonevent_event_id AS id')
 				->select('a.name AS title')
 				->select('CONCAT(a.teaser,a.text) AS text')
 				->select('a.sdate AS created')
@@ -200,7 +200,7 @@ class PlgSearchBabioonevent extends JPlugin
 			for ( $i = 0; $i < $count; $i++ )
 			{
 				$event = $rows[$i];
-				$event->href = $link . $event->id;
+				$event->href = $link . $event->babioon_event_id;
 
 				if (searchHelper::checkNoHTML($event, $searchText, $searchin))
 				{
