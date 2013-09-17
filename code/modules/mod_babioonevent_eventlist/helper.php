@@ -32,6 +32,7 @@ class ModBabiooneventEventlistHelper
 		$order      = $params->get('order', 1);
 		$Itemid     = BabioonEventRouteHelper::getItemid('events');
 		$db         = JFactory::getDBO();
+		$user		= JFactory::getUser();
 		$now        = gmdate("Y-m-d");
 
 		$query = $db->getQuery(true);
@@ -43,7 +44,7 @@ class ModBabiooneventEventlistHelper
 				->from('#__categories AS cc')
 				->where('(e.sdate >= "' . $now . '" OR e.edate >= "' . $now . '")')
 				->where('e.catid = cc.id')
-				->where('e.published = 1')
+				->where('e.enabled = 1')
 				->where('cc.published = 1')
 				->order('e.sdate, cc.title');
 
@@ -51,6 +52,13 @@ class ModBabiooneventEventlistHelper
 		{
 			$catfilter = 'catid in (' . implode(',', $eventcats) . ') ';
 			$query->where($catfilter);
+		}
+
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+			$groups = implode(',', $user->getAuthorisedViewLevels());
+			$query->where('cc.access IN (' . $groups . ')');
 		}
 
 		$db->setQuery($query, 0, $eventcount);
@@ -67,7 +75,7 @@ class ModBabiooneventEventlistHelper
 			$obj       = new stdClass;
 			$crow      = $c [$i];
 			$obj       = $crow;
-			$obj->link = $link . $crow->id;
+			$obj->link = $link . $crow->babioonevent_event_id;
 			$nr []     = $obj;
 			$categorylist [$obj->catid] = $obj->cctitle;
 		}
