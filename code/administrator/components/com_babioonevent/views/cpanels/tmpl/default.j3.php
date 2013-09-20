@@ -12,7 +12,6 @@ $sidebar = JHtmlSidebar::render();
 <?php else : ?>
 	<div id="j-main-container well">
 <?php endif;?>
-
 		<?php echo JText::_('COM_BABIOONEVENT_COMP');?>
 		<?php echo JText::_('COM_BABIOONEVENT_COMP_DESC');?>
 

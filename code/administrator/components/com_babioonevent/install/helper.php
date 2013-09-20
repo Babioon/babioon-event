@@ -53,7 +53,7 @@ class BabioonInstallHelper
 	 * with other things :-)
 	 *
 	 * @copyright Copyright (c)2009-2013 Nicholas K. Dionysopoulos
-     * @license GNU General Public License version 3, or later
+	 * @license GNU General Public License version 3, or later
 	 */
 
 	/**
@@ -686,5 +686,123 @@ class BabioonInstallHelper
 		$query->values($eid . ', ' . $db->quote($version));
 		$db->setQuery($query);
 		$db->execute();
+	}
+
+	/**
+	 * Check if FoF is already installed and install if not
+	 *
+	 * @param   object  $parent  class calling this method
+	 *
+	 * @return  array            Array with performed actions summary
+	 */
+	public static function installFOF($parent)
+	{
+		$src = $parent->getParent()->getPath('source');
+
+		// Load dependencies
+		JLoader::import('joomla.filesystem.file');
+		JLoader::import('joomla.utilities.date');
+		$source = $src . '/fof';
+
+		if (!defined('JPATH_LIBRARIES'))
+		{
+			$target = JPATH_ROOT . '/libraries/fof';
+		}
+		else
+		{
+			$target = JPATH_LIBRARIES . '/fof';
+		}
+
+		$haveToInstallFOF = false;
+
+		if (!is_dir($target))
+		{
+			$haveToInstallFOF = true;
+		}
+		else
+		{
+			$fofVersion = array();
+
+			if (file_exists($target . '/version.txt'))
+			{
+				$rawData = JFile::read($target . '/version.txt');
+				$info    = explode("\n", $rawData);
+				$fofVersion['installed'] = array(
+					'version'   => trim($info[0]),
+					'date'      => new JDate(trim($info[1]))
+				);
+			}
+			else
+			{
+				$fofVersion['installed'] = array(
+					'version'   => '0.0',
+					'date'      => new JDate('2011-01-01')
+				);
+			}
+
+			$rawData = JFile::read($source . '/version.txt');
+			$info    = explode("\n", $rawData);
+			$fofVersion['package'] = array(
+				'version'   => trim($info[0]),
+				'date'      => new JDate(trim($info[1]))
+			);
+
+			$haveToInstallFOF = $fofVersion['package']['date']->toUNIX() > $fofVersion['installed']['date']->toUNIX();
+		}
+
+		$installedFOF = false;
+
+		if ($haveToInstallFOF)
+		{
+			$versionSource = 'package';
+			$installer = new JInstaller;
+			$installedFOF = $installer->install($source);
+		}
+		else
+		{
+			$versionSource = 'installed';
+		}
+
+		if (!isset($fofVersion))
+		{
+			$fofVersion = array();
+
+			if (file_exists($target . '/version.txt'))
+			{
+				$rawData = JFile::read($target . '/version.txt');
+				$info    = explode("\n", $rawData);
+				$fofVersion['installed'] = array(
+					'version'   => trim($info[0]),
+					'date'      => new JDate(trim($info[1]))
+				);
+			}
+			else
+			{
+				$fofVersion['installed'] = array(
+					'version'   => '0.0',
+					'date'      => new JDate('2011-01-01')
+				);
+			}
+
+			$rawData = JFile::read($source . '/version.txt');
+			$info    = explode("\n", $rawData);
+			$fofVersion['package'] = array(
+				'version'   => trim($info[0]),
+				'date'      => new JDate(trim($info[1]))
+			);
+			$versionSource = 'installed';
+		}
+
+		if (!($fofVersion[$versionSource]['date'] instanceof JDate))
+		{
+			$fofVersion[$versionSource]['date'] = new JDate;
+		}
+
+		return array(
+			'required'  => $haveToInstallFOF,
+			'installed' => $installedFOF,
+			'version'   => $fofVersion[$versionSource]['version'],
+			'date'      => $fofVersion[$versionSource]['date']->format('Y-m-d'),
+		);
 	}
 }

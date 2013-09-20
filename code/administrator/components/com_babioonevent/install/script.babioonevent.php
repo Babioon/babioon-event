@@ -207,10 +207,19 @@ class Com_BabiooneventInstallerScript
 		// $parent is the class calling this method
 		// $type is the type of change (install, update or discover_install)
 
+		$status = new stdClass;
+		$status->fof = '';
+		$status->subextensions = '';
+
 		if ($type != 'discover_install')
 		{
 			// Install subextensions
-			$status = BabioonInstallHelper::installSubextensions($parent, $this->installation_queue);
+			$status->subextensions = BabioonInstallHelper::installSubextensions($parent, $this->installation_queue);
+		}
+
+		if (version_compare(JVERSION, '3.2.0', 'lt'))
+		{
+			$status->fof = BabioonInstallHelper::installFOF($parent);
 		}
 
 		$this->_renderPostInstallation($status, $parent);
@@ -248,13 +257,29 @@ class Com_BabiooneventInstallerScript
 			<td class="key" colspan="2">Babioon Event component</td>
 			<td><strong style="color: green">Installed</strong></td>
 		</tr>
-		<?php if (count($status->modules)) : ?>
+
+		<?php if (!empty($status->fof)) : ?>
+			<tr class="row<?php echo ($rows++ % 2); ?>">
+				<td class="key" colspan="2">FOF</td>
+				<?php if ($status->fof['required']) : ?>
+					<?php if ($status->fof['installed']) : ?>
+						<td><strong style="color: green">Installed</strong> - Version: <?php echo $status->fof['version'] . '(' . $status->fof['date'] .')' ; ?></td>
+					<?php else : ?>
+						<td><strong style="color: red">NOT Installed</strong></td>
+					<?php endif; ?>
+				<?php else : ?>
+					<td><strong style="color: green">Installation not necessary</strong></td>
+				<?php endif; ?>
+			</tr>
+		<?php endif; ?>
+
+		<?php if (count($status->subextensions->modules)) : ?>
 		<tr>
 			<th>Module</th>
 			<th>Client</th>
 			<th></th>
 		</tr>
-		<?php foreach ($status->modules as $module) : ?>
+		<?php foreach ($status->subextensions->modules as $module) : ?>
 		<tr class="row<?php echo ($rows++ % 2); ?>">
 			<td class="key"><?php echo $module['name']; ?></td>
 			<td class="key"><?php echo ucfirst($module['client']); ?></td>
@@ -262,13 +287,13 @@ class Com_BabiooneventInstallerScript
 		</tr>
 		<?php endforeach;?>
 		<?php endif;?>
-		<?php if (count($status->plugins)) : ?>
+		<?php if (count($status->subextensions->plugins)) : ?>
 		<tr>
 			<th>Plugin</th>
 			<th>Group</th>
 			<th></th>
 		</tr>
-		<?php foreach ($status->plugins as $plugin) : ?>
+		<?php foreach ($status->subextensions->plugins as $plugin) : ?>
 		<tr class="row<?php echo ($rows++ % 2); ?>">
 			<td class="key"><?php echo ucfirst($plugin['name']); ?></td>
 			<td class="key"><?php echo ucfirst($plugin['group']); ?></td>
