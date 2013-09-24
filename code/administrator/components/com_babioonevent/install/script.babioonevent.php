@@ -32,7 +32,7 @@ class Com_BabiooneventInstallerScript
 	protected $babioon_extension = 'com_babioonevent';
 
 	/** @var string min Joomla Version to install on */
-	protected $minJVersion   = '2.5.9';
+	protected $minJVersion   = '3.1.4';
 
 	/** @var string min php version to install on */
 	protected $minPhpVersion = '5.3.1';
