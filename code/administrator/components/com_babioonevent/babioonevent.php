@@ -56,7 +56,17 @@ if ($view == 'liveupdate')
 
 // END: Akeeba Live Update
 
+$doc = JFactory::getDocument();
 
+if (BabioonEventHelper::isVersion3())
+{
+	// Add css
+	$doc->addStyleSheet(JURI::base(true) . '/../media/babioon/css/3x.css');
+}
+else
+{
+	$doc->addStyleSheet(JURI::base(true) . '/../media/babioon/css/2x.css');
+}
 
 FOFDispatcher::getTmpInstance('com_babioonevent')->dispatch();
 
