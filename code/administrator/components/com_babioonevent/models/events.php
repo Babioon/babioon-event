@@ -126,7 +126,7 @@ class BabiooneventModelEvents extends FOFModel
 
 		foreach (array ('sdate', 'edate') as $d)
 		{
-			if ($data[$d] != '')
+			if (array_key_exists($d, $data) && $data[$d] != '')
 			{
 				$data[$d] = $this->formatDate($data[$d]);
 
