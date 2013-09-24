@@ -24,6 +24,14 @@
 		<language tag="de-DE">de-DE/de-DE.com_babioonevent.ini</language>
 	</languages>
 
+	<!-- Media files -->
+	<media destination="babioon" folder="media/babioon">
+		<folder>css</folder>
+		<folder>event</folder>
+		<folder>images</folder>
+	</media>
+
+
 	<administration>
     	<menu img="../media/babioon/images/babioon.png">COM_BABIOONEVENT</menu>
     	<menu link="option=com_categories&amp;extension=com_babioonevent" view="categories" alt="Event/Categories">COM_BABIOONEVENT_CATEGORIES</menu>
