@@ -9,8 +9,8 @@
 
 // No direct access
 defined('_JEXEC') or die;
-$hh = $displayData->form->getValue($displayData->fieldname . 'hh');
-$mm = $displayData->form->getValue($displayData->fieldname . 'mm');
+$hh = str_pad($displayData->form->getValue($displayData->fieldname . 'hh'), 2, '0', STR_PAD_LEFT);
+$mm = str_pad($displayData->form->getValue($displayData->fieldname . 'mm'), 2, '0', STR_PAD_LEFT);
 $value = $hh . ':' . $mm;
 ?>
 <?php if ($value != ':') : ?>

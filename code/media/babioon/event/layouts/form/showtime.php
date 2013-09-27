@@ -11,9 +11,14 @@
 defined('_JEXEC') or die;
 $hh = $displayData->form->getValue($displayData->fieldname . 'hh');
 $mm = $displayData->form->getValue($displayData->fieldname . 'mm');
-$value = $hh . ':' . $mm;
 
-if ($value == ':')
+if ($hh != '' || $mm != '')
+{
+	$hh = str_pad($hh, 2, '0', STR_PAD_LEFT);
+	$mm = str_pad($mm, 2, '0', STR_PAD_LEFT);
+	$value = $hh . ':' . $mm;
+}
+else
 {
 	$value = JText::_('COM_BABIOONEVENT_NODATASET');
 }
