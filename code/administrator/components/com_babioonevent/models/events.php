@@ -201,7 +201,7 @@ class BabiooneventModelEvents extends FOFModel
 	 */
 	public function buildQuery($overrideLimits = false)
 	{
-		// We don't do the next statement because it is doin some crazy stuff with filters
+		// TODO: Check why I made the statement "We don't do the next statement because it is doin some crazy stuff with filters"
 		$query = parent::buildQuery($overrideLimits);
 
 		$db    = $this->getDbo();
@@ -1153,4 +1153,49 @@ class BabiooneventModelEvents extends FOFModel
 
 		return array('','');
 	}
+
+	/**
+	 * This method runs after the data is saved to the $table.
+	 *
+	 * @param   FOFTable  &$table  The table which was saved
+	 *
+	 * @return  boolean
+	 */
+	protected function onAfterSave(&$table)
+	{
+		if ($this->_isNewRecord)
+		{
+			$this->sendNotifyEmailAboutNewEvent($table);
+		}
+		return true;
+	}
+
+	/**
+	 * send a notifcation about a new event to the administrator
+	 *
+	 * @param   FOFTable  $table  The Ad
+	 *
+	 * @return  boolean   true on success otherwise false
+	 */
+	public function sendNotifyEmailAboutNewEvent($table)
+	{
+		$params  	= JComponentHelper::getParams('com_babioonevent');
+		$fromname	= $params->get('emailfrom');
+		$from		= $params->get('email');
+		$email 		= $params->get('emailsendto');
+		$uri     = JURI::getInstance();
+		$link 		= $uri->base() . '/administrator/index.php';
+		$body    = JText::sprintf('COM_BABIOONEVENT_NOTIFYEMAILTXT', $link);
+		$subject = JText::_($table->name);
+
+		$mail       = JFactory::getMailer();
+
+		if ($mail->sendMail($from, $fromname, $email, $subject, $body, true))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 }
