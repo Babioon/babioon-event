@@ -9,32 +9,32 @@
 		description="COM_BABIOONEVENT_GROUP_BASIC_DESC"
 	>
 
-		<field name="fulltext" type="text" class="inputbox" labelclass="control-label"
+		<field name="fulltext" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_FULLTEXT"
 			description="COM_BABIOONEVENT_FULLTEXT_DESC" required="false" />
 
 		<field name="s_isfreeofcharge" type="checkbox" label="COM_BABIOONEVENT_SEARCH_ISFREEOFCHARGE"
-			labelclass="control-label" required="false"
+			labelClass="control-label" required="false"
 			description="COM_BABIOONEVENT_SEARCH_ISFREEOFCHARGE_DESC" value="1" />
 
-		<field name="s_sdate" type="calendar" class="inputbox" labelclass="control-label"
+		<field name="s_sdate" type="calendar" class="inputbox" labelClass="control-label"
 			size="12" label="COM_BABIOONEVENT_SDATE" default="" format="%d.%m.%Y"
 			description="COM_BABIOONEVENT_SDATE_DESC" required="false" />
 
-		<field name="s_edate" type="calendar" class="inputbox" labelclass="control-label"
+		<field name="s_edate" type="calendar" class="inputbox" labelClass="control-label"
 			size="12" label="COM_BABIOONEVENT_EDATE" default="" format="%d.%m.%Y"
 			description="COM_BABIOONEVENT_EDATE_DESC" required="false" />
 
-		<field name="pcodefrom" type="text" class="inputbox" labelclass="control-label"
+		<field name="pcodefrom" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_PCODEFROM"
 			description="COM_BABIOONEVENT_PCODEFROM_DESC" required="false" />
 
-		<field name="pcodeupto" type="text" class="inputbox" labelclass="control-label"
+		<field name="pcodeupto" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_PCODEUPTO"
 			description="COM_BABIOONEVENT_PCODEUPTO_DESC" required="false" />
 
 		<field name="excatid" type="category" extension="com_babioonevent" required="true"
-			labelclass="control-label" label="COM_BABIOONEVENT_CATID"
+			labelClass="control-label" label="COM_BABIOONEVENT_CATID"
 			 description="COM_BABIOONEVENT_CATID_DESC" />
 
 	</fieldset>

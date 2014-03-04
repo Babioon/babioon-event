@@ -14,15 +14,15 @@
 			<option value="0">JUNPUBLISHED</option>
 		</field>
 
-		<field name="name" type="text" class="inputbox" labelclass="control-label"
+		<field name="name" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_NAME"
 			description="COM_BABIOONEVENT_NAME_DESC" required="true" />
 
-		<field name="organiser" type="text" class="inputbox" labelclass="control-label"
+		<field name="organiser" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_ORGANISER"
 			description="COM_BABIOONEVENT_ORGANISER_DESC" required="false"/>
 
-		<field name="sdate" type="calendar" class="inputbox" labelclass="control-label"
+		<field name="sdate" type="calendar" class="inputbox" labelClass="control-label"
 			size="12" label="COM_BABIOONEVENT_SDATE" default="" format="%d.%m.%Y"
 			description="COM_BABIOONEVENT_SDATE_DESC" required="false" />
 
@@ -75,7 +75,7 @@
 			<option value="55">55</option>
 		</field>
 
-		<field name="edate" type="calendar" class="inputbox" labelclass="control-label"
+		<field name="edate" type="calendar" class="inputbox" labelClass="control-label"
 			size="12" label="COM_BABIOONEVENT_EDATE" default="" format="%d.%m.%Y"
 			description="COM_BABIOONEVENT_EDATE_DESC" required="false" />
 
@@ -128,75 +128,75 @@
 			<option value="55">55</option>
 		</field>
 
-		<field name="contact" type="text" class="inputbox" labelclass="control-label"
+		<field name="contact" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_CONTACT"
 			description="COM_BABIOONEVENT_CONTACT_DESC" required="false"/>
 
-		<field name="email" type="text" class="inputbox" labelclass="control-label"
+		<field name="email" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_EMAIL"
 			description="COM_BABIOONEVENT_EMAIL_DESC" required="false"/>
 
 		<field name="showemail" type="checkbox" label="COM_BABIOONEVENT_SHOWEMAIL"
-			labelclass="control-label"
+			labelClass="control-label"
 			description="COM_BABIOONEVENT_SHOWEMAIL_DESC" value="1" />
 
-		<field name="tel" type="text" class="inputbox" labelclass="control-label"
+		<field name="tel" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_TEL"
 			description="COM_BABIOONEVENT_TEL_DESC" required="false"/>
 
-		<field name="website" type="text" class="inputbox" labelclass="control-label"
+		<field name="website" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_WEBSITE"
 			description="COM_BABIOONEVENT_WEBSITE_DESC" required="false"/>
 
 		<field name="address" type="textarea" default="" label="COM_BABIOONEVENT_ADDRESS"
-			labelclass="control-label"
+			labelClass="control-label"
 			description="COM_BABIOONEVENT_ADDRESS_DESC" rows="5" cols="30" />
 
-		<field name="ainfo" type="text" class="inputbox" labelclass="control-label"
+		<field name="ainfo" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_AINFO"
 			description="COM_BABIOONEVENT_AINFO_DESC" required="false"/>
 
-		<field name="street" type="text" class="inputbox" labelclass="control-label"
+		<field name="street" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_STREET"
 			description="COM_BABIOONEVENT_STREET_DESC" required="false"/>
 
-		<field name="pcode" type="text" class="inputbox" labelclass="control-label"
+		<field name="pcode" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_PCODE"
 			description="COM_BABIOONEVENT_PCODE_DESC" required="false"/>
 
-		<field name="city" type="text" class="inputbox" labelclass="control-label"
+		<field name="city" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_CITY"
 			description="COM_BABIOONEVENT_CITY_DESC" required="false"/>
 
-		<field name="state" type="text" class="inputbox" labelclass="control-label"
+		<field name="state" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_STATE"
 			description="COM_BABIOONEVENT_STATE_DESC" required="false"/>
 
-		<field name="country" type="text" class="inputbox" labelclass="control-label"
+		<field name="country" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_COUNTRY"
 			description="COM_BABIOONEVENT_COUNTRY_DESC" required="false"/>
 
-		<field name="teaser" type="editor" filter="safehtml" labelclass="control-label"
+		<field name="teaser" type="editor" filter="safehtml" labelClass="control-label"
 			label="COM_BABIOONEVENT_TEASER" description="COM_BABIOONEVENT_TEASER_DESC"
 			buttons="false" rows="5" cols="30" />
 
-		<field name="text" type="editor" filter="safehtml" labelclass="control-label"
+		<field name="text" type="editor" filter="safehtml" labelClass="control-label"
 			label="COM_BABIOONEVENT_TEXT" description="COM_BABIOONEVENT_TEXT_DESC"
 			buttons="false" rows="5" cols="30" />
 
 		<field name="isfreeofcharge" type="radio" label="COM_BABIOONEVENT_ISFREEOFCHARGE"
-			labelclass="control-label" value="1" default="1"
+			labelClass="control-label" value="1" default="1"
 			description="COM_BABIOONEVENT_ISFREEOFCHARGE_DESC">
 			<option value="0">COM_BABIOONEVENT_NOFREEOFCHARGE</option>
 			<option value="1">COM_BABIOONEVENT_YESFREEOFCHARGE</option>
 		</field>
 
-		<field name="charge" type="text" class="inputbox" labelclass="control-label"
+		<field name="charge" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_CHARGE"
 			description="COM_BABIOONEVENT_CHARGE_DESC" required="false"/>
 
 		<field name="catid" type="category" extension="com_babioonevent" required="true"
-			labelclass="control-label" label="COM_BABIOONEVENT_CATID"
+			labelClass="control-label" label="COM_BABIOONEVENT_CATID"
 			 description="COM_BABIOONEVENT_CATID_DESC" />
 
 	</fieldset>
@@ -206,15 +206,15 @@
 		description="COM_BABIOONEVENT_INFOAREA_DESC"
 	>
 
-		<field name="geo_b" type="text" class="inputbox" labelclass="control-label"
+		<field name="geo_b" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_GEO_B" readonly="true"
 			description="COM_BABIOONEVENT_GEO_B_DESC" required="false"/>
 
-		<field name="geo_l" type="text" class="inputbox" labelclass="control-label"
+		<field name="geo_l" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_GEO_L" readonly="true"
 			description="COM_BABIOONEVENT_GEO_L_DESC" required="false"/>
 
-		<field name="babioonevent_event_id" type="text" class="inputbox" labelclass="control-label"
+		<field name="babioonevent_event_id" type="text" class="inputbox" labelClass="control-label"
 			size="40" label="COM_BABIOONEVENT_ID" readonly="true"
 			description="COM_BABIOONEVENT_ID_DESC" required="false"/>
 
