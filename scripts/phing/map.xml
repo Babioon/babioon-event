@@ -3,7 +3,7 @@
 <project name="map" default="do">
 
 	<!-- import task -->
-	<import file="${tasksdir}/_4all/tasks.xml"/>
+	<import file="${project.basedir}/../_4all/tasks.xml"/>
 
 	<target name="do">
 
