@@ -32,7 +32,7 @@ if ($form->getValue('edate') == '0000-00-00')
 	$form->setValue('edate', '');
 }
 
-$title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+$title = JLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
 ?>
 <!-- ************************** START: babioonevent ************************** -->
 <div class="babioonevent">
@@ -49,31 +49,31 @@ $title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/medi
 
 			<?php $displayData->label = $form->getLabel('fulltext'); ?>
 			<?php $displayData->input = $form->getInput('fulltext'); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $displayData->label = $form->getLabel('s_isfreeofcharge'); ?>
 			<?php $displayData->input = $form->getInput('s_isfreeofcharge'); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $f = 's_sdate'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $f = 's_edate'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $f = 'pcodefrom'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $f = 'pcodeupto'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $f = 'excatid'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
@@ -81,7 +81,7 @@ $title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/medi
 			<?php $displayData->removeRoot = true; ?>
 			<?php $displayData->selectAll = true; ?>
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.categoriesselect', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.categoriesselect', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 		</fieldset>
 

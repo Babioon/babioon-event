@@ -18,7 +18,7 @@ $headerlevel    = $params->get('headerlevel', 1);
 $slevel			= $headerlevel;
 $Itemid 		= BabioonEventRouteHelper::getItemid('events');
 
-$title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+$title = JLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
 
 $month	= '';
 $close  = '';

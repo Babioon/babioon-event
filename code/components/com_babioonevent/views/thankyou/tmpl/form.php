@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 $displayData = new stdClass;
 $params 	 = JComponentHelper::getParams('com_babioonevent');
 $headerlevel = $params->get('headerlevel', 1);
-$title       = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+$title       = JLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
 ?>
 <!-- **************** start event **************** -->
 <div class="babioonevent">

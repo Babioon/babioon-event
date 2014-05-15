@@ -33,7 +33,7 @@ if ($form->getValue('edate') == '0000-00-00')
 	$form->setValue('edate', '');
 }
 
-$title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+$title = JLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
 ?>
 <!-- ************************** START: babioonevent ************************** -->
 <div class="babioonevent">
@@ -44,7 +44,7 @@ $title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/medi
 
 		$displayData->pretext = JText::_('COM_BABIOONEVENT_ERRORSUBMITEVENT');
 		$displayData->errors = $errors;
-		echo FOFLayoutHelper::render('form.error', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+		echo JLayoutHelper::render('form.error', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
 	}
 	else
 	{
@@ -60,12 +60,12 @@ $title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/medi
 			<?php $f = 'sdate'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $f = 'edate'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.formelement', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 			<?php $f = 'catid'; ?>
 			<?php $displayData->label = $form->getLabel($f); ?>
@@ -80,7 +80,7 @@ $title = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/medi
 			<?php endif; ?>
 
 			<?php $displayData->input = $form->getInput($f); ?>
-			<?php echo FOFLayoutHelper::render('form.categoriesselect', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.categoriesselect', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 
 		</fieldset>
 

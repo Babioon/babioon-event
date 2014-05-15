@@ -30,7 +30,7 @@ if ($form->getValue('edate') == '0000-00-00')
 	$form->setValue('edate', '');
 }
 
-$title 			 = FOFLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+$title 			 = JLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
 $fields 		 = array('tel','website','ainfo','street','pcode','city','state','country','address','teaser','text');
 ?>
 <!-- **************** start event **************** -->
@@ -55,51 +55,51 @@ $fields 		 = array('tel','website','ainfo','street','pcode','city','state','coun
 	<?php $f = 'organiser'; ?>
 	<?php if (in_array($f, $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
-		<?php echo FOFLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+		<?php echo JLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 	<?php $f = 'sdate'; ?>
 	<?php if (in_array($f, $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
-		<?php echo FOFLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+		<?php echo JLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 	<?php $f = 'stime'; ?>
 	<?php if (in_array($f . 'hh', $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
-		<?php echo FOFLayoutHelper::render('form.showsettime', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+		<?php echo JLayoutHelper::render('form.showsettime', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 	<?php $f = 'edate'; ?>
 	<?php if (in_array($f, $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
-		<?php echo FOFLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+		<?php echo JLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 	<?php $f = 'etime'; ?>
 	<?php if (in_array($f . 'hh', $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
-		<?php echo FOFLayoutHelper::render('form.showsettime', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+		<?php echo JLayoutHelper::render('form.showsettime', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 	<?php $f = 'contact'; ?>
 	<?php if (in_array($f, $keys)) : ?>
 		<?php $displayData->fieldname = $f; ?>
-		<?php echo FOFLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+		<?php echo JLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 	<?php if ($form->getValue('showemail') == 1) : ?>
 		<?php $f = 'email'; ?>
 		<?php if (in_array($f, $keys)) : ?>
 			<?php $displayData->fieldname = $f; ?>
-			<?php echo FOFLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 		<?php endif; ?>
 	<?php endif; ?>
 
 	<?php foreach ($fields as $f) : ?>
 		<?php if (in_array($f, $keys)) : ?>
 			<?php $displayData->fieldname = $f; ?>
-			<?php echo FOFLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('form.showsetvalue', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 		<?php endif; ?>
 	<?php endforeach; ?>
 
@@ -107,11 +107,11 @@ $fields 		 = array('tel','website','ainfo','street','pcode','city','state','coun
 		<?php $f = 'charge'; ?>
 		<?php if (in_array($f, $keys)) : ?>
 			<?php $displayData->fieldname = $f; ?>
-			<?php echo FOFLayoutHelper::render('html.showcharge', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('html.showcharge', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 		<?php endif; ?>
 
 	<?php else : ?>
-			<?php echo FOFLayoutHelper::render('html.showfreeofcharge', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
+			<?php echo JLayoutHelper::render('html.showfreeofcharge', $displayData, JPATH_ROOT . '/media/babioon/event/layouts'); ?>
 	<?php endif; ?>
 
 
