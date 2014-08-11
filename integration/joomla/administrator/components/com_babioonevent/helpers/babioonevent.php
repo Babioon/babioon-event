@@ -198,7 +198,7 @@ class BabioonEventHelper
 							chr(13),
 							' | ');
 
-		$ersetze3 = array('');
+		$ersetze2 = array('');
 
 		$ersetze3 = array (	'',
 							'"',
