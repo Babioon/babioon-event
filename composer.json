@@ -1,5 +1,18 @@
 {
+    "name": "Babioon/BabioonEvent",
+    "description": "An Event extension",
+    "license": "GPL",
+    "require" : {
+        "illuminate/container": "~4.2"
+    },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "BabioonEvent\\": "app/BabioonEvent",
+            "BabioonRad\\": "app/BabioonRad"
+        }
     }
 }

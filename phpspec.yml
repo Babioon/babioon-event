@@ -1,0 +1,4 @@
+suites:
+  babioon_suite:
+    src_path: app
+    spec_path: tests
