@@ -190,6 +190,12 @@ class BabiooneventModelEvents extends FOFModel
 			$record->etimehh = (int) $etimehh;
 			$record->etimemm = (int) $etimemm;
 		}
+
+		// Add some fields to the know fields array; Needed because in the controller NOT know fields are removed
+		$record->addKnownField('stimehh');
+		$record->addKnownField('stimemm');
+		$record->addKnownField('etimehh');
+		$record->addKnownField('etimemm');
 	}
 
 	/**
