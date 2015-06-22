@@ -30,6 +30,7 @@ else
 {
 	// Include the helper functions only once
 	require_once dirname(__FILE__) . '/helper.php';
-	$items = modBabiooneventEventlistHelper::getItems($params);
+	$helper = new modBabiooneventEventlistHelper;
+	$items = $helper->getItems($params);
 	require JModuleHelper::getLayoutPath('mod_babioonevent_eventlist', $params->get('layout', 'default'));
 }

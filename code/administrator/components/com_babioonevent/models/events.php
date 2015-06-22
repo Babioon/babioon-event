@@ -398,7 +398,7 @@ class BabiooneventModelEvents extends FOFModel
 	/**
 	 * Method to allow derived classes to preprocess the form.
 	 *
-	 * @param   FOFForm  $form   A FOFForm object.
+	 * @param   FOFForm  &$form  A FOFForm object.
 	 * @param   mixed    &$data  The data expected for the form.
 	 * @param   string   $group  The name of the plugin group to import (defaults to "content").
 	 *
@@ -408,7 +408,7 @@ class BabiooneventModelEvents extends FOFModel
 	 * @since   2.0
 	 * @throws  Exception if there is an error in the form event.
 	 */
-	protected function preprocessForm(FOFForm $form, &$data, $group = 'content')
+	protected function preprocessForm(FOFForm &$form, &$data, $group = 'content')
 	{
 		// Do what have to be done
 		parent::preprocessForm($form, $data, $group);
