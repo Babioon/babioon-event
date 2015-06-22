@@ -199,6 +199,22 @@
 			labelClass="control-label" label="COM_BABIOONEVENT_CATID"
 			 description="COM_BABIOONEVENT_CATID_DESC" />
 
+		<field name="customfield1" type="text" class="inputbox" labelClass="control-label"
+			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD1"
+			   description="COM_BABIOONEVENT_CUSTONFIELD1_DESC" required="false"/>
+
+		<field name="customfield2" type="text" class="inputbox" labelClass="control-label"
+			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD2"
+			   description="COM_BABIOONEVENT_CUSTONFIELD2_DESC" required="false"/>
+
+		<field name="customfield3" type="text" class="inputbox" labelClass="control-label"
+			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD3"
+			   description="COM_BABIOONEVENT_CUSTONFIELD3_DESC" required="false"/>
+
+		<field name="customfield4" type="text" class="inputbox" labelClass="control-label"
+			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD4"
+			   description="COM_BABIOONEVENT_CUSTONFIELD4_DESC" required="false"/>
+
 	</fieldset>
 
 	<fieldset name="infoarea"
