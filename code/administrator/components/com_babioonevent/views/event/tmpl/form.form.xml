@@ -200,20 +200,20 @@
 			 description="COM_BABIOONEVENT_CATID_DESC" />
 
 		<field name="customfield1" type="text" class="inputbox" labelClass="control-label"
-			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD1"
-			   description="COM_BABIOONEVENT_CUSTONFIELD1_DESC" required="false"/>
+			   size="40" label="COM_BABIOONEVENT_CUSTOMFIELD1"
+			   description="COM_BABIOONEVENT_CUSTOMFIELD1_DESC" required="false"/>
 
 		<field name="customfield2" type="text" class="inputbox" labelClass="control-label"
-			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD2"
-			   description="COM_BABIOONEVENT_CUSTONFIELD2_DESC" required="false"/>
+			   size="40" label="COM_BABIOONEVENT_CUSTOMFIELD2"
+			   description="COM_BABIOONEVENT_CUSTOMFIELD2_DESC" required="false"/>
 
 		<field name="customfield3" type="text" class="inputbox" labelClass="control-label"
-			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD3"
-			   description="COM_BABIOONEVENT_CUSTONFIELD3_DESC" required="false"/>
+			   size="40" label="COM_BABIOONEVENT_CUSTOMFIELD3"
+			   description="COM_BABIOONEVENT_CUSTOMFIELD3_DESC" required="false"/>
 
 		<field name="customfield4" type="text" class="inputbox" labelClass="control-label"
-			   size="40" label="COM_BABIOONEVENT_CUSTONFIELD4"
-			   description="COM_BABIOONEVENT_CUSTONFIELD4_DESC" required="false"/>
+			   size="40" label="COM_BABIOONEVENT_CUSTOMFIELD4"
+			   description="COM_BABIOONEVENT_CUSTOMFIELD4_DESC" required="false"/>
 
 	</fieldset>
 
