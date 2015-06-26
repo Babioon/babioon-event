@@ -22,8 +22,8 @@
 			size="40" label="COM_BABIOONEVENT_ORGANISER"
 			description="COM_BABIOONEVENT_ORGANISER_DESC" required="false"/>
 
-		<field name="sdate" type="calendar" class="inputbox" labelClass="control-label"
-			size="12" label="COM_BABIOONEVENT_SDATE" default="" format="%d.%m.%Y"
+		<field name="sdate" type="babioonevent.calendar" class="inputbox" labelClass="control-label"
+			size="12" label="COM_BABIOONEVENT_SDATE" default="" format="dd.mm.yyyy"
 			description="COM_BABIOONEVENT_SDATE_DESC" required="false" />
 
 		<field name="stimehh" type="list"
@@ -75,8 +75,8 @@
 			<option value="55">55</option>
 		</field>
 
-		<field name="edate" type="calendar" class="inputbox" labelClass="control-label"
-			size="12" label="COM_BABIOONEVENT_EDATE" default="" format="%d.%m.%Y"
+		<field name="edate" type="babioonevent.calendar" class="inputbox" labelClass="control-label"
+			size="12" label="COM_BABIOONEVENT_EDATE" default="" format="dd.mm.yyyy"
 			description="COM_BABIOONEVENT_EDATE_DESC" required="false" />
 
 		<field name="etimehh" type="list"
