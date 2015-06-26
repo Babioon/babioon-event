@@ -41,6 +41,7 @@ else
 }
 
 $title = JLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
+
 ?>
 <!-- ************************** START: babioonevent ************************** -->
 <div class="babioonevent">
