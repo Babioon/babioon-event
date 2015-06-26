@@ -185,7 +185,7 @@ class PlgSearchBabioonevent extends JPlugin
 				->where('a.sdate >= "' . $today . '"')
 				->where('a.enabled = 1')
 				->where('c.published = 1')
-				->group('a.id')
+				->group('a.babioonevent_event_id')
 				->order($order);
 
 		$db->setQuery($query, 0, $limit);
@@ -202,7 +202,7 @@ class PlgSearchBabioonevent extends JPlugin
 			for ( $i = 0; $i < $count; $i++ )
 			{
 				$event = $rows[$i];
-				$event->href = $link . $event->babioon_event_id;
+				$event->href = $link . $event->id;
 
 				if (searchHelper::checkNoHTML($event, $searchText, $searchin))
 				{
