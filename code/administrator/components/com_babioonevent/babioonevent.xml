@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5" method="upgrade">
 	<name>COM_BABIOONEVENT</name>
-	<creationDate>August 2013</creationDate>
+	<creationDate>June 2015</creationDate>
 	<author>Robert Deutz</author>
 	<copyright>Robert Deutz Business Solution</copyright>
 	<license>GNU General Public License version 3</license>
 	<authorEmail>contact@babioon.com</authorEmail>
 	<authorUrl>www.babioon.com</authorUrl>
-	<version>3.0.0</version>
+	<version>3.1.0</version>
 	<description>Babioon Event - Event Component</description>
 
 	<!-- Frontend component files -->
 	<files folder="frontend/com_babioonevent">
 		<folder>controllers</folder>
+		<folder>fields</folder>
 		<folder>helpers</folder>
 		<folder>views</folder>
 		<filename>babioonevent.php</filename>
