@@ -187,8 +187,7 @@ class BabioonEventHelper
 							'@&(iexcl|#161);@i',
 							'@&(cent|#162);@i',
 							'@&(pound|#163);@i',
-							'@&(copy|#169);@i',
-							'@&#(\d+);@e'                      // Als PHP auswerten
+							'@&(copy|#169);@i'
 							);
 
 		$ersetze1 = array (	'',
@@ -198,7 +197,7 @@ class BabioonEventHelper
 							chr(13),
 							' | ');
 
-		$ersetze3 = array('');
+		$ersetze2 = array('');
 
 		$ersetze3 = array (	'',
 							'"',
