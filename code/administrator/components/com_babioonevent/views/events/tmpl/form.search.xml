@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form
+    validate="true"
+    serverside_validate="true"
+>
+
+	<fieldset name="basic_configuration"
+		label="COM_BABIOONEVENT_GROUP_BASIC"
+		description="COM_BABIOONEVENT_GROUP_BASIC_DESC"
+	>
+
+		<field name="fulltext" type="text" class="inputbox" labelClass="control-label"
+			size="40" label="COM_BABIOONEVENT_FULLTEXT"
+			description="COM_BABIOONEVENT_FULLTEXT_DESC" required="false" />
+
+		<field name="s_isfreeofcharge" type="checkbox" label="COM_BABIOONEVENT_SEARCH_ISFREEOFCHARGE"
+			labelClass="control-label" required="false"
+			description="COM_BABIOONEVENT_SEARCH_ISFREEOFCHARGE_DESC" value="1" />
+
+		<field name="s_sdate" type="babioonevent.calendar" class="inputbox" labelClass="control-label"
+			size="12" label="COM_BABIOONEVENT_SDATE" default="" format="dd.mm.yyyy"
+			description="COM_BABIOONEVENT_SDATE_DESC" required="false" />
+
+		<field name="s_edate" type="babioonevent.calendar" class="inputbox" labelClass="control-label"
+			size="12" label="COM_BABIOONEVENT_EDATE" default="" format="dd.mm.yyyy"
+			description="COM_BABIOONEVENT_EDATE_DESC" required="false" />
+
+		<field name="pcodefrom" type="text" class="inputbox" labelClass="control-label"
+			size="40" label="COM_BABIOONEVENT_PCODEFROM"
+			description="COM_BABIOONEVENT_PCODEFROM_DESC" required="false" />
+
+		<field name="pcodeupto" type="text" class="inputbox" labelClass="control-label"
+			size="40" label="COM_BABIOONEVENT_PCODEUPTO"
+			description="COM_BABIOONEVENT_PCODEUPTO_DESC" required="false" />
+
+		<field name="excatid" type="category" extension="com_babioonevent" required="true"
+			labelClass="control-label" label="COM_BABIOONEVENT_CATID"
+			 description="COM_BABIOONEVENT_CATID_DESC" />
+
+	</fieldset>
+
+</form>

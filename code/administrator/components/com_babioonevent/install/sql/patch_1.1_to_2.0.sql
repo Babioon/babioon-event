@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `#__babioonevent_events` ; 
+DROP TABLE IF EXISTS `#__babioonevent_events` ;
 
-CREATE TABLE `#__babioonevent_events` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `#__babioonevent_events` (
+  `babioonevent_event_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `organiser` varchar(255) NOT NULL,
   `start` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -39,13 +39,13 @@ CREATE TABLE `#__babioonevent_events` (
   `created_by_alias` text NOT NULL,
   `modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_by` int(11) unsigned NOT NULL DEFAULT '0',
-  `published` tinyint(1) NOT NULL DEFAULT '0',
+  `enabled` tinyint(1) NOT NULL DEFAULT '0',
   `params` text NOT NULL,
   `control` text NOT NULL,
   `catid` int(11) unsigned NOT NULL DEFAULT '0',
   `hash` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `published` (`published`)
+  PRIMARY KEY (`babioonevent_event_id`),
+  KEY `enabled` (`enabled`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

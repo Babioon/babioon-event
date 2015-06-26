@@ -75,7 +75,6 @@ class PlgSearchBabioonevent extends JPlugin
 	{
 		if ($this->eventRouterLoaded == false)
 		{
-
 			return array();
 		}
 
@@ -88,7 +87,6 @@ class PlgSearchBabioonevent extends JPlugin
 		{
 			if (!array_intersect($areas, array_keys($this->onContentSearchAreas())))
 			{
-
 				return array();
 			}
 		}
@@ -116,6 +114,7 @@ class PlgSearchBabioonevent extends JPlugin
 			default:
 				$order = 'a.sdate ASC';
 		}
+
 		$today = gmdate("Y-m-d");
 
 		// Serach in
@@ -138,6 +137,7 @@ class PlgSearchBabioonevent extends JPlugin
 						$searchin[] = $t;
 					}
 				}
+
 				$where = '(' . implode(') OR (', $wheres2) . ')';
 				break;
 			case 'all':
@@ -161,14 +161,16 @@ class PlgSearchBabioonevent extends JPlugin
 							$searchin[] = $t;
 						}
 					}
+
 					$wheres[] 	= implode(' OR ', $wheres2);
 				}
+
 				$where = '(' . implode(($phrase == 'all' ? ') AND (' : ') OR ('), $wheres) . ')';
 				break;
 		}
 
 		$query = $db->getQuery(true);
-		$query->select('a.id')
+		$query->select('a.babioonevent_event_id AS id')
 				->select('a.name AS title')
 				->select('CONCAT(a.teaser,a.text) AS text')
 				->select('a.sdate AS created')
@@ -181,9 +183,9 @@ class PlgSearchBabioonevent extends JPlugin
 				->join('LEFT', '#__categories AS c ON a.catid = c.id')
 				->where($where)
 				->where('a.sdate >= "' . $today . '"')
-				->where('a.published = 1')
+				->where('a.enabled = 1')
 				->where('c.published = 1')
-				->group('a.id')
+				->group('a.babioonevent_event_id')
 				->order($order);
 
 		$db->setQuery($query, 0, $limit);
@@ -208,6 +210,7 @@ class PlgSearchBabioonevent extends JPlugin
 				}
 			}
 		}
+
 		return $return;
 	}
 }

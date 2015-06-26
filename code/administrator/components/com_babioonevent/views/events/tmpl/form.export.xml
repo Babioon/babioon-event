@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<form
+	    validate="true"
+	    serverside_validate="true"
+	>
+
+		<field name="sdate" type="babioonevent.calendar" class="inputbox" labelClass="control-label"
+			size="12" label="COM_BABIOONEVENT_SDATE" default="" format="dd.mm.yyyy"
+			description="COM_BABIOONEVENT_SDATE_DESC" required="false" />
+
+		<field name="edate" type="babioonevent.calendar" class="inputbox" labelClass="control-label"
+			size="12" label="COM_BABIOONEVENT_EDATE" default="" format="dd.mm.yyyy"
+			description="COM_BABIOONEVENT_EDATE_DESC" required="false" />
+
+		<field name="excatid" type="category" extension="com_babioonevent" required="true"
+			label="COM_BABIOONEVENT_CATID" description="COM_BABIOONEVENT_CATID_DESC"
+			labelClass="control-label"/>
+
+	</form>

@@ -8,6 +8,17 @@
 		<property name="filebase" value="${project.basedir}/../../.." override="false"/>
 		<property name="pname"    value="babioon-event" override="true"/>
 		<property name="codebase" value="${filebase}/${pname}/code" override="true"/>
+		<property name="fofdir" value="${filebase}/akeeba/rdeutz-fof-fork" override="true"/>
+
+		<!-- Library check -->
+		<property name="lib" value="${filebase}/babioon-library" override="true"/>
+		<available file="${lib}" type="dir" property="libdependency" value="true" />
+		<fail unless="libdependency" message="Library not found ${lib}" />
+
+		<!-- FOF Library check -->
+		<available file="${fofdir}" type="dir" property="fofdependency" value="true" />
+		<fail unless="fofdependency" message="FOF Library not found ${fofdir}" />
+
 
 		<getversion propertyname="vn" filename="${codebase}/administrator/components/com_babioonevent/babioonevent.xml" />
 
@@ -32,6 +43,8 @@
 		<mkdir dir="${targetdir}/backend/language" />
 		<mkdir dir="${targetdir}/frontend" />
 		<mkdir dir="${targetdir}/frontend/language" />
+		<mkdir dir="${targetdir}/fof" />
+		<mkdir dir="${targetdir}/media" />
 		<mkdir dir="${targetdir}/modules" />
 		<mkdir dir="${targetdir}/plugins" />
 		<mkdir dir="${targetdir}/install" />
@@ -74,6 +87,27 @@
 		<!-- copy the language frontend -->
 		<copy todir="${targetdir}/frontend/language" overwrite="true">
 			<fileset dir="${codebase}/language" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy fof -->
+		<copy todir="${targetdir}/fof" overwrite="true">
+			<fileset dir="${fofdir}/fof" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy media -->
+		<copy todir="${targetdir}/media" overwrite="true">
+			<fileset dir="${lib}/code/media" >
+				<include name="*/**" />
+			</fileset>
+		</copy>
+
+		<!-- copy media event component -->
+		<copy todir="${targetdir}/media" overwrite="true">
+			<fileset dir="${codebase}/media" >
 				<include name="*/**" />
 			</fileset>
 		</copy>

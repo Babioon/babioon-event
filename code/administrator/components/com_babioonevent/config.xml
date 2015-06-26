@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config addfieldpath="/plugins/system/babioon/patched/fields">
+<config>
 
 
 	<fieldset name="export" label="COM_BABIOONEVENT_EXPORT"
@@ -125,7 +125,6 @@
 
 		<field name="showdates" type="list" default="4"
 			label="COM_BABIOONEVENT_SHOWDATES" description="COM_BABIOONEVENT_SHOWDATES_DESC">
-			<option value="0">JNO</option>
 			<option value="1">COM_BABIOONEVENT_SHOWSTARTDATE</option>
 			<option value="2">COM_BABIOONEVENT_SHOWSTARTDATEANDSTIME</option>
 			<option value="3">COM_BABIOONEVENT_SHOWSTARTDATEMANDATORY</option>
@@ -185,7 +184,7 @@
 		</field>
 
 		<field name="showemail" type="radio" default="1"
-			label="COM_BABIOONEVENT_SHOWEMAIL" description="COM_BABIOONEVENT_SHOWEMAIL_DESC">
+			label="COM_BABIOONEVENT_SHOWEMAIL" description="COM_BABIOONEVENT_SHOWEMAIL_CONF_DESC">
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
@@ -211,6 +210,13 @@
 
 		<field name="showlongdesc" type="radio" default="2"
 			label="COM_BABIOONEVENT_SHOWLONGDESC" description="COM_BABIOONEVENT_SHOWLONGDESC_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
+		</field>
+
+		<field name="showcharge" type="radio" default="2"
+			label="COM_BABIOONEVENT_SHOWCHARGE" description="COM_BABIOONEVENT_SHOWCHARGE_DESC">
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 			<option value="2">COM_BABIOONEVENT_MANDATORY</option>
@@ -275,9 +281,8 @@
 		<field name="gmapdefzoom" type="text" default="14"
 			label="COM_BABIOONEVENT_GMAPDEFZOOM" description="COM_BABIOONEVENT_GMAPDEFZOOM_DESC" />
 
-		<field name="getgeo" type="list" default="0"
+		<field name="getgeo" type="list" default="1"
 			label="COM_BABIOONEVENT_GETGEO" description="COM_BABIOONEVENT_GETGEO_DESC">
-			<option value="0">JNO</option>
 			<option value="1">COM_BABIOONEVENT_ONSAVE</option>
 			<option value="2">COM_BABIOONEVENT_ONSUBMITANDSAVE</option>
 		</field>
@@ -290,12 +295,22 @@
 
 	</fieldset>
 
-	<fieldset name="permissions_component" label="COM_BABIOONEVENT_PERMISSIONS_COMPONENT"
-		description="COM_BABIOONEVENT_PERMISSIONS_COMPONENT_DESC">
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC"
+		>
 
-		<field name="rules" type="rules"
-			label="COM_BABIOONEVENT_PERMISSIONS_COMPONENT_RULESLABEL" class="inputbox"
-			filter="rules" validate="rules" component="com_babioonevent" section="component" />
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			filter="rules"
+			validate="rules"
+			component="com_babioonevent"
+			section="component" />
 	</fieldset>
+
 
 </config>

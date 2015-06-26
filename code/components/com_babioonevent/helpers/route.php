@@ -37,6 +37,16 @@ class BabioonEventRouteHelper
 				$result = $app->getMenu()
 								->getItems('link', 'index.php?option=com_babioonevent&view=events', true);
 				break;
+
+			case "export":
+				$result = $app->getMenu()
+								->getItems('link', 'index.php?option=com_babioonevent&view=events&layout=export', true);
+				break;
+
+			case "search":
+				$result = $app->getMenu()
+								->getItems('link', 'index.php?option=com_babioonevent&view=events&layout=search', true);
+				break;
 		}
 
 		$result = is_object($result) ? $result->id : $app->input->get('Itemid', 0, 'uint');

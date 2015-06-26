@@ -40,6 +40,9 @@ $rcount = count($items);
 
 if (is_array($items) && $rcount != 0)
 {
+
+	echo '<div class="babiooneventmodule">';
+
 	if ($showmonths == 0 && $showcats == 0)
 	{
 		echo '<ul class="liste">';
@@ -83,7 +86,7 @@ if (is_array($items) && $rcount != 0)
 			// Start und ende angegeben
 			$sd = date('d.m.Y', strtotime($elm->sdate));
 			$ed = date('d.m.Y', strtotime($elm->edate));
-
+			echo '<span class="date">';
 			if ($sd == $ed)
 			{
 				echo $sd;
@@ -93,20 +96,22 @@ if (is_array($items) && $rcount != 0)
 				// Beide Tage ausgeben
 				echo $sd,' - ', $ed;
 			}
-			echo ': ';
+			echo ':</span> ';
 		}
 		else
 		{
 			if ($elm->sdate != '0000-00-00')
 			{
-					echo date('d.m.Y', strtotime($elm->sdate));
-					echo ': ';
+					echo '<span class="date">' . date('d.m.Y', strtotime($elm->sdate));
+					echo ':</span> ';
 			}
 
 		}
 		echo '<a href="' . $elm->link . '">' . $elm->name . '</a>', '</li>';
 	}
 	echo $close;
+
+	echo '</div>';
 }
 else
 {

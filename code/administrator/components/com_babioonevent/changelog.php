@@ -30,6 +30,16 @@ Legend:
 - -> Removed
 ! -> Note
 
+-- Version 3.0.0 -- 15 September 2013 -----------------------------------------
+! more or less a complete rewrite because the component is using FOF
+! (the RAD for Joomla)
+! This Version should run under 2.5 and 3.x
+! It installs FOF when the Joomla Version is less then 3.2
+! You can not install it prior Joomla 2.5.9
+! PHP 5.3.1 is needed to install
+
+
+
 -- Version 2.0.0 -- 25 January 2013 -----------------------------------------
 ! changed the version naming scheme, see http://babioon.com
 ! new repository layout

@@ -7,83 +7,68 @@
  * @license    GNU General Public License version 2 or later
  **/
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die ('Restricted access');
+// No direct access
+defined('_JEXEC') or die;
 
-$pageclass_sfx  = $this->params->get('pageclass_sfx', '');
-$subheaderlevel = $this->headerlevel;
+JHtml::_('behavior.framework');
 
-$data = $this->defaultData;
-?>
+$displayData 	= new stdClass;
+$params 		= JComponentHelper::getParams('com_babioonevent');
+$headerlevel    = $params->get('headerlevel', 1);
+$slevel			= $headerlevel+1;
+$Itemid 		= BabioonEventRouteHelper::getItemid('events');
 
-<div id="event<?php echo $pageclass_sfx;?>">
+$title = JLayoutHelper::render('html.title', $displayData, JPATH_ROOT . '/media/babioon/event/layouts');
 
-<?php
-
-if ($this->title != '')
-{
-	echo "<h$this->headerlevel>" . $this->title . "</h$this->headerlevel> \n";
-	$slevel = $this->headerlevel + 1;
-}
 $month	= '';
-$close      = '';
+$close  = '';
 
-echo '<div id="liste">';
-
-if ( !empty($data))
-{
-        foreach ($data as $elm)
-        {
-                $emon = date('m',strtotime($elm->sdate));
-                if ( $emon != $month )
-                {
-                        echo $close;
-                        $month = $emon;
-                        echo '<h'.$slevel.'>'.JText::_(date('F',strtotime($elm->sdate))).' '.date('Y',strtotime($elm->sdate)).'</h'.$slevel.'>';
-                        echo '<ul class="liste">';
-                        $close= '</ul>';
-                }
-                echo '<li>';
-
-                if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00')
-                {
-                	//start und ende angegeben
-                	$sd=date('d.m.Y',strtotime($elm->sdate));
-                	$ed=date('d.m.Y',strtotime($elm->edate));
-                	if ($sd == $ed)
-                	{
-                		echo $sd;
-                	}
-                	else
-                	{
-                		// beide Tage ausgeben
-                		echo $sd,' - ', $ed;
-                	}
-                	echo ': ';
-                }
-                else
-                {
-					if ($elm->sdate != '0000-00-00')
-					{
-               			echo date('d.m.Y',strtotime($elm->sdate));
-               			echo ': ';
-					}
-
-                }
-                echo '<a href="'.$elm->link.'">'.$elm->name.'</a>','</li>';
-        }
-        echo $close;
-}
-else
-{
-	echo JText::_('COM_BABIOONEVENT_DEFAULTLISTNORESULT');
-}
-echo '</div>';
-if ($this->showpagination)
-{
-	echo '<div class="pagination">';
-    echo $this->dpage->getPagesLinks(  );
-    echo '</div>';
-}
 ?>
-</div> <!-- id=event -->
+<!-- ************************** START: babioonevent ************************** -->
+<div class="babioonevent">
+
+	<h<?php echo $headerlevel;?>>
+		<?php echo $title;?>
+	</h<?php echo $headerlevel;?>>
+
+	<div id="liste">
+
+		<?php if (!empty($this->items)) : ?>
+			<?php foreach ($this->items AS $elm) : ?>
+				<?php $emon = date('m', strtotime($elm->sdate)); ?>
+				<?php if ($emon != $month) : ?>
+					<?php echo $close; ?>
+					<?php $month = $emon; ?>
+					<h<?php echo $slevel;?>>
+						<?php echo JText::_(date('F', strtotime($elm->sdate))) . ' ' . date('Y', strtotime($elm->sdate)); ?>
+					</h<?php echo $slevel;?>>
+					<ul class="liste">
+						<?php $close = '</ul>';?>
+				<?php endif;?>
+						<li>
+							<?php if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00') :?>
+								<?php $sd = date('d.m.Y', strtotime($elm->sdate));?>
+								<?php $ed = date('d.m.Y', strtotime($elm->edate));?>
+								<?php echo $sd == $ed ? $sd : $sd . ' - ' . $ed; ?>:&nbsp;
+							<?php else : ?>
+								<?php if ($elm->sdate != '0000-00-00') : ?>
+									<?php echo date('d.m.Y', strtotime($elm->sdate));?>:&nbsp;
+								<?php endif;?>
+							<?php endif;?>
+							<a href="<?php echo $elm->link; ?>">
+								<?php echo $elm->name;?>
+							</a>
+						</li>
+			<?php endforeach; ?>
+			<?php echo $close;?><!-- CLOSE ul -->
+		<?php else : ?>
+			<?php echo JText::_('COM_BABIOONEVENT_DEFAULTLISTNORESULT'); ?>
+		<?php endif;?>
+	</div>
+
+	<div class="pagination">
+    	<?php echo $this->pagination->getPagesLinks(); ?>
+    </div>
+
+</div>
+<!-- *************************** END: babioonevent *************************** -->

@@ -7,20 +7,17 @@
  * @license    GNU General Public License version 2 or later
  **/
 
-if (!defined('BABIOON'))
+// Load FOF
+require_once JPATH_LIBRARIES . '/fof/include.php';
+
+if (!defined('FOF_INCLUDED'))
 {
-	// We need the BABIOON System Plugin
-	jexit('we need the BABIOON System Plugin');
+	JError::raiseError('500', 'FOF is not installed');
 }
 
-// Include dependancies
-jimport('joomla.application.component.controller');
+require_once dirname(__FILE__) . '/helpers/route.php';
+require_once JPATH_COMPONENT_ADMINISTRATOR . '/helpers/babioonevent.php';
 
-require JPATH_COMPONENT . '/helpers/route.php';
-
-// Execute the task.
-$controller	= JController::getInstance('BabioonEvent');
-$controller->execute(JRequest::getCmd('task'));
-$controller->redirect();
+FOFDispatcher::getTmpInstance('com_babioonevent')->dispatch();
 
 /** EOF **/

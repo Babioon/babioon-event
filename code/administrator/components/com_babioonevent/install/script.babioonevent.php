@@ -32,7 +32,7 @@ class Com_BabiooneventInstallerScript
 	protected $babioon_extension = 'com_babioonevent';
 
 	/** @var string min Joomla Version to install on */
-	protected $minJVersion   = '2.5.9';
+	protected $minJVersion   = '3.1.4';
 
 	/** @var string min php version to install on */
 	protected $minPhpVersion = '5.3.1';
@@ -56,38 +56,6 @@ class Com_BabiooneventInstallerScript
 	);
 
 	/**
-	 * createAssets description, ACL
-	 *
-	 * @return  boolean  true on success
-	 */
-	public function createAssets()
-	{
-		$db = JFactory::getDBO();
-
-		// We need to add some asset rows on install, this is a tree
-
-		$asset	= JTable::getInstance('asset');
-
-		if (!$asset->loadByName($this->babioon_extension))
-		{
-			$root	= JTable::getInstance('asset');
-			$root->loadByName('root.1');
-			$asset->name = $this->babioon_extension;
-			$asset->title = $this->babioon_extension;
-			$asset->setLocation($root->id, 'last-child');
-
-			if (!$asset->check() || !$asset->store())
-			{
-				$this->setError($asset->getError());
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * method to install the component
 	 *
 	 * @param   JInstaller  $parent  Parent object
@@ -96,9 +64,6 @@ class Com_BabiooneventInstallerScript
 	 */
 	function install($parent)
 	{
-		// $parent is the class calling this method
-		// $parent->getParent()->setRedirectURL('index.php?option=' . $this->babioon_extension);
-		// self::createAssets();
 	}
 
 	/**
@@ -110,7 +75,6 @@ class Com_BabiooneventInstallerScript
 	 */
 	function discover_install($parent)
 	{
-		self::install($parent);
 	}
 
 	/**
@@ -170,7 +134,7 @@ class Com_BabiooneventInstallerScript
 		}
 		else
 		{
-			// Pfff, ok then we take the risk but we'll send a message about not geeting the info
+			// Pfff, ok then we take the risk but we'll send a message about not getting the info
 			$message[] = "<p>We couldn't get information about the PHP Version we assume that you have $this->minPhpVersion or later</p>";
 			$version   = $this->minPhpVersion;
 		}
@@ -216,7 +180,7 @@ class Com_BabiooneventInstallerScript
 		}
 
 		// Bugfix for certain installer features
-		if (in_array($type, array('install','discover_install')))
+		if (in_array($type, array('install')))
 		{
 			BabioonInstallHelper::bugfixDBFunctionReturnedNoError($this->babioon_extension);
 		}
@@ -243,10 +207,20 @@ class Com_BabiooneventInstallerScript
 		// $parent is the class calling this method
 		// $type is the type of change (install, update or discover_install)
 
-		self::createAssets();
+		$status = new stdClass;
+		$status->fof = '';
+		$status->subextensions = '';
 
-		// Install subextensions
-		$status = BabioonInstallHelper::installSubextensions($parent, $this->installation_queue);
+		if ($type != 'discover_install')
+		{
+			// Install subextensions
+			$status->subextensions = BabioonInstallHelper::installSubextensions($parent, $this->installation_queue);
+		}
+
+		if (version_compare(JVERSION, '3.2.0', 'lt'))
+		{
+			$status->fof = BabioonInstallHelper::installFOF($parent);
+		}
 
 		$this->_renderPostInstallation($status, $parent);
 	}
@@ -283,13 +257,29 @@ class Com_BabiooneventInstallerScript
 			<td class="key" colspan="2">Babioon Event component</td>
 			<td><strong style="color: green">Installed</strong></td>
 		</tr>
-		<?php if (count($status->modules)) : ?>
+
+		<?php if (!empty($status->fof)) : ?>
+			<tr class="row<?php echo ($rows++ % 2); ?>">
+				<td class="key" colspan="2">FOF</td>
+				<?php if ($status->fof['required']) : ?>
+					<?php if ($status->fof['installed']) : ?>
+						<td><strong style="color: green">Installed</strong> - Version: <?php echo $status->fof['version'] . '(' . $status->fof['date'] .')' ; ?></td>
+					<?php else : ?>
+						<td><strong style="color: red">NOT Installed</strong></td>
+					<?php endif; ?>
+				<?php else : ?>
+					<td><strong style="color: green">Installation not necessary</strong></td>
+				<?php endif; ?>
+			</tr>
+		<?php endif; ?>
+
+		<?php if (count($status->subextensions->modules)) : ?>
 		<tr>
 			<th>Module</th>
 			<th>Client</th>
 			<th></th>
 		</tr>
-		<?php foreach ($status->modules as $module) : ?>
+		<?php foreach ($status->subextensions->modules as $module) : ?>
 		<tr class="row<?php echo ($rows++ % 2); ?>">
 			<td class="key"><?php echo $module['name']; ?></td>
 			<td class="key"><?php echo ucfirst($module['client']); ?></td>
@@ -297,13 +287,13 @@ class Com_BabiooneventInstallerScript
 		</tr>
 		<?php endforeach;?>
 		<?php endif;?>
-		<?php if (count($status->plugins)) : ?>
+		<?php if (count($status->subextensions->plugins)) : ?>
 		<tr>
 			<th>Plugin</th>
 			<th>Group</th>
 			<th></th>
 		</tr>
-		<?php foreach ($status->plugins as $plugin) : ?>
+		<?php foreach ($status->subextensions->plugins as $plugin) : ?>
 		<tr class="row<?php echo ($rows++ % 2); ?>">
 			<td class="key"><?php echo ucfirst($plugin['name']); ?></td>
 			<td class="key"><?php echo ucfirst($plugin['group']); ?></td>
