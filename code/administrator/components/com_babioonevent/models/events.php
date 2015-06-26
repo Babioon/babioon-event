@@ -432,6 +432,15 @@ class BabiooneventModelEvents extends FOFModel
 				$this->removeFields($form, 'enabled');
 			}
 
+			if ($isAdmin)
+			{
+				// Change the field type for the backend, use the "normal" datepicker
+				$form->setFieldAttribute('sdate', 'type', 'calendar');
+				$form->setFieldAttribute('sdate', 'format', '%d.%m.%Y');
+				$form->setFieldAttribute('edate', 'type', 'calendar');
+				$form->setFieldAttribute('edate', 'format', '%d.%m.%Y');
+			}
+
 			// Handle the date and time fields
 			$showdates = $params->get('showdates', 4);
 			$remove    = array('stimehh','stimemm','edate','etimehh','etimemm');
@@ -628,7 +637,7 @@ class BabiooneventModelEvents extends FOFModel
 
 		if ($sdateVaild && $edateVaild)
 		{
-			if ($this->input->get('edate') < $this->input->get('sdate'))
+			if (strtotime($this->input->get('edate')) <  strtotime($this->input->get('sdate')))
 			{
 				$errors[] = JText::_('COM_BABIOONEVENT_EXPORT_ORDERDATES_ERRORMSG');
 			}
@@ -1173,6 +1182,7 @@ class BabiooneventModelEvents extends FOFModel
 		{
 			$this->sendNotifyEmailAboutNewEvent($table);
 		}
+
 		return true;
 	}
 
@@ -1189,6 +1199,12 @@ class BabiooneventModelEvents extends FOFModel
 		$fromname	= $params->get('emailfrom');
 		$from		= $params->get('email');
 		$email 		= $params->get('emailsendto');
+
+		if (strpos($email, ',') !== false)
+		{
+			$email = explode(',', $email);
+		}
+
 		$uri     = JURI::getInstance();
 		$link 		= $uri->base() . '/administrator/index.php';
 		$body    = JText::sprintf('COM_BABIOONEVENT_NOTIFYEMAILTXT', $link);
@@ -1203,5 +1219,4 @@ class BabiooneventModelEvents extends FOFModel
 
 		return false;
 	}
-
 }
