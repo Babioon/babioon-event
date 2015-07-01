@@ -25,6 +25,9 @@ class BabioonEventToolbar extends FOFToolbar
 	 */
 	public function onEventsBrowse()
 	{
+		// Render the submenu
+		$this->renderSubmenu();
+
 		// Set toolbar title
 		$option = $this->input->getCmd('option', 'com_foobar');
 		$subtitle_key = strtoupper($option . '_TITLE_' . $this->input->getCmd('view', 'cpanel'));
