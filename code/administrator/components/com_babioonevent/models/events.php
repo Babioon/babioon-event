@@ -225,79 +225,89 @@ class BabiooneventModelEvents extends FOFModel
 				{
 					$now   = JFactory::getDate()->format("Y-m-d");
 					$query->where($db->qn('sdate') . ' >= ' . "'$now'");
+
+					// Filter on catid
+					$catid = (array) $this->input->get('catid');
+
+					if (! empty($catid))
+					{
+						$catid = array_map('intval', $catid);
+						$catid = implode(',', $catid);
+						$query->where($db->qn('catid') . ' IN ' . '(' . $catid . ')');
+					}
+
+					return $query;
+				}
+
+				$isfreeofcharge = $this->input->get('s_isfreeofcharge', 0);
+
+				if ($isfreeofcharge == 1)
+				{
+					$query->where($db->qn('isfreeofcharge') . ' = 1');
+				}
+
+				$sdate = $this->input->get('s_sdate');
+
+				if ($sdate == '')
+				{
+					$sdate   = JFactory::getDate()->format("Y-m-d");
 				}
 				else
 				{
-					$isfreeofcharge = $this->input->get('s_isfreeofcharge', 0);
-
-					if ($isfreeofcharge == 1)
-					{
-						$query->where($db->qn('isfreeofcharge') . ' = 1');
-					}
-
-					$sdate = $this->input->get('s_sdate');
-
-					if ($sdate == '')
-					{
-						$sdate   = JFactory::getDate()->format("Y-m-d");
-					}
-					else
-					{
-						$sdate = $this->formatDate($sdate);
-					}
-
-					$query->where($db->qn('sdate') . ' >= ' . $db->q($sdate));
-
-					$edate = $this->input->get('s_edate');
-
-					if ($edate != '')
-					{
-						$query->where($db->qn('edate') . ' <= ' . $db->q($edate));
-					}
-					else
-					{
-						$edate = $this->formatDate($edate);
-					}
-
-					$pcodefrom = $this->input->get('pcodefrom');
-
-					if ($pcodefrom != '')
-					{
-						$query->where($db->qn('pcode') . ' >= ' . $db->q($pcodefrom));
-					}
-
-					$pcodeupto = $this->input->get('pcodeupto');
-
-					if ($pcodeupto != '')
-					{
-						$query->where($db->qn('pcode') . ' <= ' . $db->q($pcodeupto));
-					}
-
-					$fulltext = $this->input->get('fulltext', '', 'string');
-
-					if ($fulltext != '')
-					{
-						$fulltext = '%' . $fulltext . '%';
-						$query->where('(' .
-									$db->qn('name') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('organiser') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('contact') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('ainfo') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('street') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('pcode') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('city') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('state') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('country') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('teaser') . ' like ' . $db->q($fulltext) . ') OR (' .
-									$db->qn('text') . ' like ' . $db->q($fulltext) . ')'
-									);
-					}
-
-					$excatid 	= (array) $this->input->get('excatid');
-					JArrayHelper::toInteger($excatid);
-					$excatid 	= implode(',', $excatid);
-					$query->where($db->qn('catid') . ' IN ' . '(' . $excatid . ')');
+					$sdate = $this->formatDate($sdate);
 				}
+
+				$query->where($db->qn('sdate') . ' >= ' . $db->q($sdate));
+
+				$edate = $this->input->get('s_edate');
+
+				if ($edate != '')
+				{
+					$query->where($db->qn('edate') . ' <= ' . $db->q($edate));
+				}
+				else
+				{
+					$edate = $this->formatDate($edate);
+				}
+
+				$pcodefrom = $this->input->get('pcodefrom');
+
+				if ($pcodefrom != '')
+				{
+					$query->where($db->qn('pcode') . ' >= ' . $db->q($pcodefrom));
+				}
+
+				$pcodeupto = $this->input->get('pcodeupto');
+
+				if ($pcodeupto != '')
+				{
+					$query->where($db->qn('pcode') . ' <= ' . $db->q($pcodeupto));
+				}
+
+				$fulltext = $this->input->get('fulltext', '', 'string');
+
+				if ($fulltext != '')
+				{
+					$fulltext = '%' . $fulltext . '%';
+					$query->where('(' .
+								$db->qn('name') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('organiser') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('contact') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('ainfo') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('street') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('pcode') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('city') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('state') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('country') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('teaser') . ' like ' . $db->q($fulltext) . ') OR (' .
+								$db->qn('text') . ' like ' . $db->q($fulltext) . ')'
+								);
+				}
+
+				$excatid 	= (array) $this->input->get('excatid');
+				$excatid = array_map('intval', $excatid);
+				$excatid 	= implode(',', $excatid);
+				$query->where($db->qn('catid') . ' IN ' . '(' . $excatid . ')');
 			}
 		}
 
