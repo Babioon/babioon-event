@@ -173,7 +173,7 @@ class PlgSearchBabioonevent extends JPlugin
 		$query->select('a.babioonevent_event_id AS id')
 				->select('a.name AS title')
 				->select('CONCAT(a.teaser,a.text) AS text')
-				->select('a.sdate AS created')
+				->select('a.created AS created')
 				->select('"2" AS browsernav')
 				->select('c.title as section')
 				->select('a.organiser')
@@ -196,7 +196,7 @@ class PlgSearchBabioonevent extends JPlugin
 		{
 			// Get an itemid
 			$Itemid = BabioonEventRouteHelper::getItemid('events');
-			$link  = 'index.php?option=com_babioonevent&view=event&layout=default&Itemid=' . $Itemid . '&id=';
+			$link  = 'index.php?option=com_babioonevent&view=event&layout=item&Itemid=' . $Itemid . '&id=';
 			$count = count($rows);
 
 			for ( $i = 0; $i < $count; $i++ )
