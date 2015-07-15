@@ -1229,4 +1229,23 @@ class BabiooneventModelEvents extends FOFModel
 
 		return false;
 	}
+
+	/**
+	 * get the event component categories
+	 *
+	 * @return  mixed
+	 */
+	public function getCategories()
+	{
+		$db 		= $this->getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select("*")
+			->from("#__categories")
+			->where('extension = "com_babioonevent"')
+			->order('lft');
+		$db->setQuery($query);
+
+		return $db->loadObjectList('id');
+	}
 }
