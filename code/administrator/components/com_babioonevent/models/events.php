@@ -207,7 +207,9 @@ class BabiooneventModelEvents extends FOFModel
 	 */
 	public function buildQuery($overrideLimits = false)
 	{
-		// TODO: Check why I made the statement "We don't do the next statement because it is doin some crazy stuff with filters"
+		// If SEF is enabled then start is a state var and will be used as filter from FOF
+		$this->blacklistFilters('start');
+
 		$query = parent::buildQuery($overrideLimits);
 
 		$db    = $this->getDbo();
@@ -324,6 +326,8 @@ class BabiooneventModelEvents extends FOFModel
 	 */
 	public function &getItemList($overrideLimits = false, $group = '')
 	{
+		$this->setState('limitstart', $this->input->get('limitstart', 0, 'UINT'));
+
 		$items	= parent::getItemList($overrideLimits, $group);
 
 		if (FOFPlatform::getInstance()->isFrontend())
