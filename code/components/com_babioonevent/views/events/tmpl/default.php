@@ -67,8 +67,8 @@ $close  = '';
 	</div>
 
 	<div class="pagination">
-    	<?php echo $this->pagination->getPagesLinks(); ?>
-    </div>
+    	<?php echo $this->pagination->getPaginationLinks(); ?>
+	</div>
 
 </div>
 <!-- *************************** END: babioonevent *************************** -->
