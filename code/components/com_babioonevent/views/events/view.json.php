@@ -78,6 +78,6 @@ class BabioonEventViewEvents extends FOFViewJson
 
 		echo $json;
 
-		return true;
+		return false;
 	}
 }
