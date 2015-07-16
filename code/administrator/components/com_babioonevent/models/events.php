@@ -651,7 +651,7 @@ class BabiooneventModelEvents extends FOFModel
 
 		if ($sdateVaild && $edateVaild)
 		{
-			if (strtotime($this->input->get('edate')) <  strtotime($this->input->get('sdate')))
+			if (strtotime($this->input->get('edate')) < strtotime($this->input->get('sdate')))
 			{
 				$errors[] = JText::_('COM_BABIOONEVENT_EXPORT_ORDERDATES_ERRORMSG');
 			}
@@ -877,7 +877,15 @@ class BabiooneventModelEvents extends FOFModel
 			$query->where($db->qn('e.sdate') . ' < ' . $db->q($edate));
 		}
 
-		$farray		= array();
+		$query->select("e.stimeset")
+			->select("e.etimeset")
+			->select("e.showemail")
+			->select("e.name ")
+			->select("cc.title as cctitle")
+			->from("#__babioonevent_events as e")
+			->from("#__categories as cc")
+			->order('e.sdate,e.stime,e.edate,e.etime');
+
 		$fields  = array('organiser','start','end','contact','email','tel','website','address','teaser','text','isfreeofcharge','charge');
 
 		foreach ($fields as $elm)
@@ -903,14 +911,6 @@ class BabiooneventModelEvents extends FOFModel
 			}
 		}
 
-		$query->select("e.stimeset")
-				->select("e.etimeset")
-				->select("e.showemail")
-				->select("e.name ")
-				->select("cc.title as cctitle")
-				->from("#__babioonevent_events as e")
-				->from("#__categories as cc")
-				->order('e.sdate,e.stime,e.edate,e.etime');
 		$db->setQuery($query);
 
 		$this->data = $db->loadAssocList();
@@ -994,7 +994,7 @@ class BabiooneventModelEvents extends FOFModel
 				{
 					$r =	$this->data[$i];
 
-					if ($r['showemail'] == 0 AND in_array('email', $head_fields))
+					if ($r['showemail'] == 0 && in_array('email', $head_fields))
 					{
 						$r['email'] = '';
 					}
