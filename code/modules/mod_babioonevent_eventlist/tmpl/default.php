@@ -79,7 +79,7 @@ if (is_array($items) && $rcount != 0)
 				$close = '</ul>';
 			}
 		}
-		echo '<li>';
+		echo '<li class="category-' . $elm->catid . '">';
 
 		if ($elm->edate != '0000-00-00' && $elm->sdate != '0000-00-00')
 		{
