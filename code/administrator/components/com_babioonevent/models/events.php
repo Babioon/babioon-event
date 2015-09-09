@@ -62,7 +62,7 @@ class BabiooneventModelEvents extends FOFModel
 			{
 				// Preset default values
 				$data[$dtf . 'time'] = '00:00:00';
-				$data[$dtf . 'timeset'] = '0';
+				$data[$dtf . 'timeset'] = 0;
 
 				// Check time and date
 				$result = $this->checkDate($dtf . 'date');
