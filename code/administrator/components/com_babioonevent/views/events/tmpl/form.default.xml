@@ -12,10 +12,12 @@
 		<header name="name" type="fieldsearchable" sortable="true"
 			buttons="yes" buttonclass="btn" placeholder="COM_BABIOONEVENT_SEARCH_IN_NAME"
 		/>
+		<header name="category" type="model" model="BabiooneventModelCategories" label="COM_BABIOONEVENT_CATEGORY"
+				value_field="text" sortable="true">
+		</header>
 		<header name="organiser" type="field" sortable="true"/>
-		<header name="sdate" type="field" sortable="true" tdwidth="20%" />
-		<header name="stime" type="field" sortable="true" tdwidth="20%" />
-
+		<header name="sdate" type="field" sortable="true" />
+		<header name="stime" type="field" sortable="true" />
 	</headerset>
 
 	<fieldset name="items">
@@ -27,6 +29,7 @@
 			class="event"
 			empty_replacement="(no title)"
 		 />
+		<field name="category_title" type="text" />
 		<field name="organiser" type="text" />
 		<field name="sdate" type="date" />
 		<field name="stime" type="text" />
