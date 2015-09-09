@@ -18,8 +18,13 @@ defined('_JEXEC') or die;
  */
 class BabioonEventViewEvents extends FOFViewHtml
 {
+    public function __construct($config = array())
+    {
+        parent::__construct();
+        $this->setFrontendPageTitle = true;
+    }
 
-	public function onEresult()
+    public function onEresult()
 	{
 		$this->files = $this->getModel()->getExportFile();
 	}
