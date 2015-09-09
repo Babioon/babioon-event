@@ -191,6 +191,14 @@ class BabiooneventModelEvents extends FOFModel
 			$record->etimemm = (int) $etimemm;
 		}
 
+		$categories = $this->getCategories();
+		$record->category_title = '';
+
+		if (array_key_exists($record->catid, $categories))
+		{
+			$record->category_title = $categories[$record->catid]->title;
+		}
+
 		// Add some fields to the know fields array; Needed because in the controller NOT know fields are removed
 		$record->addKnownField('stimehh');
 		$record->addKnownField('stimemm');
@@ -213,100 +221,102 @@ class BabiooneventModelEvents extends FOFModel
 		$query = parent::buildQuery($overrideLimits);
 
 		$db    = $this->getDbo();
+		$task  = $this->getState('task');
 
 		$formName = $this->getState('form_name');
-		$task = $this->getState('task');
 
-		if ($formName == 'form.default' || (is_null($formName) && $task == 'sresult'))
+		if (FOFPlatform::getInstance()->isFrontend())
 		{
-			if (FOFPlatform::getInstance()->isFrontend())
+			$query->where($db->qn('enabled') . ' = 1');
+
+			if ( ! in_array($formName, array('form.search', 'form.export')))
 			{
-				$query->where($db->qn('enabled') . ' = 1');
+				$now = JFactory::getDate()->format("Y-m-d");
+				$query->where($db->qn('sdate') . ' >= ' . "'$now'" . ' OR ' . $db->qn('edate') . ' >= ' . "'$now'");
 
-				if ($formName == 'form.default')
+				// Filter on catid
+				$catid = (array) $this->input->get('catid');
+
+				if (! empty($catid))
 				{
-					$now   = JFactory::getDate()->format("Y-m-d");
-					$query->where($db->qn('sdate') . ' >= ' . "'$now'");
-
-					// Filter on catid
-					$catid = (array) $this->input->get('catid');
-
-					if (! empty($catid))
-					{
-						$catid = array_map('intval', $catid);
-						$catid = implode(',', $catid);
-						$query->where($db->qn('catid') . ' IN ' . '(' . $catid . ')');
-					}
-
-					return $query;
+					$catid = array_map('intval', $catid);
+					$catid = implode(',', $catid);
+					$query->where($db->qn('catid') . ' IN ' . '(' . $catid . ')');
 				}
 
-				$isfreeofcharge = $this->input->get('s_isfreeofcharge', 0);
+				return $query;
+			}
 
-				if ($isfreeofcharge == 1)
-				{
-					$query->where($db->qn('isfreeofcharge') . ' = 1');
-				}
+			// Search or export form
+			$isfreeofcharge = $this->input->get('s_isfreeofcharge', 0);
 
-				$sdate = $this->input->get('s_sdate');
+			if ($isfreeofcharge == 1)
+			{
+				$query->where($db->qn('isfreeofcharge') . ' = 1');
+			}
 
-				if ($sdate == '')
-				{
-					$sdate   = JFactory::getDate()->format("Y-m-d");
-				}
-				else
-				{
-					$sdate = $this->formatDate($sdate);
-				}
+			$sdate = $this->input->get('s_sdate');
 
-				$query->where($db->qn('sdate') . ' >= ' . $db->q($sdate));
+			if ($sdate == '')
+			{
+				$sdate   = JFactory::getDate()->format("Y-m-d");
+			}
+			else
+			{
+				$sdate = $this->formatDate($sdate);
+			}
 
-				$edate = $this->input->get('s_edate');
+			$query->where($db->qn('sdate') . ' >= ' . $db->q($sdate));
 
-				if ($edate != '')
-				{
-					$query->where($db->qn('edate') . ' <= ' . $db->q($edate));
-				}
-				else
-				{
-					$edate = $this->formatDate($edate);
-				}
+			$edate = $this->input->get('s_edate');
 
-				$pcodefrom = $this->input->get('pcodefrom');
+			if ($edate != '')
+			{
+				$query->where($db->qn('edate') . ' <= ' . $db->q($edate));
+			}
+			else
+			{
+				$edate = $this->formatDate($edate);
+			}
 
-				if ($pcodefrom != '')
-				{
-					$query->where($db->qn('pcode') . ' >= ' . $db->q($pcodefrom));
-				}
+			$pcodefrom = $this->input->get('pcodefrom');
 
-				$pcodeupto = $this->input->get('pcodeupto');
+			if ($pcodefrom != '')
+			{
+				$query->where($db->qn('pcode') . ' >= ' . $db->q($pcodefrom));
+			}
 
-				if ($pcodeupto != '')
-				{
-					$query->where($db->qn('pcode') . ' <= ' . $db->q($pcodeupto));
-				}
+			$pcodeupto = $this->input->get('pcodeupto');
 
-				$fulltext = $this->input->get('fulltext', '', 'string');
+			if ($pcodeupto != '')
+			{
+				$query->where($db->qn('pcode') . ' <= ' . $db->q($pcodeupto));
+			}
 
-				if ($fulltext != '')
-				{
-					$fulltext = '%' . $fulltext . '%';
-					$query->where('(' .
-								$db->qn('name') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('organiser') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('contact') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('ainfo') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('street') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('pcode') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('city') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('state') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('country') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('teaser') . ' like ' . $db->q($fulltext) . ') OR (' .
-								$db->qn('text') . ' like ' . $db->q($fulltext) . ')'
-								);
-				}
+			$fulltext = $this->input->get('fulltext', '', 'string');
 
-				$excatid 	= (array) $this->input->get('excatid');
+			if ($fulltext != '')
+			{
+				$fulltext = '%' . $fulltext . '%';
+				$query->where('(' .
+					$db->qn('name') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('organiser') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('contact') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('ainfo') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('street') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('pcode') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('city') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('state') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('country') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('teaser') . ' like ' . $db->q($fulltext) . ') OR (' .
+					$db->qn('text') . ' like ' . $db->q($fulltext) . ')'
+				);
+			}
+
+			$excatid 	= (array) $this->input->get('excatid');
+
+			if ( ! empty($excatid))
+			{
 				$excatid = array_map('intval', $excatid);
 				$excatid 	= implode(',', $excatid);
 				$query->where($db->qn('catid') . ' IN ' . '(' . $excatid . ')');
@@ -314,6 +324,31 @@ class BabiooneventModelEvents extends FOFModel
 		}
 
 		return $query;
+	}
+
+	/**
+	 * Adding more useful fields to the resultArray
+	 *
+	 * @param   array  &$resultArray  An array of objects, each row representing a record
+	 *
+	 * @return  void
+	 */
+	protected function onProcessList(&$resultArray)
+	{
+		if (FOFPlatform::getInstance()->isFrontend())
+		{
+			$categories = $this->getCategories();
+
+			foreach ($resultArray AS $key => &$result)
+			{
+				$result->category_title = '';
+
+				if (array_key_exists($result->catid, $categories))
+				{
+					$result->category_title = $categories[$result->catid]->title;
+				}
+			}
+		}
 	}
 
 	/**
