@@ -1265,7 +1265,14 @@ class BabiooneventModelEvents extends FOFModel
 		}
 
 		$uri     = JURI::getInstance();
-		$link 		= $uri->base() . '/administrator/index.php';
+		$link 	 = $uri->base();
+
+		if (JPATH_BASE != JPATH_ADMINISTRATOR)
+		{
+			$link .= 'administrator/';
+		}
+
+		$link .= 'index.php';
 		$body    = JText::sprintf('COM_BABIOONEVENT_NOTIFYEMAILTXT', $link);
 		$subject = JText::_($table->name);
 
