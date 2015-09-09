@@ -225,6 +225,19 @@ class BabiooneventModelEvents extends FOFModel
 
 		$formName = $this->getState('form_name');
 
+		if (FOFPlatform::getInstance()->isBackend())
+		{
+			// Filter on catid
+			$catid = (int) $this->input->get('category');
+
+			if ($catid != 0)
+			{
+				$query->where($db->qn('catid') . ' = ' . $catid);
+			}
+
+			return $query;
+		}
+
 		if (FOFPlatform::getInstance()->isFrontend())
 		{
 			$query->where($db->qn('enabled') . ' = 1');
@@ -335,18 +348,15 @@ class BabiooneventModelEvents extends FOFModel
 	 */
 	protected function onProcessList(&$resultArray)
 	{
-		if (FOFPlatform::getInstance()->isFrontend())
+		$categories = $this->getCategories();
+
+		foreach ($resultArray AS $key => &$result)
 		{
-			$categories = $this->getCategories();
+			$result->category_title = '';
 
-			foreach ($resultArray AS $key => &$result)
+			if (array_key_exists($result->catid, $categories))
 			{
-				$result->category_title = '';
-
-				if (array_key_exists($result->catid, $categories))
-				{
-					$result->category_title = $categories[$result->catid]->title;
-				}
+				$result->category_title = $categories[$result->catid]->title;
 			}
 		}
 	}
