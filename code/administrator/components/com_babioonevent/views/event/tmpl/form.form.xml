@@ -29,7 +29,7 @@
 		<field name="stimehh" type="list"
 			label="COM_BABIOONEVENT_STIME_HH" description="COM_BABIOONEVENT_STIME_HH_DESC"
 			class="input-mini" size="1" default="" >
-			<option value="">--</option>
+			<option value="--">--</option>
 			<option value="00">0</option>
 			<option value="01">1</option>
 			<option value="02">2</option>
@@ -59,7 +59,7 @@
 		<field name="stimemm" type="list"
 			label="COM_BABIOONEVENT_STIME_MM" description="COM_BABIOONEVENT_STIME_MM_DESC"
 			class="input-mini" size="1" default="" >
-			<option value="">--</option>
+			<option value="--">--</option>
 			<option value="00">0</option>
 			<option value="05">5</option>
 			<option value="10">10</option>
@@ -82,7 +82,7 @@
 		<field name="etimehh" type="list"
 			label="COM_BABIOONEVENT_ETIME_HH" description="COM_BABIOONEVENT_ETIME_HH_DESC"
 			class="input-mini" size="1" default="" >
-			<option value="">--</option>
+			<option value="--">--</option>
 			<option value="00">0</option>
 			<option value="01">1</option>
 			<option value="02">2</option>
@@ -112,7 +112,7 @@
 		<field name="etimemm" type="list"
 			label="COM_BABIOONEVENT_ETIME_MM" description="COM_BABIOONEVENT_ETIME_MM_DESC"
 			class="input-mini" size="1" default="" >
-			<option value="">--</option>
+			<option value="--">--</option>
 			<option value="00">0</option>
 			<option value="05">5</option>
 			<option value="10">10</option>
