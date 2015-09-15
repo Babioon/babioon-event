@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This is project's console commands configuration for Robo task runner.
  *
@@ -48,10 +49,11 @@ class RoboFile extends \Robo\Tasks
 	            {
 	            	$method = 'process' . ucfirst($element);
 
-	            	$this->say('working:' . $method);
+	            	$this->say('check:' . $method);
 
 	            	if (method_exists($this, $method))
 	            	{
+		            	$this->say('working:' . $method);
 	            		$this->$method($codeBase, $toDir);
 	            	}	
 	            }
@@ -142,7 +144,7 @@ class RoboFile extends \Robo\Tasks
 		$this->mapDir('modules', $codeBase, $toDir);
 	}
 
-	private function processPlugings($codeBase, $toDir = null)
+	private function processPlugins($codeBase, $toDir = null)
 	{
 		$toDir = $this->getToDir($toDir);
 		$base  = $codeBase . '/plugins';
@@ -155,9 +157,9 @@ class RoboFile extends \Robo\Tasks
 		    {
 	            if ($element != "." && $element != "..") 
 	            {
-	            	if (is_dir($element))
+	            	if (is_dir($base . '/' . $element))
 	            	{
-	            		$this->mapDir($element, $base, $todir . '/plugins');	
+	            		$this->mapDir($element, $base, $toDir . '/plugins');
 	            	}
 		        }
 		    }    
