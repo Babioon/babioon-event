@@ -245,17 +245,7 @@ class BabiooneventModelEvents extends FOFModel
 			if ( ! in_array($formName, array('form.search', 'form.export')))
 			{
 				$now = JFactory::getDate()->format("Y-m-d");
-				$query->where($db->qn('sdate') . ' >= ' . "'$now'" . ' OR ' . $db->qn('edate') . ' >= ' . "'$now'");
-
-				// Filter on catid
-				$catid = (array) $this->input->get('catid');
-
-				if (! empty($catid))
-				{
-					$catid = array_map('intval', $catid);
-					$catid = implode(',', $catid);
-					$query->where($db->qn('catid') . ' IN ' . '(' . $catid . ')');
-				}
+				$query->where('(' . $db->qn('sdate') . ' >= ' . "'$now'" . ' OR ' . $db->qn('edate') . ' >= ' . "'$now'" . ')');
 
 				return $query;
 			}
