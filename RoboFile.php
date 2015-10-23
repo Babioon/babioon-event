@@ -112,15 +112,15 @@ class RoboFile extends \Robo\Tasks
 		    {
 	            if ($element != "." && $element != "..") 
 	            {
-	            	if (is_dir($element))
+	            	if (is_dir($base . '/' .$element))
 	            	{
 	            		$langDirHandle = opendir($base . '/' . $element);
 			
 					    while (false !== ($file = readdir($langDirHandle)))
 					    {
-					    	if (is_file($file))
+					    	if (is_file($base . '/' . $element . '/' . $file))
 					    	{
-					    		$this->symlink($base . '/' . $element . '/' .$file, $toDir . '/language/' . $element . '/' . $file);
+					    		$this->symlink($base . '/' . $element . '/' . $file, $toDir . '/language/' . $element . '/' . $file);
 					    	}	
 					    }	
 	            	}	
